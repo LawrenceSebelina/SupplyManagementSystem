@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Primary Meta Tags -->
+        <title>J.F Rubber Phils., Inc</title>
+        <meta name="title" content="J.F Rubber Phils., Inc">
+        <meta name="description" content="This is a medical HTML template">
+    
+        <!-- Favicon Link -->
+        <!-- <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml"> -->
+        <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    
+        <!-- Preload Images -->
+        <!-- <link rel="stylesheet" as="image" href="./assets/images/hero-banner.png">
+        <link rel="stylesheet" as="image" href="./assets/images/hero-banner.png"> -->
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css">
+    
+        <!-- FontAwesome -->
+        <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css">
+    
+        <!-- CSS Style -->
+        <link rel="stylesheet" href="style.css">
+
+
+    <style>
+
+        body {
+            color: black;
+        }
+        
+        #layoutAuthentication {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            gap: 20px;
+            background-color: red;
+        }
+
+        #layoutAuthentication #layoutAuthentication_content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            flex-grow: 1;
+            /* margin-block: auto; */
+        }
+
+        #layoutAuthentication .header {
+            min-width: 0;
+        }
+
+        #layoutAuthentication .footer {
+            min-width: 0;
+        }
+
+        #alertMessage {
+            display: none;
+        }
+    </style>
+
+    </head>
+    <body>
+        <div id="layoutAuthentication">
+            <header class="header" style="background-color: var(--dark-blue);">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg navbar-dark"> <!-- bg-body-tertiary  -->
+                        <div class="container-fluid px-0">
+                            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                            <img src="assets/images/logo.png" width="80px" alt="logo">
+                            <a href="index.html" class="navbar-brand">J.F RUBBER</a>
+                            
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarIconMenu" aria-controls="navbarIconMenu" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                <!-- <i class="fa-solid fa-bars"></i> -->
+                            </button>
+    
+                            <div class="collapse navbar-collapse" id="navbarIconMenu">
+                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Products</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="index2.html#contact-section">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-body">
+                                        <form method="post" id="loginForm" class="needs-validation" novalidate>
+                                            <div class="alert alert-danger" id="alertMessage"></div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputEmail" name="userEmail" type="email" placeholder="name@example.com" required />
+                                                <label for="inputEmail">Email address</label>
+
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid state.
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputPassword" name="userPassword" type="password" placeholder="Password" required />
+                                                <label for="inputPassword">Password</label>
+
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid state.
+                                                </div>
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                <a class="small" href="password.html">Forgot Password?</a>
+
+                                                <button type="submit" class="btn btn-primary btn-block" id="btnLoginAccount" name="btnLoginAccount">Login</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <footer class="footer">
+        
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 footer-logo">
+                                <div class="container">
+                                    <img src="assets/images/logo.png" width="80px" alt="logo">
+                                    <a href="index.html" class="navbar-brand">J.F RUBBER</a>
+        
+                                    <p class="paragraph-text">
+                                        Innovative rubber solutions for the automotive and electronics industries.
+                                    </p>
+                                </div>
+                                
+                            </div>
+        
+                            <div class="col-md-6 nav-menus">
+                                <div class="container">
+                                    <nav class="nav">
+                                        <a class="nav-link active" aria-current="page" href="#">About Us</a>
+                                        <a class="nav-link" href="#">Products</a>
+                                        <a class="nav-link" href="#">Contact Us</a>
+                                        <a class="nav-link" href="#">Log In</a>
+                                    </nav>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-3 social-list">
+                                <div class="container">
+                                    <!-- <h6>Follow Us</h6> -->
+        
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="social-link">
+                                                <i class="fa fa-brands fa-facebook"></i>
+                                            </a>
+                                        </li>
+                    
+                                        <li>
+                                            <a href="#" class="social-link">
+                                                <i class="fa fa-brands fa-instagram"></i>
+                                            </a>
+                                        </li>
+                    
+                                        <li>
+                                            <a href="#" class="social-link">
+                                                <i class="fa fa-brands fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="footer-bottom">
+                    <div class="container">
+                        <p class="copyright-text text-center">
+                            <span class="text-warning">J. F. Rubber Phils., Inc.</span> &copy; <?php echo date('Y') ?? "2023" ?> | All Rights Reserved
+                        </p>
+                    </div>
+                </div>
+        
+            </footer>
+
+        </div>
+
+        
+    
+        <!-- Back to top -->
+    
+        <a href="#" class="back-top-btn" aria-label="Back to top">
+            <i class="fa fa-solid fa-arrow-up"></i>
+        </a>
+    
+    
+        <!-- Bootstrap JS -->
+        <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
+    
+        <!-- Load library from the CDN -->
+        <script src="assets/vendors/typed/typed.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                const loginAccountForm = document.querySelector("#loginForm");
+                const loginAccountBtn = document.querySelector("#btnLoginAccount");
+                const alertMessage = document.querySelector("#alertMessage");
+
+                loginAccountForm.onsubmit = (e)=> {
+                    e.preventDefault();
+                }
+
+                loginAccountBtn.onclick = ()=> {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "partials/php/login_account.php", true);
+                    xhr.onload = ()=> {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            if (xhr.status === 200) {
+                                let data = xhr.response;
+                                if (data === "success") {
+                                    // alertMessage.textContent = data;
+                                    window.location = "index.html"
+                                } else {
+                                    // alertMessage.style.display = "block";
+                                    alertMessage.textContent = data;
+                                }
+                            }
+                        }
+                    }
+                    let formData = new FormData(loginAccountForm);
+                    xhr.send(formData);
+                }
+            });
+
+
+            // Input fields validation
+            const forms = document.querySelectorAll('.needs-validation');
+
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+
+            // Preloader
+            const preloader = document.querySelector(".preloader");
+
+            window.addEventListener("load", function() {
+                preloader.classList.add("loaded");
+                document.body.classList.add("loaded");
+            });
+
+            // Header Scroll
+            // const header = document.querySelector(".header");
+            // const navbar = document.querySelector(".navbar");
+            // const backTopBtn = document.querySelector(".back-top-btn");
+
+            // window.addEventListener("scroll", function() {
+            //     if (window.scrollY > 100) {
+            //         backTopBtn.classList.add("active");
+            //         header.classList.add("active");
+            //         header.classList.add("fixed-top");
+            //     } else {
+            //         header.classList.remove("active");
+            //         backTopBtn.classList.remove("active");
+            //     }
+            // });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,431 @@
+*,
+*::after
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar Style */
+.navbar-brand{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.nav-login{
+    background: #1C9D72;
+    width: 100px;
+    padding: 0 8px;
+    text-align: center;
+    
+    
+    border-radius: 2px;
+}
+.nav-login .nav-link{
+    font-size: 1rem;
+    font-weight: 500;
+}
+/* Style the active class (and buttons on mouse-over) */
+.nav-item.active, .nav-item:hover {
+    background-color:#666;
+    
+}
+
+/* Banner Style */
+#banner-section{
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.5)) ,url("../img/jfrubber-header\ 1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* margin-top: 78px; */
+    height: 960px;
+    position: relative;
+    display: none;
+}
+
+.banner-content{
+    position: absolute;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.banner-title{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.banner-title span{
+    color: #1C9D72;
+}
+.banner-text{
+    list-style: none;
+    padding: 0;
+   
+}
+.banner-li{
+    font-size: 0.5rem;
+   
+}
+
+/* History Section */
+#history-section{
+    padding: 5em 0;
+}
+.history-title{
+    font-weight: bold;
+    margin: 0;
+}
+.history-right{
+    padding: 2em;
+    text-align: center;
+}
+.his-right-h2{
+    font-weight: 600;
+    text-align: center;
+}
+.his-right-p{
+    text-align: justify;
+}
+.his-right-btn{
+    border-style: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    background-color: #1C9D72;
+}
+
+/* Values Section */
+.values-section{
+    padding: 5em 0;
+    background-color: #F7F7F7;
+    text-align: center;
+}
+.values-title{
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Mission Section */
+.mission-section{
+    padding: 5em 0;
+    text-align: center;
+}
+.mission-right{
+    padding: 2em;
+}
+.mission-title{
+    font-weight: bold;
+    margin: 0;
+}
+.mission-right-p{
+    text-align: justify;
+}
+.mission-btn{
+    border-style: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    background-color: #1C9D72;
+}
+.mission-left{
+    padding: 2em;
+}
+
+/* Vision Section */
+.vision-section{
+    padding: 2em 0;
+    text-align: center;
+}
+.vision-left{
+    padding: 2em;
+}
+.vision-title{
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Product Section */
+.product-section{
+    padding: 5em 0;
+    background-color: #F7F7F7;
+    text-align: center;
+    width: 100%;
+}
+.product-title{
+    font-weight: bold;
+    margin: 0;
+}
+.item{
+    border: 2px solid #D9D9D9;
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+}
+.owl-img{
+    height: 250px;
+    padding: 2em 0 2em 2em;
+}
+.owl-img-2{
+    height: 250px;
+    padding: 2em;
+}
+.owl-content{
+   display: flex;
+   flex-direction: column;
+   align-items:center;
+   border-top: 2px solid #D9D9D9;
+}
+.item-h4{
+    text-transform: uppercase;
+    padding: 0.5rem;
+}
+.item-a{
+    padding: 0.5rem 0;
+   
+}
+.item-a a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #F9A400;
+    font-size: 1.2rem;
+}
+
+/* Contact Section */
+.contact-section{
+   
+    
+    
+    text-align: center;
+    padding: 5em 0;
+    width: 100%;
+}
+.contact-title{
+    font-weight: bold;
+    margin: 0;
+}
+.contact-row{
+    background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url("../img/contactbg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 600px;
+}
+
+/* Login Style */
+.login-form{
+    max-width: 350px;
+    margin: 6em auto;
+    text-align: center;
+    border: 1px solid #000;
+    padding: 1em;
+    border-radius: 10px;
+}
+.login-h2{
+    font-size: 1.2rem;
+    color: #2BB788;
+    margin-bottom: 1em;
+}
+.login-logo{
+    width: 80px;
+}
+.form-label{
+    text-align: start;
+    font-size: 0.8rem;
+}
+.form-btn{
+    background-color: #2BB788;
+    color: #fff;
+    padding: 0.7em 0;;
+    border: none;
+    border-radius:10px;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    
+}
+.form-btn:hover{
+    background-color: #7a7a7a;
+}
+.form-class{
+    display: flex;
+    flex-direction: column;
+}
+.form-class input[type="text"],
+input[type="email"],
+input[type="password"]{
+    margin-bottom: 1em;
+    padding: 0.8em 0.6em;
+    border: 1px solid #767676;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+/* Footer */
+.main-footer{
+    background-color: #D9D9D9;
+    padding: 2em 1em;
+    text-align: center;
+}
+
+@media only screen and (min-width:768px){
+    #banner-section{
+        display: block;
+        height:300px;
+    }
+    .banner-title{
+        font-size: 2.5rem;
+    }
+    .banner-text{
+        width: 350px;
+        margin: 0 auto;
+    }
+    .banner-li{
+        font-size: 0.8rem;
+    }
+    /* History */
+    .history-section{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2em;
+        max-width: 85%;
+        margin: 0 auto;
+    }
+    .history-left{
+        width: 50%;
+    }
+    .history-right{
+        width: 50%;
+        text-align: right;
+        padding-left:2em;
+        margin-top: 100px;
+    }
+    .his-right-h2{
+        font-size: 1.3rem;
+        text-align: right;
+    }
+
+    /* Values */
+    .values-row{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .val-img{
+        width: 100px;
+    }
+
+    /* Mission */
+    .mission-section{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 85%;
+        margin: 0 auto;
+    }
+    .mission-right{
+        text-align: start;
+    }
+
+    /* Vision */
+    .vision-section{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 85%;
+        margin: 0 auto;
+    }
+    .vision-left{
+        text-align: end;
+    }
+
+    /* Contact */
+    .contact-row{
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(3,1fr);
+        height: 350px;
+        padding: 0 2.5em;
+    }
+    .contact-col{
+        height: 150px;
+    }
+}
+
+@media only screen and (min-width:1000px){
+    #banner-section{
+        display: block;
+        height:600px;
+    }
+    .banner-title{
+        font-size: 4.5rem;
+    }
+    .banner-text{
+        
+            width: 500px;
+    }
+    .banner-li{
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    /* History */
+    .history-right{
+        width: 40%;
+        margin: 0;
+    }
+    .his-right-h2{
+        font-size: 2.2rem;
+    }
+    /* Values */
+    .values-row{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+    }
+    .nav-login .nav-link{
+        padding: 8px;
+    }
+    .nav-item .nav-login{
+        padding: 0;
+       
+    }
+    .nav-item{
+        padding: 0 1em;
+    }
+    .nav-login .nav-link{
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    .nav-link{
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    /* mission */
+    .mission-right{
+        max-width: 50%;
+    }
+    .mission-section{
+        max-width: 65%;
+        margin: 0 auto;
+    }
+      /* vision */
+      .vision-left{
+        max-width: 50%;
+    }
+    .vision-section{
+        max-width: 65%;
+        margin: 0 auto;
+    }
+    .owl-img{
+        height: 300px;
+    }
+    .owl-img-2{
+        height: 300px;
+    }
+    .item{
+        width: 80%;
+    }
+   
+}
+
