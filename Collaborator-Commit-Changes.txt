@@ -50,6 +50,7 @@ The collaborator navigates into the cloned repository:
 
 bash:
 
+cd /path/to/xampp/htdocs
 cd repository_directory
 Replace repository_directory with the actual name of the cloned repository.
 
