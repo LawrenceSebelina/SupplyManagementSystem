@@ -1,0 +1,49 @@
+Lawrence Mark C. Sebelina
+
+
+To switch accounts on Git using Git Bash and commit new changes to a repository, you'll need to follow these steps:
+
+1. Check Current Git Configuration:
+Before switching accounts, it's a good idea to check the current Git configuration to make sure you know what account is currently configured. Open Git Bash and run the following command:
+
+bash:
+
+git config user.email
+
+This will display the current email associated with your Git configuration.
+
+2. Switch Git User:
+To switch accounts, you need to set a new email and name for your Git configuration. Run the following commands, replacing new-email@example.com and Your New Name with the email and name associated with the account you want to switch to:
+
+bash:
+
+git config --global user.email "new-email@example.com"
+git config --global user.name "Your New Name"
+
+3. Check the Switch:
+Run git config user.email again to verify that the configuration has been updated:
+
+bash
+
+git config user.email
+
+Ensure that the displayed email matches the one you set in the previous step.
+
+4. Commit New Changes:
+After switching accounts, you can commit your changes. Navigate to your Git repository using the cd command, make sure you're on the branch you want to commit changes to, and then use the following commands:
+
+bash:
+
+git add .
+git commit -m "Your commit message here"
+Replace "Your commit message here" with a brief and meaningful message describing the changes you made.
+
+5. Push Changes:
+Finally, push your changes to the remote repository:
+
+bash:
+
+git push origin your-branch-name
+Replace your-branch-name with the actual name of the branch you are working on.
+
+Now you have successfully switched accounts and committed new changes to the repository. Ensure you have the necessary permissions to push changes to the repository, as this can vary depending on the hosting service (GitHub, GitLab, Bitbucket, etc.).
