@@ -1,70 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J.F Rubber Phils., Inc</title>
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-    <!-- Bootstrap 5 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- CSS Style -->
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+    <?php include_once('assets/components/head.php'); ?>
+    <title>Login</title>
 </head>
 <body>
-    
-<div class="container">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top d-flex justify-content-between">
+    <header class="header fixed-top" style="background-color: var(--dark-blue);">
         <div class="container">
-                    <img src="img/company-logo 1.png" width="80px" alt="">
-                    <a href="index.php" class="navbar-brand">J.F RUBBER PHILS</a>
-                
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <nav class="navbar navbar-expand-lg navbar-dark"> <!-- bg-body-tertiary  -->
+                <div class="container-fluid px-0">
+                    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                    <img src="assets/images/logo.png" width="80px" alt="logo">
+                    <a href="index.html" class="navbar-brand">J.F RUBBER</a>
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarIconMenu" aria-controls="navbarIconMenu" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
+                        <!-- <i class="fa-solid fa-bars"></i> -->
                     </button>
-            <div class="collapse navbar-collapse" id="navmenu">
-                <ul id="main-nav" class="navbar-nav ms-auto">
-                    <li class="nav-item nav-login">
-                        <a href="login.php" class="nav-link text-white">LOGIN</a>
-                    </li>
-                </ul>
-            </div>
-        </div>    
-    </nav>
-</div>
-    <!-- End of Navbar -->
-<section class="login-form">
-    <img class="login-logo" src="img/company-logo 1.png" alt="">
-        <h2 class="login-h2">Admin Login</h2>
-        <form class="form-class" action="includes/login.inc.php" method="post">
-            <label class="form-label" for="username">Username</label>
-            <input type="text" name="username" placeholder="Username...">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" name="password" placeholder="Password...">
 
-            <?php 
+                    <div class="collapse navbar-collapse" id="navbarIconMenu">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index#product-section">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index#history-section">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index#contact-section">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="login-form-wrapper">
+        <main>
+            <section class="form-section">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card">
+                                <div class="card-header"><h2 class="headline-md">Login</h2></div>
+                                <div class="card-body">
+                                    <div class="alert alert-danger" id="alertMessage"></div>
+                                    <form method="post" id="loginForm" class="needs-validation" novalidate>
+                                        <div class="alert alert-danger alert-message"></div>
+                                        <div class="form-floating">
+                                            <input class="form-control" id="userEmail" name="userEmail" type="email" placeholder="name@example.com" required />
+                                            <label class="label-blue" for="userEmail"><i class="fa-solid fa-envelope"></i>Email address</label>
+
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please select a valid state.
+                                            </div>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input class="form-control" id="userPassword" name="userPassword" type="password" placeholder="Password" required />
+                                            <label class="label-blue" for="userPassword"><i class="fa-solid fa-lock"></i>Password</label>
+
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please select a valid state.
+                                            </div>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                            <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                        </div>
+                                        <div class="btn-section">
+                                            <a class="small" href="password.html">Forgot Password?</a>
+
+                                            <button type="submit" class="btn btn-blue btn-block" id="btnLoginAccount" name="btnLoginAccount">Login</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center py-3">
+                                    <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     
-    if(isset($_GET["error"])){
-        if($_GET["error"] == "emptyinput"){
-            echo "<p style='border-radius: 10px;padding:0.5em;margin-bottom:0.2em;background-color:#FCAFAF;color:red;'>Fill in all fields!</p>";
-        }
-        if($_GET["error"] == "notuser"){
-            echo "<p style='border-radius: 10px;padding:0.5em;margin-bottom:0.2em;background-color:#FCAFAF;color:red;'>Incorrect Username and Password!</p>";
-        }
-        
-    }
+        <?php include_once('assets/components/footer.php'); ?>
 
-?>
+    </div>
 
-            <button class="form-btn" type="submit" name="submit">Log In</button>
-        </form>
+    <!-- Back to top -->
 
-       
+    <a href="#" class="back-top-btn" aria-label="Back to top">
+        <i class="fa fa-solid fa-arrow-up"></i>
+    </a>
 
-</section>
-<?php include("footer.php"); ?>
+    <!-- Bootstrap JS -->
+    <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+
+    <!-- Load library from the CDN -->
+    <script src="assets/vendors/typed/typed.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const loginAccountForm = document.querySelector("#loginForm");
+            const loginAccountBtn = document.querySelector("#btnLoginAccount");
+            const alertMessage = document.querySelector("#alertMessage");
+
+            loginAccountForm.onsubmit = (e)=> {
+                e.preventDefault();
+            }
+
+            loginAccountBtn.onclick = ()=> {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "includes/phpFunction/login.php", true);
+                xhr.onload = ()=> {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            let data = xhr.response;
+                            if (data === "success") {
+                                alertMessage.style.display = "block";
+                                alertMessage.textContent = data;
+                                // window.location = "index.html"
+
+                                window.location.href = "admin/index.php";
+                            } else {
+                                alertMessage.style.display = "block";
+                                alertMessage.textContent = data;
+                            }
+                        }
+                    }
+                }
+                let formData = new FormData(loginAccountForm);
+                xhr.send(formData);
+            }
+        });
+
+        // Input fields validation
+        const forms = document.querySelectorAll('.needs-validation');
+
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+
+        // Preloader
+        const preloader = document.querySelector(".preloader");
+
+        window.addEventListener("load", function() {
+            preloader.classList.add("loaded");
+            document.body.classList.add("loaded");
+        });
+    </script>
+</body>
+</html>

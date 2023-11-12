@@ -1,244 +1,460 @@
+<?php
+    // Get the requested file
+    // $request_file = $_SERVER['PHP_SELF'];
 
-<?php include "header.php"; ?>
-    <!-- Banner Section -->
-    <section id="banner-section" class="banner-section">
-        <div class="banner-content">
-            <h1 class="banner-title text-white text-center">J.F RUBBER <span>PHILS., INC.</span></h1>
-            <ul class="banner-text d-flex align-items-center justify-content-between">
-                <li class="banner-li text-white">Quality Products</li>
-                <li class="banner-li text-white">Innovation</li>
-                <li class="banner-li text-white">Customer Satisfactions</li>
-            </ul>
-        </div>
-    </section>
+    // Output the requested file
+    // echo "The requested file is: " . $request_file;
+?>
 
-<main>
-    <!-- History Section -->
-    <section id="history-section" class="history-section">
-           
-        <div class="history-left">
-            <h2 class="history-title text-uppercase pb-3">History</h2>
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="img/carousel-bg2 1.png" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/carousel-bg 1.png" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/carousel-bg3 1.png" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-        </div>
-        <div class="history-right">
-            <h2 class="his-right-h2 text-uppercase">J.F Rubber Phil's., Inc.</h2>
-            <p class="his-right-p">J. F. Rubber Phils., Inc. manufactures rubber parts for the automotive and electronic industries. The company also produces and supplies rubber compound to other companies.The state of the art technology transfer from Japan and the increased build-up of technical expertise will be our foremost concentration. This will assure us a continued high level of competence and resilience in this industry
-            </p>
-            <button type="button" class="his-right-btn text-white" data-bs-toggle="modal" data-bs-target="#historyModal">Read More</button>
-           
-  
-  <!-- Modal -->
-  <div class="modal fade" id="historyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title " id="historyModal">Company Background</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;J. F. Rubber Phils., Inc. manufactures rubber parts for the automotive and electronic industries. The company also produces and supplies rubber compound to other companies. Its factory is located at Block 2, Lot 6 of the People's Technology Complex - Special Economic Zone in Carmona, Cavite, Philippines.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;The company was established last 17 January 1992 under its previous name - JP-Aoki Rubber Philippines, Inc. It is a joint venture project of Filipino and Japanese Stockholders. It was also in 1992 when factory construction started and two pioneer employees were sent to Akita, Japan for training. Factory construction was completed on April 1993. At the same time, the machineries and equipment for manufacturing arrived and were installed. The first batch of production employees were trained and initial production and testing of rubber parts were made on May 1993. The factory's commercial operation started 7 July 1993.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;Two years after, from May to October 1995, the factory underwent an expansion to support the continued increase of orders from customers and its continuous improvement projects. Quality control procedures improved from a purely visual inspection process to a system utilizing measuring and testing equipments maintained in a technical laboratory for material, process and product quality improvements.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;On September 1998, the partnership between Aoki Rubber Industrial Co. Ltd. of Japan and JP-Aoki Rubber Phils., Inc. was terminated. This event led to the change of company name from JP-Aoki Rubber Phils., Inc. to "J. F. Rubber Phils., Inc." which was formally registered at BOI on 15 November 1999.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;On 24 July 2000, J.F. Rubber Phils., Inc. (JFR) received its ISO 9002:1994 Certificate of Registration from the Governing Board of Certification International Philippines, Inc. that covers the scope of "Manufacture of Moulded-Rubber Products for the Automotive and Electronic Industries".
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;On 7 August 2001, JFR became a PEZA Registered enterprise and on the same month, the company entered into tie-up with Seien Gum - Japan and operation of injection machines started. On 30 October 2001, JFR has been selected by the DTI - CBI Integrated Program for Mobile Equipment as among the five Filipino manufacturing companies to promote Philippine rubber industry in Europe.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;On 4 December 2004, the company received its QS 9000:1998 Certificate of Registration from AJA Registrars, Inc. Due to the increase in the global market demand, the company embarked in buying new equipment to continually improve its rubber molding process. With the advent of new quality management standards and the changes in demands and expectations of customers, the company acquired new sets of vacuum press machines and initiated mixing our own compound master batch. The company strived towards further improvements on its processes to become more effective and efficient.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;After a long year of manufacturing in moulded automobile rubber parts, JFR adopted its own compounding machinery to provide its own compound rubber master batch. On January 2006, we have established Material Development and Compounding (MDC) Section under the supervision of QA/Technical Services Department. The function of this section is to create our own CMB recipe. The MDC Section has started to develop a recipe on a trial and error basis using the lab mill machine which then was evaluated by the assigned incoming inspector. After passing the material quality, the developed material was sent to Rubber Research Institute in Malaysia to test the ozone and volume resistivity. The rubber sample passed the material testing after a year of development. JFR started its own compounded master batch on the middle of the year 2007.
-            </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
-    </div>
-  </div>
-        </div>
-    </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php include_once('assets/components/head.php'); ?>
+    <title>Home</title>
+</head>
+<body>
+   <?php include_once('assets/components/header.php'); ?>
 
-    <!-- Core Values Section -->
-    <section class="values-section">
-        <h2 class="values-title text-uppercase pb-5">Core values</h2>
-        <div class="values-row">
-            <div class="values-col py-5">
-                <img class="val-img" src="img/deal.png" width="50px" alt="">
-                <h3 class="fs-5 text-uppercase pt-3">Commitment</h3>
-            </div>
-            <div class="values-col py-5">
-                <img class="val-img" src="img/teamwork 1.png" width="50px" alt="">
-                <h3 class="fs-5 text-uppercase pt-3">Teamwork</h3>
-            </div>
-            <div class="values-col py-5">
-                <img class="val-img" src="img/value.png" width="50px" alt="">
-                <h3 class="fs-5 text-uppercase pt-3">Integrity</h3>
-            </div>
-            <div class="values-col py-5">
-                <img class="val-img" src="img/teacher.png" width="50px" alt="">
-                <h3 class="fs-5 text-uppercase pt-3">Professionalism</h3>
-            </div>
-        </div>
-    </section>
-    <!-- Mission Section -->
-    <section class="mission-section">
-        <div class="mission-right">
-            <h2 class="mission-title text-uppercase pb-5">Mission</h2>
-            <p class="mission-right-p">J. F. RUBBER strives to provide world-class quality, competitive-priced rubber products for the automotive, telecommunications, computer, and any other industry that uses rubber components in the manufacture of their products.</p>
-            <button class="mission-btn text-white" type="button" data-bs-toggle="modal" data-bs-target="#missionModal">Read More</button>
-            <!-- Modal -->
-  <div class="modal fade" id="missionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title " id="missionModal">Mission</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;J. F. RUBBER strives to provide world-class quality, competitive-priced rubber products for the automotive, telecommunications, computer, and any other industry that uses rubber components in the manufacture of their products.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;The state of the art technology transfer from Japan and the increased build-up of technical expertise will be our foremost concentration. This will assure us a continued high level of competence and resilience in this industry. As economies open up for global competition J. F. RUBBER will continue to upgrade and improve itself to be more than ready for any changes in the rubber industry.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;We continue to support the economic aspirations of the Philippines and its labor sector by providing increased livelihood opportunities.
-            </p>
-            <p style="text-align:justify;">
-                &nbsp;&nbsp;We hope to operate in an atmosphere of cooperation and mutual respect and social responsibility because we believe that a company that stands united will succeed and prosper.
-            </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
-    </div>
-  </div>
-        </div>
-        <div class="mission-left">
-            <img class="mis-left-img" src="img/undraw_automobile_repair_ywci 1.png" width="250px" alt="">
-        </div>
-    </section>
-    <!-- Vision Section -->
-    <section class="vision-section">
-        <div class="vision-right">
-            <img src="img/undraw_delivery_truck_vt6p 1.png" width="250px" alt="">
-        </div>
-        <div class="vision-left">
-            <h2 class="vision-title text-uppercase pb-5">Vision</h2>
-            <p>To be the country's leader in the manufacture of world-class rubber parts for industries that makes use of rubber components in their products.</p>
-        </div>
-    </section>
-    <!-- Product Section -->
-    <section id="product-section" class="product-section">
-        <h2 class="product-title text-uppercase pb-5">Product</h2>
-        <!-- owl Carousel -->
-        <div class="owl-carousel owl-theme">
-            <div class="item">
-                <img class="owl-img" src="img/product-set-1-removebg-preview (1) 1.png" alt="">
-                <div class="owl-content">
-                    <span class="item-h4">Grommets and covers for the automotive wiring harness</span>
-                    <span class="item-a"><a href="">View</a></span>
+    <main>
+        <section class="product-section" id="product-section">
+            <div class="container">
+
+                <h2 class="headline-md text-white">What Do We Offer?</h2>
+
+                <div class="row">
+                    <div class="col-md-4 mb-auto">
+                        <div class="container product-container">
+                            <img class="img-fluid" src="assets/images/product-1.png" alt="product">
+                        </div>
+                        
+                        <div class="product-description">
+                            <p>
+                                Grommets and covers for the automotive wiring harness.
+                            </p>
+                        </div>
+
+                        <div class="read-more">
+                            <a type="button" class="btn-text" data-bs-toggle="modal" data-bs-target="#historyModal">Read More<i class="fa fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-auto">
+                        <div class="container product-container">
+                            <img class="img-fluid" src="assets/images/product-2.png" alt="product">
+                        </div>
+
+                        <div class="product-description">
+                            <p>
+                                Small rubber tires for toy and toy accessories applications.
+                            </p>
+                        </div>
+
+                        <div class="read-more">
+                            <a type="button" class="btn-text" data-bs-toggle="modal" data-bs-target="#historyModal">Read More<i class="fa fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-auto">
+                        <div class="container product-container">
+                            <img class="img-fluid" src="assets/images/product-3.png" alt="product">
+                        </div>
+
+                        <div class="product-description">
+                            <p>
+                                Dampers, bush caps, seals, boots, clutch cover, cap breathers, packings For non-auto, and automotive applications (power windows, engines, and transmission parts).
+                            </p>
+                        </div>
+
+                        <div class="read-more">
+                            <a type="button" class="btn-text" data-bs-toggle="modal" data-bs-target="#historyModal">Read More<i class="fa fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-auto">
+                        <div class="container product-container">
+                            <img class="img-fluid" src="assets/images/product-4.png" alt="product">
+                        </div>
+
+                        <div class="product-description">
+                            <p>
+                                Dampers, bush caps, seals, boots, clutch cover, cap breathers, packings For non-auto, and automotive applications (power windows, engines, and transmission parts).
+                            </p>
+                        </div>
+                        
+                        <div class="read-more">
+                            <a type="button" class="btn-text" data-bs-toggle="modal" data-bs-target="#historyModal">Read More<i class="fa fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-auto">
+                        <div class="container product-container">
+                            <img class="img-fluid" src="assets/images/product-5.png" alt="product">
+                        </div>
+
+                        <div class="product-description">
+                            <p>
+                                O-rings and packing for filter systems.
+                            </p>
+                        </div>
+                      
+                        <div class="read-more">
+                            <a type="button" class="btn-text" data-bs-toggle="modal" data-bs-target="#historyModal">Read More<i class="fa fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-auto">
+                        <div class="container product-container">
+                            <img class="img-fluid" src="assets/images/product-6.png" alt="product">
+                        </div>
+                      
+                        <div class="product-description">
+                            <p>
+                                Base Pads for antenna assemblies.
+                            </p>
+                        </div>
+                        
+                        <div class="read-more">
+                            <a type="button" class="btn-text" data-bs-toggle="modal" data-bs-target="#historyModal">Read More<i class="fa fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+        </section>
+
+        <section class="history-section" id="history-section">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="assets/images/carousel-bg2 1.png" class="d-block w-100 img-fluid" alt="carousel-img">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/carousel-bg 1.png" class="d-block w-100 img-fluid" alt="carousel-img">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/carousel-bg3 1.png" class="d-block w-100 img-fluid" alt="carousel-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="headline-md">Company Background</h2>
+
+                        <p class="paragraph-text">
+                            J. F. Rubber Phils., Inc. manufactures rubber parts for the automotive and electronic industries. The company also produces and supplies rubber compound to other companies. Its factory is located at Block 2, Lot 6 of the People's Technology Complex - Special Economic Zone in Carmona, Cavite, Philippines.
+                        </p>
+
+                        <p class="paragraph-text">
+                            The company was established last 17 January 1992 under its previous name - JP-Aoki Rubber Philippines, Inc.
+                        </p>
+
+                        <div class="read-more">
+                            <a type="button" class="btn-text" data-bs-toggle="modal" data-bs-target="#historyModal">Read More<i class="fa fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                        <h2 class="headline-md">Company Background</h2>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <p class="paragraph-text">
+                                            J. F. Rubber Phils., Inc. manufactures rubber parts for the automotive and electronic industries. The company also produces and supplies rubber compound to other companies. Its factory is located at Block 2, Lot 6 of the People's Technology Complex - Special Economic Zone in Carmona, Cavite, Philippines.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            The company was established last 17 January 1992 under its previous name - JP-Aoki Rubber Philippines, Inc. It is a joint venture project of Filipino and Japanese Stockholders. It was also in 1992 when factory construction started and two pioneer employees were sent to Akita, Japan for training. Factory construction was completed on April 1993. At the same time, the machineries and equipment for manufacturing arrived and were installed. The first batch of production employees were trained and initial production and testing of rubber parts were made on May 1993. The factory's commercial operation started 7 July 1993.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            Two years after, from May to October 1995, the factory underwent an expansion to support the continued increase of orders from customers and its continuous improvement projects. Quality control procedures improved from a purely visual inspection process to a system utilizing measuring and testing equipments maintained in a technical laboratory for material, process and product quality improvements.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            On September 1998, the partnership between Aoki Rubber Industrial Co. Ltd. of Japan and JP-Aoki Rubber Phils., Inc. was terminated. This event led to the change of company name from JP-Aoki Rubber Phils., Inc. to "J. F. Rubber Phils., Inc." which was formally registered at BOI on 15 November 1999.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            On 24 July 2000, J.F. Rubber Phils., Inc. (JFR) received its ISO 9002:1994 Certificate of Registration from the Governing Board of Certification International Philippines, Inc. that covers the scope of "Manufacture of Moulded-Rubber Products for the Automotive and Electronic Industries".
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            On 7 August 2001, JFR became a PEZA Registered enterprise and on the same month, the company entered into tie-up with Seien Gum - Japan and operation of injection machines started. On 30 October 2001, JFR has been selected by the DTI - CBI Integrated Program for Mobile Equipment as among the five Filipino manufacturing companies to promote Philippine rubber industry in Europe.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            On 4 December 2004, the company received its QS 9000:1998 Certificate of Registration from AJA Registrars, Inc. Due to the increase in the global market demand, the company embarked in buying new equipment to continually improve its rubber molding process. With the advent of new quality management standards and the changes in demands and expectations of customers, the company acquired new sets of vacuum press machines and initiated mixing our own compound master batch. The company strived towards further improvements on its processes to become more effective and efficient.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            After a long year of manufacturing in moulded automobile rubber parts, JFR adopted its own compounding machinery to provide its own compound rubber master batch. On January 2006, we have established Material Development and Compounding (MDC) Section under the supervision of QA/Technical Services Department. The function of this section is to create our own CMB recipe. The MDC Section has started to develop a recipe on a trial and error basis using the lab mill machine which then was evaluated by the assigned incoming inspector. After passing the material quality, the developed material was sent to Rubber Research Institute in Malaysia to test the ozone and volume resistivity. The rubber sample passed the material testing after a year of development. JFR started its own compounded master batch on the middle of the year 2007.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            Last 17 July 2007, another milestone of the company was achieved. The Vehicle Certification Agency - Certification International Managing Director awarded the ISO/TS 16949:2002 Certificate to the organization. Compliance to ISO/TS 16949 requirement is maintained and practiced by the company up to the present.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            In 21 May 2010, JFR received the 2nd Certification of Registration for ISO/TS 16949:2009 for complying with the requirements specified in automotive production and relevant service part organizations.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            A year after, J. F. Rubber Phils., Inc. was certified to operate an Environmental Management System which has been assessed as conforming to ISO 14001:2004 for the scope of activities "Manufacturer of rubber molded products" and was issued a Certification No. CIP/4518/11/07/771 on 15 August 2011 by Certification International.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            On 8 April 2013, VCA certifying body issued certificates to the company as conformance to ISO/TS 16949:2009 and ISO 9001:2008 standards.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            On 12 August 2013, the Governing Board of Certification International Philippines had issued a continued certification of JFR's environmental management system to ISO 14001:2004 under the revised scope "Manufacture of compounded and rubber moulded products". This reconfirmation was based on the results of the second surveillance audit of the company's Environmental Management System on 8 July 2013. On 15 August 2020, TUV Nord issued Certificate of Registration No. 4410420930026 / Audit Report No. SEATH-E930320/2020 for JFRâ€™s Management System as per ISO14001:2015 for the same scope above.
+                                        </p>
+
+                                        <p class="paragraph-text">
+                                            On 15 August 2020, TUV Nord issued Certificate of Registration No. 4410420930026 / Audit Report No. SEATH-E930320/2020 for JFR's Management System as per ISO14001:2015 for the same scope above.
+                                        </p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-red btn-logo" data-bs-dismiss="modal">Close<i class="fa fa-solid fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="core-values-section" id="core-values-section">
+            <div class="container">
+
+                <h2 class="headline-md">Core Values</h2>
+
+                <div class="row">
+                    <div class="col-md-3 core-value">
+                        <img class="img-fluid" src="assets/images/core-value-1.svg" alt="commitment-img">
+                        <h3 class="mt-4">Commitment</h3>
+                    </div>
+                    <div class="col-md-3 core-value">
+                        <img class="img-fluid" src="assets/images/core-value-2.svg" alt="team-work-img">
+                        <h3 class="mt-4">Team Work</h3>
+                    </div>
+                    <div class="col-md-3 core-value">
+                        <img class="img-fluid" src="assets/images/core-value-3.svg" alt="integrity-img">
+                        <h3 class="mt-4">Integrity</h3>
+                    </div>
+                    <div class="col-md-3 core-value">
+                        <img class="img-fluid" src="assets/images/core-value-4.svg" alt="professionalism-img">
+                        <h3 class="mt-4">Professionalism</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mv-section" id="mv-section">
+            <div class="container">
+
+                <div class="row mission-section">
+                    <div class="col-md-6">
+                        <h2 class="headline-md">Mission</h2>
+                        
+                        <p class="paragraph-text">
+                            J. F. Rubber Phils., Inc. manufactures rubber parts for the automotive and electronic industries. The company also produces and supplies rubber compound to other companies. Its factory is located at Block 2, Lot 6 of the People's Technology Complex - Special Economic Zone in Carmona, Cavite, Philippines.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="img-fluid" src="assets/images/mission.svg" alt="mission-img">
+                    </div>
+                </div>
+
+                <div class="row vision-section">
+                    <div class="col-md-6">
+                        <img class="img-fluid" src="assets/images/vision.svg" alt="vision-img">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="headline-md">Vision</h2>
+
+                        <p class="paragraph-text">
+                            J. F. Rubber Phils., Inc. manufactures rubber parts for the automotive and electronic industries. The company also produces and supplies rubber compound to other companies. Its factory is located at Block 2, Lot 6 of the People's Technology Complex - Special Economic Zone in Carmona, Cavite, Philippines.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact-section">
+            <div class="container">
+
+                <h2 class="headline-md">Contact Us!</h2>
+
+                <div class="row">
+                    <div class="col-md-6 contact-infos">
                 
-            </div>
-            <div class="item">
-                <img class="owl-img-2" src="img/product-set-3-removebg-preview 1.png" alt="">
-                <div class="owl-content">
-                    <span class="item-h4">Dampers, bush caps, seals , boots , clutch cover ,cap breathers</span>
-                    <span class="item-a"><a href="">View</a></span>
-                </div>
-            </div>
-            <div class="item">
-                <img class="owl-img-2" src="img/product-set-4-removebg-preview (1) 1.png" alt="">
-                <div class="owl-content">
-                    <span class="item-h4">packings For non-auto and automotive applications</span>
-                    <span class="item-a"><a href="">View</a></span>
-                </div>
-            </div>
-            <div class="item">
-                <img class="owl-img-2" src="img/product-set-1-removebg-preview (1) 1.png" alt="">
-                <div class="owl-content">
-                    <span class="item-h4">Grommets and covers for the automotive wiring harness</span>
-                    <span class="item-a"><a href="">View</a></span>
-                </div>
-            </div>
-            <div class="item">
-                <img class="owl-img-2" src="img/product-set-4-removebg-preview (1) 1.png" alt="">
-                <div class="owl-content">
-                    <span class="item-h4">packings For non-auto and automotive applications</span>
-                    <span class="item-a"><a href="">View</a></span>
-                </div>
-            </div>
-            <div class="item">
-                <img class="owl-img-2" src="img/product-set-1-removebg-preview (1) 1.png" alt="">
-                <div class="owl-content">
-                    <span class="item-h4">Grommets and covers for the automotive wiring harness</span>
-                    <span class="item-a"><a href="">View</a></span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="contact-section" class="contact-section mb-5">
-        <h2 class="contact-title text-uppercase pb-5">Contact Us</h2>
-        <div class="contact-row">
-            <div class="contact-col ">
-                <img class="py-3" src="img/addresscon.png" width="50px" alt="">
-                <h3>Adrress</h3>
-                <p>Block 2, Lot 6 of the People's Technology Complex - Special Economic Zone in Carmona, Cavite, Philippines</p>
-            </div>
-            <div class="contact-col py-3">
-                <img class="py-3" src="img/phonecon.png" width="50px" alt="">
-                <h3>Phone</h3>
-                <p>(046-430-3485)</p>
-            </div>
-            <div class="contact-col py-3">
-                <img class="py-3" src="img/emailcon.png" width="50px" alt="">
-                <h3>Email Adrress</h3>
-                <p>sales@jfrubber.ph</p>
-            </div>
-        </div>
-    </section>
-</main>
+                        <div class="contact-info-top">
+                            <p class="paragraph-text">Welcome to our "Contact Us" section! We would love to hear from you and we're always here to help. If you have any questions or feedback, please do not hesitate to reach out to us.</p>
 
-<?php include "footer.php"; ?>
+                            <p class="paragraph-text">We value your input and want to make sure that we're providing the best possible experience for our customers. So, don't hesitate to let us know what's on your mind. We look forward to hearing from you!</p>
+                        </div>
+                        
+                        <div class="contact-info-bottom">
+                            <div class="contact-info pb-3">
+                                <img class="img-fluid" src="assets/images/location.svg" height="30" width="30" alt="location">
+
+                                <a href="https://goo.gl/maps/VdUoe545SsHHd2p56" target="_blank" class="info">Block 2, Lot 6 of the People's Technology Complex - Special Economic Zone in Carmona, Cavite, Philippines</a>
+                            </div>
+
+                            <div class="contact-info">
+                                <img class="img-fluid" src="assets/images/phone.svg" height="30" width="30"   alt="phone">
+
+                                <a href="tel: 0464303485" class="info">046-430-3485</a>
+                            </div>
+
+                            <div class="contact-info pt-3">
+                                <img class="img-fluid" src="assets/images/mail.svg" height="30" width="30"   alt="mail">
+
+                                <a href="mailto: sales@jfrubber.ph" class="info">sales@jfrubber.ph</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 contact-form">
+                        <h3>
+                            Leave Us A Message
+                        </h3>
+                        
+                        <div class="container">
+                            <form method="post" id="contactUsForm" class="needs-validation" novalidate>
+                                <div class="alert alert-danger alert-message"></div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="userName" name="userName" type="text" placeholder="Juan" required />
+                                    <label class="label-blue" for="userName"><i class="fa-solid fa-user-tie"></i>Name</label>
+
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <input class="form-control" id="userEmail" name="userEmail" type="email" placeholder="name@example.com" required />
+                                    <label class="label-blue" for="userEmail"><i class="fa-solid fa-envelope"></i>Email</label>
+
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-floating">
+                                    <input class="form-control" id="userMsgSubject" name="userMsgSubject" type="text" placeholder="Password" required />
+                                    <label class="label-blue" for="userMsgSubject"><i class="fa-solid fa-quote-right"></i>Subject</label>
+
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="userMsg" name="userMsg" placeholder="Leave a message here"></textarea>
+                                    <label class="label-blue" for="userMsg"><i class="fa-solid fa-message"></i>Message</label>
+
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+
+                                <div class="btn-section">
+                                    <button type="submit" class="btn btn-blue btn-block" id="btnSubmitMsg" name="btnSubmitMsg">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="location-section">
+            <div class="container">
+
+                <h2 class="headline-md">Location Map</h2>
+
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15463.964793442736!2d121.0364199!3d14.311944!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d70aed18bd09%3A0x840a33b8d704b846!2sJF%20Rubber%20Phils.!5e0!3m2!1sen!2sph!4v1682172615882!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <?php include_once('assets/components/footer.php'); ?>
+
+    <!-- Bootstrap JS -->
+    <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Load library from the CDN -->
+    <script src="assets/vendors/typed/typed.js"></script>
+
+ 
+    <script>
+        // Preloader
+        const preloader = document.querySelector(".preloader");
+
+        window.addEventListener("load", function() {
+            preloader.classList.add("loaded");
+            document.body.classList.add("loaded");
+        });
+
+        // Header Scroll
+        const header = document.querySelector(".header");
+        const navbar = document.querySelector(".navbar");
+        const backTopBtn = document.querySelector(".back-top-btn");
+
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 100) {
+                backTopBtn.classList.add("active");
+                header.classList.add("active");
+                header.classList.add("fixed-top");
+            } else {
+                header.classList.remove("active");
+                backTopBtn.classList.remove("active");
+            }
+        });
+
+        // Auto Type
+    
+        const typed = new Typed('.auto-type', {
+            strings: ['Quality Products', 'Innovation', 'Customer Satisfaction'],
+            typeSpeed: 50,
+            backSpeed: 50,
+            loop: true
+        });
+
+    </script>
+</body>
+</html>

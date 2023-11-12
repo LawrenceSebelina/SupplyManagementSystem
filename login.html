@@ -25,95 +25,63 @@
         <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css">
     
         <!-- CSS Style -->
-        <link rel="stylesheet" href="style.css">
-
-
-    <style>
-
-        body {
-            color: black;
-        }
-        
-        #layoutAuthentication {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            gap: 20px;
-            background-color: red;
-        }
-
-        #layoutAuthentication #layoutAuthentication_content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 0;
-            flex-grow: 1;
-            /* margin-block: auto; */
-        }
-
-        #layoutAuthentication .header {
-            min-width: 0;
-        }
-
-        #layoutAuthentication .footer {
-            min-width: 0;
-        }
-
-        #alertMessage {
-            display: none;
-        }
-    </style>
+        <link rel="stylesheet" href="assets/css/style.css">
 
     </head>
     <body>
-        <div id="layoutAuthentication">
-            <header class="header" style="background-color: var(--dark-blue);">
-                <div class="container">
-                    <nav class="navbar navbar-expand-lg navbar-dark"> <!-- bg-body-tertiary  -->
-                        <div class="container-fluid px-0">
-                            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-                            <img src="assets/images/logo.png" width="80px" alt="logo">
-                            <a href="index.html" class="navbar-brand">J.F RUBBER</a>
-                            
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarIconMenu" aria-controls="navbarIconMenu" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                                <!-- <i class="fa-solid fa-bars"></i> -->
-                            </button>
-    
-                            <div class="collapse navbar-collapse" id="navbarIconMenu">
-                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">About Us</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Products</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="index2.html#contact-section">Contact Us</a>
-                                    </li>
-                                </ul>
-                            </div>
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="spinner"></div>
+        </div>
+
+        <header class="header fixed-top" style="background-color: var(--dark-blue);">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark"> <!-- bg-body-tertiary  -->
+                    <div class="container-fluid px-0">
+                        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                        <img src="assets/images/logo.png" width="80px" alt="logo">
+                        <a href="index.html" class="navbar-brand">J.F RUBBER</a>
+                        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarIconMenu" aria-controls="navbarIconMenu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            <!-- <i class="fa-solid fa-bars"></i> -->
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarIconMenu">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index2.html#contact-section">Contact Us</a>
+                                </li>
+                            </ul>
                         </div>
-                    </nav>
-                </div>
-            </header>
-            
-            <div id="layoutAuthentication_content">
-                <main>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <div id="login-form-wrapper">
+            <main>
+                <section class="form-section">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                <div class="card">
+                                    <div class="card-header"><h2 class="headline-md">Login</h2></div>
                                     <div class="card-body">
                                         <form method="post" id="loginForm" class="needs-validation" novalidate>
                                             <div class="alert alert-danger" id="alertMessage"></div>
-                                            <div class="form-floating mb-3">
+                                            <div class="form-floating">
                                                 <input class="form-control" id="inputEmail" name="userEmail" type="email" placeholder="name@example.com" required />
-                                                <label for="inputEmail">Email address</label>
+                                                <label class="label-blue" for="inputEmail"><i class="fa-solid fa-envelope"></i>Email address</label>
 
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -122,9 +90,9 @@
                                                     Please select a valid state.
                                                 </div>
                                             </div>
-                                            <div class="form-floating mb-3">
+                                            <div class="form-floating">
                                                 <input class="form-control" id="inputPassword" name="userPassword" type="password" placeholder="Password" required />
-                                                <label for="inputPassword">Password</label>
+                                                <label class="label-blue" for="inputPassword"><i class="fa-solid fa-lock"></i>Password</label>
 
                                                 <div class="valid-feedback">
                                                     Looks good!
@@ -133,14 +101,14 @@
                                                     Please select a valid state.
                                                 </div>
                                             </div>
-                                            <div class="form-check mb-3">
+                                            <div class="form-check">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                             </div>
-                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            <div class="btn-section">
                                                 <a class="small" href="password.html">Forgot Password?</a>
 
-                                                <button type="submit" class="btn btn-primary btn-block" id="btnLoginAccount" name="btnLoginAccount">Login</button>
+                                                <button type="submit" class="btn btn-blue btn-block" id="btnLoginAccount" name="btnLoginAccount">Login</button>
                                             </div>
                                         </form>
                                     </div>
@@ -151,9 +119,9 @@
                             </div>
                         </div>
                     </div>
-                </main>
-            </div>
-
+                </section>
+            </main>
+        
             <footer class="footer">
         
                 <div class="footer-top">
@@ -222,15 +190,12 @@
             </footer>
 
         </div>
-
-        
     
         <!-- Back to top -->
     
         <a href="#" class="back-top-btn" aria-label="Back to top">
             <i class="fa fa-solid fa-arrow-up"></i>
         </a>
-    
     
         <!-- Bootstrap JS -->
         <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
@@ -271,7 +236,6 @@
                 }
             });
 
-
             // Input fields validation
             const forms = document.querySelectorAll('.needs-validation');
 
@@ -293,22 +257,6 @@
                 preloader.classList.add("loaded");
                 document.body.classList.add("loaded");
             });
-
-            // Header Scroll
-            // const header = document.querySelector(".header");
-            // const navbar = document.querySelector(".navbar");
-            // const backTopBtn = document.querySelector(".back-top-btn");
-
-            // window.addEventListener("scroll", function() {
-            //     if (window.scrollY > 100) {
-            //         backTopBtn.classList.add("active");
-            //         header.classList.add("active");
-            //         header.classList.add("fixed-top");
-            //     } else {
-            //         header.classList.remove("active");
-            //         backTopBtn.classList.remove("active");
-            //     }
-            // });
         </script>
     </body>
 </html>

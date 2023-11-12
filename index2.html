@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css">
 
     <!-- CSS Style -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <!-- Preloader -->
@@ -416,32 +416,60 @@
                         </h3>
                         
                         <div class="container">
-                            <form action="" method="post">
-                                <div class="row py-3 g-3">
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control" placeholder="First name" aria-label="Name">
-                                    </div>
-    
-                                    <div class="col-md-12">
-                                         <input type="text" class="form-control" placeholder="Email" aria-label="Email">
-                                    </div>
-    
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control" placeholder="Subject" aria-label="Subject">
-                                   </div>
-    
-                                   <div class="col-md-12">
-                                        <textarea name="" class="form-control" id="" cols="30" rows="5" placeholder="Message" aria-label="Message"></textarea>
-                                    </div>
+                            <form method="post" id="contactUsForm" class="needs-validation" novalidate>
+                                <div class="alert alert-danger" id="alertMessage"></div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="userName" name="userName" type="text" placeholder="Juan" required />
+                                    <label class="label-blue" for="userName"><i class="fa-solid fa-user-tie"></i>Name</label>
 
-                                    <div class="col-md-12 btn-section">
-                                        <button type="submit" class="btn btn-green" href="#" role="button">Submit</button>
+                                    <div class="valid-feedback">
+                                        Looks good!
                                     </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
 
+                                <div class="form-floating">
+                                    <input class="form-control" id="userEmail" name="userEmail" type="email" placeholder="name@example.com" required />
+                                    <label class="label-blue" for="userEmail"><i class="fa-solid fa-envelope"></i>Email</label>
+
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-floating">
+                                    <input class="form-control" id="userMsgSubject" name="userMsgSubject" type="text" placeholder="Password" required />
+                                    <label class="label-blue" for="userMsgSubject"><i class="fa-solid fa-quote-right"></i>Subject</label>
+
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="userMsg" name="userMsg" placeholder="Leave a message here"></textarea>
+                                    <label class="label-blue" for="userMsg"><i class="fa-solid fa-message"></i>Message</label>
+
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+
+                                <div class="btn-section">
+                                    <button type="submit" class="btn btn-blue btn-block" id="btnSubmitMsg" name="btnSubmitMsg">Submit</button>
                                 </div>
                             </form>
-                         
-                            
                         </div>
                     </div>
                 </div>

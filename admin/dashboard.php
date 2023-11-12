@@ -1,336 +1,389 @@
+<?php 
+    include_once('../includes/mainFunction/functionClasses.php'); 
+?>   
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- End Fonts -->
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
+    <title>Dashboard</title>
+    <?php include_once('assets/components/all-styles.php'); ?>
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center bg-dark">
-
-    <div class="d-flex align-items-center p-0">
-      <img width="70px" height="60px" src="assets/img/company-logo 1.png" alt="">
-      <a href="index.html" class="logo ">
-       
-        <span class="">J.F Rubber Phils</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn text-white"></i>
-    </div><!-- End Logo -->
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-        <li class="nav-item dropdown">
-
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
+    <div class="main-wrapper">
         
+        <?php include_once('assets/components/header.php'); ?>
+        <?php include_once('assets/components/sidebar.php'); ?>   
 
-        <li class="nav-item dropdown pe-3">
+        <div class="page-wrapper">
+            <div class="content container-fluid">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <span class="">Admin</span>
-            <span class="user-icon d-none d-md-block dropdown-toggle ps-2"><i class="bi bi-person-circle"></i></span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Mark Anthony Lara</h6>
-              <span>Admin</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <buttom id="logoutBtn" class="dropdown-item d-flex align-items-center" href="../includes/logout.inc.php">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </button>
-            </li>
-
-            <script>
-
-                const logOut = document.getElementById("logoutBtn");
-
-                logOut.addEventListener("click", function(){
-                    
-                    if(confirm("Are you sure?")) {
-                      window.location.href = "../includes/logout.inc.php";
-                    }
-
-                });
-
-            </script>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-    
-      <div class="sidebar-content text-center">
-        <img  src="./assets/img/company-logo.png" width="70px" height="70px" alt="">
-      </div>
-      <div class="sidebar-content-title text-center py-3">
-        <span class="sidebar-title">Administrator</span>
-      </div>
-    <ul class="sidebar-nav" id="sidebar-nav">
-      
-      <li class="nav-item">
-        <a class="nav-link " href="dashboard.php">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-archive"></i><span>Inventory</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="rawmaterial(Inventory).php">
-            <i class="bi bi-circle"></i><span>Raw Material</span>
-            </a>
-          </li>
-          <li>
-            <a href="category(Inventory).php">
-              <i class="bi bi-circle"></i><span>Category</span>
-            </a>
-          </li>
-          <li>
-            <a href="finishproduct(Inventory).php">
-              <i class="bi bi-circle"></i><span>Finish Product</span>
-            </a>
-          </li>
-          <li>
-            <a href="supplies(Inventory).php">
-              <i class="bi bi-circle"></i><span>Supplies</span>
-            </a>
-          </li>
-         
-        </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Order Management</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="purchaseorder(Order).php">
-              <i class="bi bi-circle"></i><span>Purchase Order</span>
-            </a>
-          </li>
-          <li>
-            <a href="orderstock(Order).php">
-              <i class="bi bi-circle"></i><span>Order Stock</span>
-            </a>
-          </li>
-          <li>
-            <a href="orderdelivery(Order).php">
-              <i class="bi bi-circle"></i><span>Order Delivery</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-bar-chart"></i><span>Report</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="sales(Report).php" >
-              <i class="bi bi-circle"></i><span>Sales Report</span>
-            </a>
-          </li>
-          <li>
-            <a href="inventory(Report).php" >
-              <i class="bi bi-circle"></i><span>Inventory Report</span>
-            </a>
-          </li>
-          <li>
-            <a href="purchase(Report)">
-              <i class="bi bi-circle"></i><span>Purchase Order Report</span>
-            </a>
-          </li>
-          <li>
-            <a href="orderdelivery(Report).php">
-              <i class="bi bi-circle"></i><span>Order Delivery Report</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-sliders"></i><span>Configuration</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="contact(Config).php">
-              <i class="bi bi-circle"></i><span>Contact Information</span>
-            </a>
-          </li>
-          <li>
-            <a href="about(Config).php">
-              <i class="bi bi-circle"></i><span>About Us</span>
-            </a>
-          </li>
-          <li>
-            <a href="images(Config).php">
-              <i class="bi bi-circle"></i><span>Images</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Charts Nav -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-sub-header">
+                                <h3 class="page-title">Welcome Admin!</h3>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active">Admin</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-    </ul>
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Students</h6>
+                                        <h3>50055</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/dash-icon-01.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Awards</h6>
+                                        <h3>50+</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/dash-icon-02.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Department</h6>
+                                        <h3>30+</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/dash-icon-03.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Revenue</h6>
+                                        <h3>$505</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/dash-icon-04.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  </aside><!-- End Sidebar-->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
 
-  <main id="main" class="main">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <h5 class="card-title">Overview</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul class="chart-list-out">
+                                            <li><span class="circle-blue"></span>Teacher</li>
+                                            <li><span class="circle-green"></span>Student</li>
+                                            <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="apexcharts-area"></div>
+                            </div>
+                        </div>
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+                    </div>
+                    <div class="col-md-12 col-lg-6">
 
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <h5 class="card-title">Number of Students</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul class="chart-list-out">
+                                            <li><span class="circle-blue"></span>Girls</li>
+                                            <li><span class="circle-green"></span>Boys</li>
+                                            <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="bar"></div>
+                            </div>
+                        </div>
 
-  </main><!-- End #main -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 d-flex">
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>J .F Rubber Philippines Incorporated</span></strong>. All Rights Reserved
+                        <div class="card flex-fill student-space comman-shadow">
+                            <div class="card-header d-flex align-items-center">
+                                <h5 class="card-title">Star Students</h5>
+                                <ul class="chart-list-out student-ellips">
+                                    <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table
+                                        class="table star-student table-hover table-center table-borderless table-striped">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th class="text-center">Marks</th>
+                                                <th class="text-center">Percentage</th>
+                                                <th class="text-end">Year</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-nowrap">
+                                                    <div>PRE2209</div>
+                                                </td>
+                                                <td class="text-nowrap">
+                                                    <a href="profile.html">
+                                                        <img class="rounded-circle" src="assets/img/profiles/avatar-02.jpg" width="25" alt="Star Students">
+                                                        John Smith
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">1185</td>
+                                                <td class="text-center">98%</td>
+                                                <td class="text-end">
+                                                    <div>2019</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap">
+                                                    <div>PRE1245</div>
+                                                </td>
+                                                <td class="text-nowrap">
+                                                    <a href="profile.html">
+                                                        <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="25" alt="Star Students">
+                                                        Jolie Hoskins
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">1195</td>
+                                                <td class="text-center">99.5%</td>
+                                                <td class="text-end">
+                                                    <div>2018</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap">
+                                                    <div>PRE1625</div>
+                                                </td>
+                                                <td class="text-nowrap">
+                                                    <a href="profile.html">
+                                                        <img class="rounded-circle" src="assets/img/profiles/avatar-03.jpg" width="25" alt="Star Students">
+                                                        Pennington Joy
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">1196</td>
+                                                <td class="text-center">99.6%</td>
+                                                <td class="text-end">
+                                                    <div>2017</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap">
+                                                    <div>PRE2516</div>
+                                                </td>
+                                                <td class="text-nowrap">
+                                                    <a href="profile.html">
+                                                        <img class="rounded-circle"
+                                                            src="assets/img/profiles/avatar-04.jpg" width="25"
+                                                            alt="Star Students">
+                                                        Millie Marsden
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">1187</td>
+                                                <td class="text-center">98.2%</td>
+                                                <td class="text-end">
+                                                    <div>2016</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap">
+                                                    <div>PRE2209</div>
+                                                </td>
+                                                <td class="text-nowrap">
+                                                    <a href="profile.html">
+                                                        <img class="rounded-circle"
+                                                            src="assets/img/profiles/avatar-05.jpg" width="25"
+                                                            alt="Star Students">
+                                                        John Smith
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">1185</td>
+                                                <td class="text-center">98%</td>
+                                                <td class="text-end">
+                                                    <div>2015</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-6 d-flex">
+
+                        <div class="card flex-fill comman-shadow">
+                            <div class="card-header d-flex align-items-center">
+                                <h5 class="card-title ">Student Activity </h5>
+                                <ul class="chart-list-out student-ellips">
+                                    <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-groups">
+                                    <div class="activity-awards">
+                                        <div class="award-boxs">
+                                            <img src="assets/img/icons/award-icon-01.svg" alt="Award">
+                                        </div>
+                                        <div class="award-list-outs">
+                                            <h4>1st place in "Chess”</h4>
+                                            <h5>John Doe won 1st place in "Chess"</h5>
+                                        </div>
+                                        <div class="award-time-list">
+                                            <span>1 Day ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-awards">
+                                        <div class="award-boxs">
+                                            <img src="assets/img/icons/award-icon-02.svg" alt="Award">
+                                        </div>
+                                        <div class="award-list-outs">
+                                            <h4>Participated in "Carrom"</h4>
+                                            <h5>Justin Lee participated in "Carrom"</h5>
+                                        </div>
+                                        <div class="award-time-list">
+                                            <span>2 hours ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-awards">
+                                        <div class="award-boxs">
+                                            <img src="assets/img/icons/award-icon-03.svg" alt="Award">
+                                        </div>
+                                        <div class="award-list-outs">
+                                            <h4>Internation conference in "St.John School"</h4>
+                                            <h5>Justin Leeattended internation conference in "St.John School"</h5>
+                                        </div>
+                                        <div class="award-time-list">
+                                            <span>2 Week ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-awards mb-0">
+                                        <div class="award-boxs">
+                                            <img src="assets/img/icons/award-icon-04.svg" alt="Award">
+                                        </div>
+                                        <div class="award-list-outs">
+                                            <h4>Won 1st place in "Chess"</h4>
+                                            <h5>John Doe won 1st place in "Chess"</h5>
+                                        </div>
+                                        <div class="award-time-list">
+                                            <span>3 Day ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card flex-fill fb sm-box">
+                            <div class="social-likes">
+                                <p>Like us on facebook</p>
+                                <h6>50,095</h6>
+                            </div>
+                            <div class="social-boxs">
+                                <img src="assets/img/icons/social-icon-01.svg" alt="Social Icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card flex-fill twitter sm-box">
+                            <div class="social-likes">
+                                <p>Follow us on twitter</p>
+                                <h6>48,596</h6>
+                            </div>
+                            <div class="social-boxs">
+                                <img src="assets/img/icons/social-icon-02.svg" alt="Social Icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card flex-fill insta sm-box">
+                            <div class="social-likes">
+                                <p>Follow us on instagram</p>
+                                <h6>52,085</h6>
+                            </div>
+                            <div class="social-boxs">
+                                <img src="assets/img/icons/social-icon-03.svg" alt="Social Icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card flex-fill linkedin sm-box">
+                            <div class="social-likes">
+                                <p>Follow us on linkedin</p>
+                                <h6>69,050</h6>
+                            </div>
+                            <div class="social-boxs">
+                                <img src="assets/img/icons/social-icon-04.svg" alt="Social Icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <p>Copyright © 2022 Dreamguys.</p>
+            </footer>
+        </div>
     </div>
-  </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+    <?php include_once('assets/components/all-scripts.php'); ?>   
 </body>
 
 </html>
