@@ -273,7 +273,7 @@
                                                         <h2 class="headline-md">Add Raw Materials</h2>
                                                     </div>
 
-                                                    <form method="post" id="addRMForm" class="needs-validation" novalidate>
+                                                    <!-- <form method="post" id="addRMForm" class="needs-validation" novalidate> -->
 
                                                         <?php
                                                             $getRMMId = $functionClass->getRMMId();
@@ -397,7 +397,7 @@
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
                                                         </div>
 
-                                                    </form>
+                                                    <!-- </form> -->
 
                                                 </div>
                                             </div>

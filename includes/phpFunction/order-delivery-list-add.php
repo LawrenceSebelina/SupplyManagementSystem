@@ -4,7 +4,7 @@
     $addODLODUId = md5(uniqid(mt_rand() . time(), true));
     $addODLODId = $_POST['addODLODId'];
     $addODLNo = ucwords($_POST['addODLNo']);
-    $addODLMaterialIds = ucwords($_POST['materialuid']);
+    $addODLMaterialIds = $_POST['materialuid'];
 
     // $addODLPN = ucwords($_POST['addODLPN']);
     // $addODLCustomer = $_POST['addODLCustomer'];

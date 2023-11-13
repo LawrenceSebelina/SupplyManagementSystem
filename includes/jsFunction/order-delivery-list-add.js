@@ -18,8 +18,8 @@ addODLSubmitBtn.onclick = ()=> {
                         window.location.href = window.location.href;
                     });
                 } else {
-                    addODAlertMsg.style.display = "block";
-                    addODAlertMsg.textContent = data;
+                    addODLAlertMsg.style.display = "block";
+                    addODLAlertMsg.textContent = data;
                 }
             }
         }

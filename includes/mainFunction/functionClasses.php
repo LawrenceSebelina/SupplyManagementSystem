@@ -1427,7 +1427,7 @@
 
                     $connection = $this->connect();
                 
-                    $stmt = $connection->prepare("INSERT INTO test_orders (testOrderId, testOrderNo, testOrderUId, rawMaterialUId) VALUES (:orderDeliveryId, :orderDeliveryUId, :orderDeliveryOrderNo)");
+                    $stmt = $connection->prepare("INSERT INTO test_orders (testOrderId, testOrderNo, testOrderUId, rawMaterialUId) VALUES (:testOrderId, :testOrderNo, :testOrderUId, :rawMaterialUId)");
     
                     $stmt->bindParam(':testOrderId', $addODLODId);
                     $stmt->bindParam(':testOrderNo', $addODLNo);
