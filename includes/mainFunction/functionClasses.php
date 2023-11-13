@@ -1238,7 +1238,7 @@
 
                 $connection = $this->connect();
             
-                $stmt = $connection->prepare("INSERT INTO order_deliveries (orderDeliveryId, orderDeliveryUId, orderDeliveryOrderNo, orderDeliveryProdName, 	orderDeliveryCustomer, orderDeliveryTotalOrder, orderDeliverySchedDate, 	orderDeliveryExpectedDate, orderDeliveryOrderStatus, orderDeliveryDateCreated) VALUES (:orderDeliveryId, :orderDeliveryUId, :orderDeliveryOrderNo, :orderDeliveryProdName, :orderDeliveryCustomer, :orderDeliveryTotalOrder, :orderDeliverySchedDate, :orderDeliveryExpectedDate, :orderDeliveryOrderStatus, :orderDeliveryDateCreated)");
+                $stmt = $connection->prepare("INSERT INTO order_deliveries (orderDeliveryId, orderDeliveryUId, orderDeliveryOrderNo, orderDeliveryProdName, orderDeliveryCustomer, orderDeliveryTotalOrder, orderDeliverySchedDate, orderDeliveryExpectedDate, orderDeliveryOrderStatus, orderDeliveryDateCreated) VALUES (:orderDeliveryId, :orderDeliveryUId, :orderDeliveryOrderNo, :orderDeliveryProdName, :orderDeliveryCustomer, :orderDeliveryTotalOrder, :orderDeliverySchedDate, :orderDeliveryExpectedDate, :orderDeliveryOrderStatus, :orderDeliveryDateCreated)");
 
                 $stmt->bindParam(':orderDeliveryId', $addODODId);
                 $stmt->bindParam(':orderDeliveryUId', $addODODUId);
@@ -1402,6 +1402,50 @@
             }
         // TODO: End of Order Deliveries All Functions   
 
+        // TODO: Add Order Deliveries with Raw Materials Lists
+
+            public function addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLMaterialIds) {
+
+                if (empty($addODLODUId) && empty($addODLODId) && empty($addODLNo) && empty($addODLMaterialIds)) {
+                    return "Some of the fields are empty";
+                }
+                
+                if (empty($addODLODUId)) {
+                    return "Order Delivery Unique Id field is empty";
+                }
+                if (empty($addODLODId)) {
+                    return "Order Delivery Id field is empty";
+                }
+                if (empty($addODLNo)) {
+                    return "Order Delivery Number field is empty";
+                }
+                if (empty($addODLMaterialIds)) {
+                    return "Order Delivery Product Name field is empty";
+                }   
+
+                foreach ($addODLMaterialIds as $addODLMaterialId) {
+
+                    $connection = $this->connect();
+                
+                    $stmt = $connection->prepare("INSERT INTO test_orders (testOrderId, testOrderNo, testOrderUId, rawMaterialUId) VALUES (:orderDeliveryId, :orderDeliveryUId, :orderDeliveryOrderNo)");
+    
+                    $stmt->bindParam(':testOrderId', $addODLODId);
+                    $stmt->bindParam(':testOrderNo', $addODLNo);
+                    $stmt->bindParam(':testOrderUId', $addODLODUId);
+                    $stmt->bindParam(':rawMaterialUId', $addODLMaterialId);
+                    $stmt->execute();
+                }
+            
+                if ($stmt) {
+                    return "success";
+                } else {
+                    return "failed";
+                }
+
+                $this->disconnect(); 
+            }
+
+        // TODO: End of Add Order Deliveries with Raw Materials Lists
     }
 
     $functionClass = new functionClasses();

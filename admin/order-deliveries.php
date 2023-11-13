@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <form method="post" id="addODForm" class="needs-validation" novalidate>
+                    <form method="post" id="addODLForm" class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card comman-shadow">
@@ -82,8 +82,8 @@
 
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-floating">
-                                                    <input class="form-control" id="addODODId" name="addODODId" type="text" value="<?php echo $getLatestODODId ?? ""; ?>" placeholder="OD-001" readonly />
-                                                    <label class="label-blue" for="addODODId"><i class="fa-solid fa-envelope"></i>Order ID<span class="text-danger">*</span></label>
+                                                    <input class="form-control" id="addODLODId" name="addODLODId" type="text" value="<?php echo $getLatestODODId ?? ""; ?>" placeholder="OD-001" readonly />
+                                                    <label class="label-blue" for="addODLODId"><i class="fa-solid fa-envelope"></i>Order ID<span class="text-danger">*</span></label>
 
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -96,8 +96,8 @@
 
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-floating">
-                                                    <input class="form-control" id="addODNo" name="addODNo" type="text" placeholder="ODN-001" required />
-                                                    <label class="label-blue" for="addODNo"><i class="fa-solid fa-envelope"></i>Order No<span class="text-danger">*</span></label>
+                                                    <input class="form-control" id="addODLNo" name="addODLNo" type="text" placeholder="ODN-001" required />
+                                                    <label class="label-blue" for="addODLNo"><i class="fa-solid fa-envelope"></i>Order No<span class="text-danger">*</span></label>
 
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -218,7 +218,7 @@
 
                                         <!-- Search Existing Raw Materials Modal -->
                                         <div class="modal fade" id="searchRMModal" tabindex="-1" aria-labelledby="searchRMModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                            <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header modal-primary">
                                                         <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
@@ -435,7 +435,7 @@
                                         <div class="row gy-4">
                                             <div class="col-12">
                                                 <div class="text-end">
-                                                    <button type="submit" class="btn btn-primary me-2" id="btnAddOD" name="btnAddOD">Submit <i class="fas fa-download"></i></button>
+                                                    <button type="submit" class="btn btn-primary me-2" id="btnaddODL" name="btnaddODL">Submit <i class="fas fa-download"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -451,6 +451,11 @@
                 </footer>
             </div>
 
+            <?php include_once('assets/components/all-scripts.php'); ?>   
+
+            <!-- Add Order Delivery JS Function -->
+            <script src="../includes/jsFunction/order-delivery-list-add.js"></script>
+            
         <?php } else { ?>
 
             <div class="page-wrapper">
@@ -515,15 +520,15 @@
                 </footer>
             </div>
 
+            <?php include_once('assets/components/all-scripts.php'); ?>   
+
+            <!-- Add Order Delivery JS Function -->
+            <script src="../includes/jsFunction/order-delivery-add.js"></script>
+            <!-- Edit Order Delivery JS Function -->
+            <script src="../includes/jsFunction/order-delivery-edit.js"></script>
+
         <?php } ?>
     </div>
-
-    <?php include_once('assets/components/all-scripts.php'); ?>   
-    
-    <!-- Add Order Delivery JS Function -->
-    <script src="../includes/jsFunction/order-delivery-add.js"></script>
-    <!-- Edit Order Delivery JS Function -->
-    <script src="../includes/jsFunction/order-delivery-edit.js"></script>
 
     <!-- Get Order Deliveries JS Function -->
     <script>
@@ -553,37 +558,40 @@
                 var $tr = $(this).closest('tr');
                 var $tds = $tr.find("td:not(:last-child)");
 
-                var firstColumnValue = $tds.eq(0).text(); // Value of the first column
-                var secondColumnValue = $tds.eq(1).text(); // Value of the second column
-
                 var ordersTable = $('#rawMaterialsOrdersTable tbody');
 
                 var matchFound = false;
                 ordersTable.find('tr').each(function() {
                     var $existingRow = $(this);
-                    var existingFirstColumnValue = $existingRow.find('td:eq(0) input').val();
-                    var existingSecondColumnValue = $existingRow.find('td:eq(1) input').val();
+                    var existingValues = $existingRow.find('td input').map(function() {
+                        return $(this).val();
+                    }).get();
 
-                    if (firstColumnValue === existingFirstColumnValue && secondColumnValue === existingSecondColumnValue) {
+                    if (JSON.stringify(existingValues) === JSON.stringify($tds.map(function() {
+                        return $(this).text();
+                    }).get())) {
                         matchFound = true;
                         return false;
                     }
                 });
 
                 if (!matchFound) {
-                    var data = $tds.map(function() {
-                        return $(this).text();
+                    var newRow = $('<tr></tr>');
+
+                    // Retrieve th values of rawMaterialsOrdersTable, convert to small caps, and remove spaces
+                    var columnNames = $('#rawMaterialsOrdersTable thead tr th').map(function() {
+                        return $(this).text().toLowerCase().replace(/\s/g, ''); // \s matches any white space character
                     }).get();
 
-                    var newRow = $('<tr></tr>');
-                    data.forEach(function(cellData) {
-                        var newCell = $('<td><input type="text" name="columnName" value="' + cellData + '"></td>');
+                    $tds.each(function(index) {
+                        var cellData = $(this).text();
+                        var newCell = $('<td><input type="text" name="' + columnNames[index] + '[]' + '" value="' + cellData + '"></td>');
                         newRow.append(newCell);
                     });
 
                     $('#rawMaterialsOrdersTable tbody').append(newRow);
                 } else {
-                    swal('Already Added!', 'This Raw Material has been already added.', 'warning');
+                    swal('Already Added!', 'This Raw Material has already been added.', 'warning');
                 }
             });
 
