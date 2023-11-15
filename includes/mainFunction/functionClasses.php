@@ -383,7 +383,7 @@
                     foreach ($datas as $data) { 
                         $actions = 
                         '<div class="actions">
-                            <a href="javascript:;" class="btn btn-sm bg-primary-light text-primary me-2 addRMOder">
+                            <a href="javascript:;" class="btn btn-sm bg-primary-light text-primary me-2 addRMOrder">
                                 <i class="feather-plus"></i>
                             </a>
                         </div>';
@@ -1404,9 +1404,9 @@
 
         // TODO: Add Order Deliveries with Raw Materials Lists
 
-            public function addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLMaterialIds) {
+            public function addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLSupplier, $addODLMaterialIds) {
 
-                if (empty($addODLODUId) && empty($addODLODId) && empty($addODLNo) && empty($addODLMaterialIds)) {
+                if (empty($addODLODUId) && empty($addODLODId) && empty($addODLNo) && empty($addODLSupplier) && empty($addODLMaterialIds)) {
                     return "Some of the fields are empty";
                 }
                 
@@ -1419,30 +1419,47 @@
                 if (empty($addODLNo)) {
                     return "Order Delivery Number field is empty";
                 }
+                if (empty($addODLSupplier)) {
+                    return "Order Delivery Supplier field is empty";
+                }
                 if (empty($addODLMaterialIds)) {
-                    return "Order Delivery Product Name field is empty";
+                    return "Order Delivery Raw Materials table is empty";
                 }   
 
-                foreach ($addODLMaterialIds as $addODLMaterialId) {
-
-                    $connection = $this->connect();
-                
-                    $stmt = $connection->prepare("INSERT INTO test_orders (testOrderId, testOrderNo, testOrderUId, rawMaterialUId) VALUES (:testOrderId, :testOrderNo, :testOrderUId, :rawMaterialUId)");
-    
-                    $stmt->bindParam(':testOrderId', $addODLODId);
-                    $stmt->bindParam(':testOrderNo', $addODLNo);
-                    $stmt->bindParam(':testOrderUId', $addODLODUId);
-                    $stmt->bindParam(':rawMaterialUId', $addODLMaterialId);
-                    $stmt->execute();
-                }
+                $connection = $this->connect();
             
+                $stmt = $connection->prepare("INSERT INTO order_deliveries (orderDeliveryId, orderDeliveryUId, orderDeliveryOrderNo, orderDeliverySupplier, orderDeliveryTotalProd) VALUES (:testOrderId, :testOrderNo, :testOrderUId, :rawMaterialUId)");
+
+                $stmt->bindParam(':orderDeliveryUId', $addODLODId);
+                $stmt->bindParam(':orderDeliveryId', $addODLNo);
+                $stmt->bindParam(':orderDeliveryOrderNo', $addODLODUId);
+                $stmt->bindParam(':orderDeliverySupplier', $addODLMaterialId);
+                $stmt->bindParam(':orderDeliveryTotalProd', count($addODLMaterialId));
+                $stmt->execute();
+
                 if ($stmt) {
-                    return "success";
-                } else {
-                    return "failed";
+                    foreach ($addODLMaterialIds as $addODLMaterialId) {
+
+                        $connection = $this->connect();
+                    
+                        $stmt = $connection->prepare("INSERT INTO order_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty) VALUES (:testOrderId, :testOrderNo, :testOrderUId, :rawMaterialUId)");
+        
+                        $stmt->bindParam(':testOrderId', $addODLODId);
+                        $stmt->bindParam(':testOrderNo', $addODLNo);
+                        $stmt->bindParam(':testOrderUId', $addODLODUId);
+                        $stmt->bindParam(':rawMaterialUId', $addODLMaterialId);
+                        $stmt->execute();
+                    }
+                
+                    if ($stmt) {
+                        return "success";
+                    } else {
+                        return "failed";
+                    }
                 }
 
                 $this->disconnect(); 
+
             }
 
         // TODO: End of Add Order Deliveries with Raw Materials Lists

@@ -110,8 +110,8 @@
 
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-floating">
-                                                    <input class="form-control" id="addODPN" name="addODPN" type="text" placeholder="Base Pads" required />
-                                                    <label class="label-blue" for="addODPN"><i class="fa-solid fa-envelope"></i>Product Name<span class="text-danger">*</span></label>
+                                                    <input class="form-control" id="addODLSupplier" name="addODLSupplier" type="text" placeholder="Base Pads" required />
+                                                    <label class="label-blue" for="addODLSupplier"><i class="fa-solid fa-envelope"></i>Supplier Name<span class="text-danger">*</span></label>
 
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -122,75 +122,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-12 col-sm-4">
-                                                <div class="form-floating">
-                                                    <input class="form-control" id="addODCustomer" name="addODCustomer" type="text" placeholder="Juan Dela Cruz" required />
-                                                    <label class="label-blue" for="addODCustomer"><i class="fa-solid fa-envelope"></i>Customer<span class="text-danger">*</span></label>
-
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid state.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-sm-4">
-                                                <div class="form-floating">
-                                                    <input class="form-control" id="addODTO" name="addODTO" type="text" placeholder="10" required />
-                                                    <label class="label-blue" for="addODTO"><i class="fa-solid fa-envelope"></i>Total Order<span class="text-danger">*</span></label>
-
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid state.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-sm-4">
-                                                <div class="form-floating">
-                                                    <input class="form-control" id="addODSDate" name="addODSDate" type="date" value="<?php echo $getPurchaseOrderCurrentDate ?? "" ?>"  placeholder="MM-DD-YYYY" required />
-                                                    <label class="label-blue" for="addODSDate"><i class="fa-solid fa-envelope"></i>Schedules Date<span class="text-danger">*</span></label>
-
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid state.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-12 col-sm-4">
-                                                <div class="form-floating">
-                                                    <input class="form-control" id="addODEDate" name="addODEDate" type="date" value="<?php echo $getPurchaseOrderCurrentDate ?? "" ?>"  placeholder="MM-DD-YYYY" required />
-                                                    <label class="label-blue" for="addODEDate"><i class="fa-solid fa-envelope"></i>Expected Date<span class="text-danger">*</span></label>
-
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid state.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-sm-4">
-                                                <div class="form-floating">
-                                                    <input class="form-control" id="addODStatus" name="addODStatus" type="text" placeholder="Pending" required />
-                                                    <label class="label-blue" for="addODStatus"><i class="fa-solid fa-envelope"></i>Status<span class="text-danger">*</span></label>
-
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid state.
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     
                                     </div>
@@ -261,6 +192,82 @@
                                             </div>
                                         </div>
                                         <!-- End of Search Existing Raw Materials Modal -->
+
+                                        <!-- Add Material Quantity Modal -->
+                                        <div class="modal fade" id="addRMODQModal" tabindex="-1" aria-labelledby="addRMODQModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header modal-primary">
+                                                        <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                                        <i class="fas fa-plus"></i>
+                                                        <h2 class="headline-md">Add Raw Materials</h2>
+                                                    </div>
+
+                                                    <div class="modal-body">
+
+                                                        <div class="row gy-4">
+                                                            <div class="col-12">
+                                                                <div class="alert alert-danger mb-4" id="alertMessage"></div>
+                                                            </div>
+
+                                                            <div class="col-12 col-sm-4">
+                                                                <div class="form-floating">
+                                                                    <input class="form-control" id="addRMQty" name="addRMQty" type="text" value="1" placeholder="1" />
+                                                                    <label class="label-blue" for="addRMQty"><i class="fa-solid fa-envelope"></i>Raw Material Quantity<span class="text-danger">*</span></label>
+
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid state.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    
+                                                    </div>
+
+                                                    <div class="modal-footer modal-primary">
+                                                        <button type="submit" class="btn btn-primary me-2" id="btnAddRMODQ" name="btnAddRMODQ">Submit <i class="fas fa-download"></i></button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Add Material Quantity Modal -->
+
+                                        <!-- Remove Material Modal -->
+                                        <div class="modal fade" id="removeRMODQModal" tabindex="-1" aria-labelledby="removeRMODQModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header modal-primary">
+                                                        <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                                        <i class="fas fa-plus"></i>
+                                                        <h2 class="headline-md">Remove Raw Materials</h2>
+                                                    </div>
+
+                                                    <div class="modal-body">
+
+                                                        <div class="row gy-4">
+                                                            
+
+                                                        </div>
+                                                    
+                                                    </div>
+
+                                                    <div class="modal-footer modal-primary">
+                                                        <button type="submit" class="btn btn-primary me-2" id="btnRemoveRMOD" name="btnRemoveRMOD">Submit <i class="fas fa-download"></i></button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Remove Material Modal -->
 
                                         <!-- Add Material Modal -->
                                         <div class="modal fade" id="addRMODModal" tabindex="-1" aria-labelledby="addRMModalLabel" aria-hidden="true">
@@ -415,6 +422,8 @@
                                                         <th>Unit</th>
                                                         <th>Quantity</th>
                                                         <th>Supplier</th>
+                                                        <th>Quantity</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -554,45 +563,96 @@
                 rawMaterialsTable.ajax.reload( null, false );
             }, 3000 );
 
-            $('#rawMaterialsTable').on('click', '.addRMOder', function() {
-                var $tr = $(this).closest('tr');
-                var $tds = $tr.find("td:not(:last-child)");
+// Event handler for adding an order in rawMaterialsTable
+rawMaterialsTable.on('click', '.addRMOrder', function() {
+    // Show the modal for adding raw material order quantity
+    $('#addRMODQModal').modal('show');
 
-                var ordersTable = $('#rawMaterialsOrdersTable tbody');
+    // Store references to the clicked row and related elements
+    var $tr = $(this).closest('tr');
+    var $tds = $tr.find("td:not(:last-child)");
 
-                var matchFound = false;
-                ordersTable.find('tr').each(function() {
-                    var $existingRow = $(this);
-                    var existingValues = $existingRow.find('td input').map(function() {
-                        return $(this).val();
-                    }).get();
+    // Event handler for the button inside the modal
+    $('#addRMODQModal').one('click', '#btnAddRMODQ', function() {
+        // Check if the order is already added based on the second column value
+        var matchFound = isOrderAlreadyAdded($tds);
 
-                    if (JSON.stringify(existingValues) === JSON.stringify($tds.map(function() {
-                        return $(this).text();
-                    }).get())) {
-                        matchFound = true;
-                        return false;
-                    }
+        // Get the raw material quantity from the modal input
+        var rawMaterialQty = $('#addRMQty').val();
+
+        // Add the order to the table if not already added
+        if (!matchFound) {
+            var newRow = $('<tr></tr>');
+
+            // Retrieve th values of rawMaterialsOrdersTable, convert to small caps, and remove spaces
+            var columnNames = $('#rawMaterialsOrdersTable thead tr th').map(function() {
+                return $(this).text().toLowerCase().replace(/\s/g, ''); // \s matches any white space character
+            }).get();
+
+            $tds.each(function(index) {
+                var cellData = $(this).text();
+                var newCell = $('<td><input type="text" name="' + columnNames[index] + '[]" value="' + cellData + '"></td>');
+                newRow.append(newCell);
+            });
+
+            newRow.append('<td><input type="text" name="materialqty[]" value="' + rawMaterialQty + '"></td>');
+            newRow.append('<td><div class="actions"><a href="javascript:;" class="btn btn-sm bg-warning-light text-warning me-2 updateRMOD"><i class="feather-edit"></i></a><a href="javascript:;" class="btn btn-sm bg-danger-light text-danger deleteRMOD"><i class="feather-trash"></i></a></div></td>');
+
+            // Append the new row to the rawMaterialsOrdersTable
+            $('#rawMaterialsOrdersTable tbody').append(newRow);
+        } else {
+            swal('Already Added!', 'This Raw Material has already been added.', 'warning');
+        }
+
+        // Close the modal
+        $('#addRMODQModal').modal('hide');
+    });
+});
+
+// Function to check if the order is already added based on the second column value
+function isOrderAlreadyAdded($tds) {
+    var ordersTable = $('#rawMaterialsOrdersTable tbody');
+    var matchFound = false;
+
+    var existingValues = $tds.map(function() {
+        return $(this).text();
+        console.log(existingValues)
+    }).get();
+
+    ordersTable.find('tr').each(function() {
+        var $existingRow = $(this);
+        var rowValues = $existingRow.find('td input').map(function() {
+            return $(this).val();
+        }).get();
+
+        if (JSON.stringify(rowValues) === JSON.stringify(existingValues)) {
+            matchFound = true;
+            return false;
+        }
+    });
+
+    return matchFound;
+}
+
+
+
+
+            // Event handler for deleting an order in rawMaterialsOrdersTable
+            $('#rawMaterialsOrdersTable').on('click', '.deleteRMOD', function() {
+                // Show the modal
+                $('#removeRMODQModal').modal('show');
+
+                // Store a reference to the clicked row
+                var $clickedRow = $(this).closest('tr');
+
+                // Event handler for the button inside the modal
+                $('#removeRMODQModal').on('click', '#btnRemoveRMOD', function() {
+                    // Remove the row
+                    $clickedRow.remove();
+
+                    // Close the modal
+                    $('#removeRMODQModal').modal('hide');
                 });
-
-                if (!matchFound) {
-                    var newRow = $('<tr></tr>');
-
-                    // Retrieve th values of rawMaterialsOrdersTable, convert to small caps, and remove spaces
-                    var columnNames = $('#rawMaterialsOrdersTable thead tr th').map(function() {
-                        return $(this).text().toLowerCase().replace(/\s/g, ''); // \s matches any white space character
-                    }).get();
-
-                    $tds.each(function(index) {
-                        var cellData = $(this).text();
-                        var newCell = $('<td><input type="text" name="' + columnNames[index] + '[]' + '" value="' + cellData + '"></td>');
-                        newRow.append(newCell);
-                    });
-
-                    $('#rawMaterialsOrdersTable tbody').append(newRow);
-                } else {
-                    swal('Already Added!', 'This Raw Material has already been added.', 'warning');
-                }
             });
 
             // TODO Order Deliveries Table

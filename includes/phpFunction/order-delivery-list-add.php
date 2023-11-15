@@ -4,6 +4,7 @@
     $addODLODUId = md5(uniqid(mt_rand() . time(), true));
     $addODLODId = $_POST['addODLODId'];
     $addODLNo = ucwords($_POST['addODLNo']);
+    $addODLSupplier = ucwords($_POST['addODLSupplier']);
     $addODLMaterialIds = $_POST['materialuid'];
 
     // $addODLPN = ucwords($_POST['addODLPN']);
@@ -16,7 +17,7 @@
     date_default_timezone_set('Asia/Manila');
     $addODLDate = date('Y-m-d H:i:s');
 
-    $returnMsg = $functionClass->addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLMaterialIds);
+    $returnMsg = $functionClass->addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLSupplier, $addODLMaterialIds);
 
     echo $returnMsg;
     
