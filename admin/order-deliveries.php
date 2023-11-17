@@ -239,6 +239,52 @@
                                         </div>
                                         <!-- End of Add Material Quantity Modal -->
 
+                                        <!-- Update Material Modal -->
+                                        <div class="modal fade" id="updateRMODQModal" tabindex="-1" aria-labelledby="updateRMODQModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header modal-primary">
+                                                        <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                                        <i class="fas fa-plus"></i>
+                                                        <h2 class="headline-md">Update Raw Material Quantity</h2>
+                                                    </div>
+
+                                                    <div class="modal-body">
+
+                                                        <div class="row gy-4">
+                                                            <div class="col-12">
+                                                                <div class="alert alert-danger mb-4" id="alertMessage"></div>
+                                                            </div>
+
+                                                            <div class="col-12 col-sm-4">
+                                                                <div class="form-floating">
+                                                                    <input class="form-control" id="updateRMQty" name="updateRMQty" type="text" value="1" placeholder="1" />
+                                                                    <label class="label-blue" for="updateRMQty"><i class="fa-solid fa-envelope"></i>Update Raw Material Quantity<span class="text-danger">*</span></label>
+
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid state.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    
+                                                    </div>
+
+                                                    <div class="modal-footer modal-primary">
+                                                        <button type="submit" class="btn btn-primary me-2" id="btnUpdateRMOD" name="btnUpdateRMOD">Submit <i class="fas fa-download"></i></button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Update Material Modal -->
+
                                         <!-- Remove Material Modal -->
                                         <div class="modal fade" id="removeRMODQModal" tabindex="-1" aria-labelledby="removeRMODQModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
@@ -563,79 +609,130 @@
                 rawMaterialsTable.ajax.reload( null, false );
             }, 3000 );
 
-// Event handler for adding an order in rawMaterialsTable
-rawMaterialsTable.on('click', '.addRMOrder', function() {
-    // Show the modal for adding raw material order quantity
-    $('#addRMODQModal').modal('show');
+            // Event handler for adding an order in rawMaterialsTable
+            rawMaterialsTable.on('click', '.addRMOrder', function () {
 
-    // Store references to the clicked row and related elements
-    var $tr = $(this).closest('tr');
-    var $tds = $tr.find("td:not(:last-child)");
+                // Show the modal for adding raw material order quantity
+                $('#addRMODQModal').modal('show');
 
-    // Event handler for the button inside the modal
-    $('#addRMODQModal').one('click', '#btnAddRMODQ', function() {
-        // Check if the order is already added based on the second column value
-        var matchFound = isOrderAlreadyAdded($tds);
+                // Store references to the clicked row and related elements
+                var tr = $(this).closest('tr');
+                var tds = tr.find("td:not(:last-child)");
 
-        // Get the raw material quantity from the modal input
-        var rawMaterialQty = $('#addRMQty').val();
+                // Event handler for the button inside the modal
+                $('#addRMODQModal').one('click', '#btnAddRMODQ', function () {
 
-        // Add the order to the table if not already added
-        if (!matchFound) {
-            var newRow = $('<tr></tr>');
+                    // Check if the order is already added based on the second column value
+                    var matchFound = isOrderAlreadyAdded(tds);
 
-            // Retrieve th values of rawMaterialsOrdersTable, convert to small caps, and remove spaces
-            var columnNames = $('#rawMaterialsOrdersTable thead tr th').map(function() {
-                return $(this).text().toLowerCase().replace(/\s/g, ''); // \s matches any white space character
-            }).get();
+                    // Get the raw material quantity from the modal input
+                    var rawMaterialQty = $('#addRMQty').val();
 
-            $tds.each(function(index) {
-                var cellData = $(this).text();
-                var newCell = $('<td><input type="text" name="' + columnNames[index] + '[]" value="' + cellData + '"></td>');
-                newRow.append(newCell);
+                    // Add the order to the table if not already added
+                    if (!matchFound) {
+
+                        var newRow = $('<tr></tr>');
+
+                        // Retrieve the values of rawMaterialsOrdersTable headers, convert to small caps, and remove spaces
+                        var columnNames = $('#rawMaterialsOrdersTable thead tr th').map(function () {
+                            return $(this).text().toLowerCase().replace(/\s/g, ''); // \s matches any white space character
+                        }).get();
+
+                        tds.each(function (index) {
+                            var cellData = $(this).text();
+                            var newCell = $('<td><input type="text" name="' + columnNames[index] + '[]" value="' + cellData + '"></td>');
+                            newRow.append(newCell);
+                        });
+
+                        newRow.append('<td><input type="text" name="materialqty[]" value="' + rawMaterialQty + '"></td>');
+                        newRow.append('<td><div class="actions"><a href="javascript:;" class="btn btn-sm bg-warning-light text-warning me-2 updateRMOD"><i class="feather-edit"></i></a><a href="javascript:;" class="btn btn-sm bg-danger-light text-danger deleteRMOD"><i class="feather-trash"></i></a></div></td>');
+
+                        // Append the new row to the rawMaterialsOrdersTable
+                        $('#rawMaterialsOrdersTable tbody').append(newRow);
+                        swal('Added!', 'This Raw Material has added.', 'success');
+                    } else {
+                        swal('Already Added!', 'This Raw Material has already been added.', 'warning');
+                    }
+
+                    // Close the modal
+                    $('#addRMODQModal').modal('hide');
+                });
             });
 
-            newRow.append('<td><input type="text" name="materialqty[]" value="' + rawMaterialQty + '"></td>');
-            newRow.append('<td><div class="actions"><a href="javascript:;" class="btn btn-sm bg-warning-light text-warning me-2 updateRMOD"><i class="feather-edit"></i></a><a href="javascript:;" class="btn btn-sm bg-danger-light text-danger deleteRMOD"><i class="feather-trash"></i></a></div></td>');
+            // Function to check if the order is already added based on the second column value
+            function isOrderAlreadyAdded(tds) {
 
-            // Append the new row to the rawMaterialsOrdersTable
-            $('#rawMaterialsOrdersTable tbody').append(newRow);
-        } else {
-            swal('Already Added!', 'This Raw Material has already been added.', 'warning');
-        }
+                var ordersTable = $('#rawMaterialsOrdersTable tbody');
+                var matchFound = false;
 
-        // Close the modal
-        $('#addRMODQModal').modal('hide');
-    });
-});
+                // Get the second column value of the current row
+                var secondColumnValue = tds.closest('tr').find('td:eq(1)').text();
 
-// Function to check if the order is already added based on the second column value
-function isOrderAlreadyAdded($tds) {
-    var ordersTable = $('#rawMaterialsOrdersTable tbody');
-    var matchFound = false;
+                ordersTable.find('tr').each(function () {
+                    var existingRow = $(this);
+                    var existingSecondColumnValue = existingRow.find('td:eq(1) input[name="materialuid[]"]').val();
 
-    var existingValues = $tds.map(function() {
-        return $(this).text();
-        console.log(existingValues)
-    }).get();
+                    // Compare the second column values
+                    if (existingSecondColumnValue === secondColumnValue) {
+                        matchFound = true;
+                        return false; // Break the loop if a match is found
+                    }
+                });
 
-    ordersTable.find('tr').each(function() {
-        var $existingRow = $(this);
-        var rowValues = $existingRow.find('td input').map(function() {
-            return $(this).val();
-        }).get();
+                return matchFound;
+            }
 
-        if (JSON.stringify(rowValues) === JSON.stringify(existingValues)) {
-            matchFound = true;
-            return false;
-        }
-    });
+            // Event handler for updating the qty of an order in rawMaterialsOrdersTable
+            $('#rawMaterialsOrdersTable').on('click', '.updateRMOD', function() {
+                console.log('Update button clicked on row:', $(this).closest('tr'));
 
-    return matchFound;
-}
+                // Show the modal
+                $('#updateRMODQModal').modal('show');
 
+                // Store a reference to the clicked row
+                var clickedRow = $(this).closest('tr');
+                console.log('Clicked row:', clickedRow);
 
+                var materialUId = clickedRow.find('td:eq(2) input[name="materialuid[]"]').val();
+                console.log('Material unique id:', materialUId);
 
+                var materialQtyInput = clickedRow.find('td:eq(7) input[name="materialqty[]"]');
+                console.log('Material quantity input:', materialQtyInput);
+
+                // Store the current material quantity
+                var currentMaterialQty = materialQtyInput.val();
+                console.log('Current material quantity:', currentMaterialQty);
+
+                // Set the value of the update input to the current material quantity
+                $('#updateRMQty').val(currentMaterialQty);
+
+                // Event handler for the button inside the modal
+                $('#updateRMODQModal').one('click', '#btnUpdateRMOD', function() {
+                    console.log('Update button inside modal clicked');
+
+                    // Get the updated quantity from the modal input
+                    var updatedRMQty = $('#updateRMQty').val();
+                    console.log('Updated quantity:', updatedRMQty);
+
+                    // Update the material quantity input in the clicked row
+                    materialQtyInput.val(updatedRMQty);
+                    console.log('Material quantity updated:', materialQtyInput.val());
+
+                    // Check if the quantity was actually updated
+                    swal('Updated!', 'Quantity has been updated.', 'success');
+                    console.log('SweetAlert: Quantity has been updated.');
+
+                    // Close the modal
+                    $('#updateRMODQModal').modal('hide');
+                    console.log('Modal closed.');
+
+                    // Check if materialUniqueId exists
+                    if (materialUId) {
+                        // Additional logic to handle materialUniqueId update
+                        console.log('MaterialUniqueId exists. Do something with it.');
+                    }
+                });
+            });
 
             // Event handler for deleting an order in rawMaterialsOrdersTable
             $('#rawMaterialsOrdersTable').on('click', '.deleteRMOD', function() {
@@ -643,13 +740,13 @@ function isOrderAlreadyAdded($tds) {
                 $('#removeRMODQModal').modal('show');
 
                 // Store a reference to the clicked row
-                var $clickedRow = $(this).closest('tr');
+                var clickedRow = $(this).closest('tr');
 
                 // Event handler for the button inside the modal
                 $('#removeRMODQModal').on('click', '#btnRemoveRMOD', function() {
                     // Remove the row
-                    $clickedRow.remove();
-
+                    clickedRow.remove();
+                    swal('Removed!', 'This Raw Material has removed.', 'success');
                     // Close the modal
                     $('#removeRMODQModal').modal('hide');
                 });
@@ -681,8 +778,8 @@ function isOrderAlreadyAdded($tds) {
             orderDeliveriesTable.on('click', '.updateOD', function() {
                 $('#updateODModal').modal('show');
 
-                $tr = $(this).closest('tr');
-                var data = $tr.children("td").map(function() {
+                tr = $(this).closest('tr');
+                var data = tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
 
@@ -698,8 +795,8 @@ function isOrderAlreadyAdded($tds) {
             orderDeliveriesTable.on('click', '.deleteOD', function() {
                 $('#deleteODModal').modal('show');
 
-                $tr = $(this).closest('tr');
-                var data = $tr.children("td").map(function() {
+                tr = $(this).closest('tr');
+                var data = tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
 

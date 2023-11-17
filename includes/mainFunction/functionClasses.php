@@ -1404,7 +1404,7 @@
 
         // TODO: Add Order Deliveries with Raw Materials Lists
 
-            public function addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLSupplier, $addODLMaterialIds) {
+            public function addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLSupplier, $addODLMaterialIds, $addODLMaterialQtys, $orderMaterialDateCreated) {
 
                 if (empty($addODLODUId) && empty($addODLODId) && empty($addODLNo) && empty($addODLSupplier) && empty($addODLMaterialIds)) {
                     return "Some of the fields are empty";
@@ -1425,37 +1425,46 @@
                 if (empty($addODLMaterialIds)) {
                     return "Order Delivery Raw Materials table is empty";
                 }   
+                if (empty($addODLMaterialQtys)) {
+                    return "There is Raw Material No Quantity table is empty";
+                }   
 
                 $connection = $this->connect();
             
-                $stmt = $connection->prepare("INSERT INTO order_deliveries (orderDeliveryId, orderDeliveryUId, orderDeliveryOrderNo, orderDeliverySupplier, orderDeliveryTotalProd) VALUES (:testOrderId, :testOrderNo, :testOrderUId, :rawMaterialUId)");
+                $stmt = $connection->prepare("INSERT INTO order_deliveries (orderDeliveryId, orderDeliveryUId, orderDeliveryOrderNo, orderDeliverySupplier, orderDeliveryTotalProd, orderDeliveryDateCreated) VALUES (:orderDeliveryId, :orderDeliveryUId, :orderDeliveryOrderNo, :orderDeliverySupplier, :orderDeliveryTotalProd, :orderDeliveryDateCreated)");
 
-                $stmt->bindParam(':orderDeliveryUId', $addODLODId);
-                $stmt->bindParam(':orderDeliveryId', $addODLNo);
-                $stmt->bindParam(':orderDeliveryOrderNo', $addODLODUId);
-                $stmt->bindParam(':orderDeliverySupplier', $addODLMaterialId);
-                $stmt->bindParam(':orderDeliveryTotalProd', count($addODLMaterialId));
+                $orderDeliveryTotalProd = count($addODLMaterialIds);
+                $stmt->bindParam(':orderDeliveryUId', $addODLODUId);
+                $stmt->bindParam(':orderDeliveryId', $addODLODId);
+                $stmt->bindParam(':orderDeliveryOrderNo', $addODLNo);
+                $stmt->bindParam(':orderDeliverySupplier', $addODLSupplier);
+                $stmt->bindParam(':orderDeliveryTotalProd', $orderDeliveryTotalProd);
+                $stmt->bindParam(':orderDeliveryDateCreated', $orderMaterialDateCreated);
                 $stmt->execute();
 
                 if ($stmt) {
-                    foreach ($addODLMaterialIds as $addODLMaterialId) {
+                    $connection = $this->connect();
 
-                        $connection = $this->connect();
-                    
-                        $stmt = $connection->prepare("INSERT INTO order_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty) VALUES (:testOrderId, :testOrderNo, :testOrderUId, :rawMaterialUId)");
-        
-                        $stmt->bindParam(':testOrderId', $addODLODId);
-                        $stmt->bindParam(':testOrderNo', $addODLNo);
-                        $stmt->bindParam(':testOrderUId', $addODLODUId);
-                        $stmt->bindParam(':rawMaterialUId', $addODLMaterialId);
+                    for ($i = 0; $i < count($addODLMaterialIds); $i++) {
+                        $addODLMaterialId = $addODLMaterialIds[$i];
+                        $addODLMaterialQty = $addODLMaterialQtys[$i];
+
+                        $stmt = $connection->prepare("INSERT INTO order_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty, orderMaterialDateCreated) VALUES (:orderMaterialUId, :orderDeliveryUId, :materialUId, :orderMaterialQty, :orderMaterialDateCreated)");
+
+                        $stmt->bindParam(':orderMaterialUId', $addODLODUId);
+                        $stmt->bindParam(':orderDeliveryUId', $addODLODUId);
+                        $stmt->bindParam(':materialUId', $addODLMaterialId);
+                        $stmt->bindParam(':orderMaterialQty', $addODLMaterialQty);
+                        $stmt->bindParam(':orderMaterialDateCreated', $orderMaterialDateCreated);
                         $stmt->execute();
                     }
-                
+
                     if ($stmt) {
                         return "success";
                     } else {
                         return "failed";
                     }
+
                 }
 
                 $this->disconnect(); 

@@ -6,6 +6,7 @@
     $addODLNo = ucwords($_POST['addODLNo']);
     $addODLSupplier = ucwords($_POST['addODLSupplier']);
     $addODLMaterialIds = $_POST['materialuid'];
+    $addODLMaterialQtys = $_POST['materialqty'];
 
     // $addODLPN = ucwords($_POST['addODLPN']);
     // $addODLCustomer = $_POST['addODLCustomer'];
@@ -15,9 +16,9 @@
     // $addODLStatus = ucwords($_POST['addODLStatus']);
 
     date_default_timezone_set('Asia/Manila');
-    $addODLDate = date('Y-m-d H:i:s');
+    $orderMaterialDateCreated = date('Y-m-d H:i:s');
 
-    $returnMsg = $functionClass->addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLSupplier, $addODLMaterialIds);
+    $returnMsg = $functionClass->addOrderDeliveryWithRawMaterials($addODLODUId, $addODLODId, $addODLNo, $addODLSupplier, $addODLMaterialIds, $addODLMaterialQtys, $orderMaterialDateCreated);
 
     echo $returnMsg;
     
