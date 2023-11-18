@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 02:50 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Nov 18, 2023 at 06:01 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `activity_logs` (
   `activityLogsUniqueId` varchar(250) NOT NULL,
   `activityLogsDone` varchar(250) NOT NULL,
   `activityLogsDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -49,7 +49,7 @@ CREATE TABLE `categories` (
   `categoryName` varchar(250) NOT NULL,
   `categoryDesc` varchar(250) NOT NULL,
   `categoryDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
@@ -78,7 +78,7 @@ CREATE TABLE `finish_products` (
   `finishProdTotal` int(100) NOT NULL,
   `finishProdDateFinished` date NOT NULL DEFAULT current_timestamp(),
   `finishProdDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -97,7 +97,7 @@ CREATE TABLE `materials` (
   `materialQuantity` int(11) NOT NULL,
   `materialSupplier` varchar(250) NOT NULL,
   `materialDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `materials`
@@ -105,7 +105,8 @@ CREATE TABLE `materials` (
 
 INSERT INTO `materials` (`id`, `materialId`, `materialUId`, `materialStatus`, `materialName`, `materialCategory`, `materialUnit`, `materialQuantity`, `materialSupplier`, `materialDateCreated`) VALUES
 (1, 'MID-001', 'f2ee9768bc4102e08d33cb7e19cc41cd', 0, 'BR-0150/BR0100', 'Categiry 1', '1', 1, '1', '2023-11-05 21:53:04'),
-(2, 'MID-002', '9fd45c0c143882aca268d67156ddb268', 0, 'EPT-3062EM', 'Category 2', '1', 1, '1', '2023-11-05 22:38:55');
+(2, 'MID-002', '9fd45c0c143882aca268d67156ddb268', 0, 'EPT-3062EM', 'Category 2', '1', 1, '1', '2023-11-05 22:38:55'),
+(3, 'MID-003', 'ac1141550100e210df33b9bb0e58d6bd', 0, '213', '123', '123', 123, '123', '2023-11-13 16:05:09');
 
 -- --------------------------------------------------------
 
@@ -121,7 +122,14 @@ CREATE TABLE `order_deliveries` (
   `orderDeliverySupplier` varchar(250) NOT NULL,
   `orderDeliveryTotalProd` int(11) NOT NULL,
   `orderDeliveryDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_deliveries`
+--
+
+INSERT INTO `order_deliveries` (`id`, `orderDeliveryId`, `orderDeliveryUId`, `orderDeliveryOrderNo`, `orderDeliverySupplier`, `orderDeliveryTotalProd`, `orderDeliveryDateCreated`) VALUES
+(1, 'OD-001', '85e6e699655ffc38c1476c1d7c3174bd', '123', 'Example', 3, '2023-11-18 12:58:31');
 
 -- --------------------------------------------------------
 
@@ -136,7 +144,16 @@ CREATE TABLE `order_materials` (
   `materialUId` varchar(250) NOT NULL,
   `orderMaterialQty` int(11) NOT NULL,
   `orderMaterialDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_materials`
+--
+
+INSERT INTO `order_materials` (`id`, `orderMaterialUId`, `orderDeliveryUId`, `materialUId`, `orderMaterialQty`, `orderMaterialDateCreated`) VALUES
+(1, '85e6e699655ffc38c1476c1d7c3174bd', '85e6e699655ffc38c1476c1d7c3174bd', 'ac1141550100e210df33b9bb0e58d6bd', 1, '2023-11-18 12:58:31'),
+(2, '85e6e699655ffc38c1476c1d7c3174bd', '85e6e699655ffc38c1476c1d7c3174bd', '9fd45c0c143882aca268d67156ddb268', 2, '2023-11-18 12:58:31'),
+(3, '85e6e699655ffc38c1476c1d7c3174bd', '85e6e699655ffc38c1476c1d7c3174bd', 'f2ee9768bc4102e08d33cb7e19cc41cd', 3, '2023-11-18 12:58:31');
 
 -- --------------------------------------------------------
 
@@ -156,7 +173,7 @@ CREATE TABLE `purchase_orders` (
   `purchaseOrderQuantity` int(11) NOT NULL,
   `purchaseOrderPrice` int(11) NOT NULL,
   `purchaseOrderDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -174,7 +191,31 @@ CREATE TABLE `supplies` (
   `supplyUnit` varchar(250) NOT NULL,
   `supplyStock` int(11) NOT NULL,
   `supplyDateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_orders`
+--
+
+CREATE TABLE `test_orders` (
+  `id` int(11) NOT NULL,
+  `testOrderId` varchar(250) NOT NULL,
+  `testOrderNo` varchar(250) NOT NULL,
+  `testOrderUId` varchar(250) NOT NULL,
+  `rawMaterialUId` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `test_orders`
+--
+
+INSERT INTO `test_orders` (`id`, `testOrderId`, `testOrderNo`, `testOrderUId`, `rawMaterialUId`) VALUES
+(1, 'OD-001', '123', '7e5d381b4b61742365e5e59949e82996', 'ac1141550100e210df33b9bb0e58d6bd'),
+(2, 'OD-001', '123', 'f6205ff993ad1438cd3ed5a83a1eb1db', 'ac1141550100e210df33b9bb0e58d6bd'),
+(3, 'OD-001', '123', 'f6205ff993ad1438cd3ed5a83a1eb1db', '9fd45c0c143882aca268d67156ddb268'),
+(4, 'OD-001', '123', 'f6205ff993ad1438cd3ed5a83a1eb1db', 'f2ee9768bc4102e08d33cb7e19cc41cd');
 
 -- --------------------------------------------------------
 
@@ -191,7 +232,7 @@ CREATE TABLE `users` (
   `userPassword` varchar(250) NOT NULL,
   `userCPassword` varchar(250) NOT NULL,
   `userDateCreated` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -247,6 +288,12 @@ ALTER TABLE `supplies`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `test_orders`
+--
+ALTER TABLE `test_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -272,19 +319,19 @@ ALTER TABLE `finish_products`
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_deliveries`
 --
 ALTER TABLE `order_deliveries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_materials`
 --
 ALTER TABLE `order_materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `purchase_orders`
@@ -297,6 +344,12 @@ ALTER TABLE `purchase_orders`
 --
 ALTER TABLE `supplies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `test_orders`
+--
+ALTER TABLE `test_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
