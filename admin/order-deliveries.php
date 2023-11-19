@@ -550,12 +550,9 @@
                                                     <th>Order ID</th>
                                                     <th>Order UID</th>
                                                     <th>Order No</th>
-                                                    <th>Prod Name</th>
-                                                    <th>Customer</th>
+                                                    <th>Supplier</th>
                                                     <th>Total Order</th>
-                                                    <th>Schedule Date</th>
-                                                    <th>Expected Date</th>
-                                                    <th>Status</th>
+                                                    <th>Order Date</th>
                                                     <th class="text-end">Actions</th>
                                                 </tr>
                                             </thead>
@@ -760,12 +757,9 @@
                     {data: "orderDeliveryId"},
                     {data: "orderDeliveryUId"},
                     {data: "orderDeliveryOrderNo"},
-                    {data: "orderDeliveryProdName"},
-                    {data: "orderDeliveryCustomer"},
-                    {data: "orderDeliveryTotalOrder"},                 
-                    {data: "orderDeliverySchedDate"},
-                    {data: "orderDeliveryExpectedDate"},
-                    {data: "orderDeliveryOrderStatus"},
+                    {data: "orderDeliverySupplier"},
+                    {data: "orderDeliveryTotalProd"},
+                    {data: "orderDeliveryDateCreated"},
                     {data: "actions"}
                 ],
             });

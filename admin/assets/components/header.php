@@ -15,7 +15,17 @@
 
 <!-- Preloader -->
 <div class="preloader">
-    <div class="spinner"></div>
+    <div class="loading-animation">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 
 <!-- Header -->

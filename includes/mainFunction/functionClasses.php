@@ -1264,10 +1264,12 @@
             public function getOrderDelivery() {
 
                 $connection = $this->connect();
-                $stmt = $connection->prepare("SELECT * FROM order_deliveries WHERE orderDeliveryStatus = :orderDeliveryStatus ORDER BY id DESC");
+                $stmt = $connection->prepare("SELECT * FROM order_deliveries ORDER BY id DESC");
 
-                $orderDeliveryStatus = 0;
-                $stmt->bindParam(':orderDeliveryStatus', $orderDeliveryStatus);
+                // $stmt = $connection->prepare("SELECT * FROM order_deliveries WHERE orderDeliveryStatus = :orderDeliveryStatus ORDER BY id DESC");
+
+                // $orderDeliveryStatus = 0;
+                // $stmt->bindParam(':orderDeliveryStatus', $orderDeliveryStatus);
                 $stmt->execute();
                 $datas = $stmt->fetchAll(); 
                 $datacount = $stmt->rowCount();
@@ -1288,12 +1290,9 @@
                             "orderDeliveryId" => $data['orderDeliveryId'],
                             "orderDeliveryUId" => $data['orderDeliveryUId'],
                             "orderDeliveryOrderNo" => $data['orderDeliveryOrderNo'],
-                            "orderDeliveryProdName" => $data['orderDeliveryProdName'],
-                            "orderDeliveryCustomer" => $data['orderDeliveryCustomer'],
-                            "orderDeliveryTotalOrder" => $data['orderDeliveryTotalOrder'],
-                            "orderDeliverySchedDate" => $data['orderDeliverySchedDate'],
-                            "orderDeliveryExpectedDate" => $data['orderDeliveryExpectedDate'],
-                            "orderDeliveryOrderStatus" => $data['orderDeliveryOrderStatus'],
+                            "orderDeliverySupplier" => $data['orderDeliverySupplier'],
+                            "orderDeliveryTotalProd" => $data['orderDeliveryTotalProd'],
+                            "orderDeliveryDateCreated" => $data['orderDeliveryDateCreated'],
                             "actions" => $actions
                         );
     
