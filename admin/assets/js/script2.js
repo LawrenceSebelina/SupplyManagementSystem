@@ -9,14 +9,13 @@ window.addEventListener("load", function() {
 
 // TODO: End of Loading State JS
 
-// TODO: asdadadas
+// TODO: Select Option Arrow Icon on the right
 
 document.addEventListener('DOMContentLoaded', function () {
     var select = document.querySelector('.select-option-field');
     var arrowIcon = document.querySelector('.select-option-icon');
 
     select.addEventListener('click', function () {
-        console.log("Test");
         arrowIcon.classList.toggle('rotate-up');
     });
 });

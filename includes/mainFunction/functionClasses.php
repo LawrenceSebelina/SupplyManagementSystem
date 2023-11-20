@@ -1186,6 +1186,24 @@
         // TODO: End of Purchase Orders All Functions
 
         // TODO: Order Deliveries All Functions 
+            public function getOrderDeliveryByODUID($orderDeliveryUId) {
+                $connection = $this->connect();
+                $stmt = $connection->prepare("SELECT * FROM order_deliveries WHERE orderDeliveryUId = :orderDeliveryUId");
+                $stmt->bindParam(':orderDeliveryUId', $orderDeliveryUId);
+                $stmt->execute();
+
+                $data = $stmt->fetchAll(); 
+                $datacount = $stmt->rowCount();
+
+                if ($datacount > 0) {
+                    return $data;
+                } else {
+                    return false;
+                }
+
+                $this->disconnect(); 
+            }
+
             public function getOrderDeliveryODId() {
                 $connection = $this->connect();
                 $stmt = $connection->prepare("SELECT id FROM order_deliveries ORDER BY id DESC LIMIT 1");
@@ -1287,7 +1305,7 @@
                         </div>';
 
                         $arrayDatas[] = array(
-                            "orderDeliveryId" => $data['orderDeliveryId'],
+                            "orderDeliveryId" => "<a href='index.php?route=order-deliveries&order=" . $data['orderDeliveryUId'] . "' class='btn btn-sm bg-success-light text-success me-2'>" . $data['orderDeliveryId'] . "</a>",
                             "orderDeliveryUId" => $data['orderDeliveryUId'],
                             "orderDeliveryOrderNo" => $data['orderDeliveryOrderNo'],
                             "orderDeliverySupplier" => $data['orderDeliverySupplier'],
@@ -1447,16 +1465,35 @@
                     for ($i = 0; $i < count($addODLMaterialIds); $i++) {
                         $addODLMaterialId = $addODLMaterialIds[$i];
                         $addODLMaterialQty = $addODLMaterialQtys[$i];
-
-                        $stmt = $connection->prepare("INSERT INTO order_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty, orderMaterialDateCreated) VALUES (:orderMaterialUId, :orderDeliveryUId, :materialUId, :orderMaterialQty, :orderMaterialDateCreated)");
-
-                        $stmt->bindParam(':orderMaterialUId', $addODLODUId);
-                        $stmt->bindParam(':orderDeliveryUId', $addODLODUId);
+                    
+                        $connection = $this->connect();
+                    
+                        $stmt = $connection->prepare("SELECT materialQuantity FROM materials WHERE materialUId = :materialUId");
                         $stmt->bindParam(':materialUId', $addODLMaterialId);
-                        $stmt->bindParam(':orderMaterialQty', $addODLMaterialQty);
-                        $stmt->bindParam(':orderMaterialDateCreated', $orderMaterialDateCreated);
                         $stmt->execute();
-                    }
+                        
+                        $existingQty = $stmt->fetchColumn();
+                    
+                        if ($existingQty !== false) {
+                            $newQty = $existingQty + $addODLMaterialQty;
+                    
+                            $stmt = $connection->prepare("UPDATE materials SET materialQuantity = :materialQuantity WHERE materialUId = :materialUId");
+                            $stmt->bindParam(':materialUId', $addODLMaterialId);
+                            $stmt->bindParam(':materialQuantity', $newQty);
+                            $stmt->execute();
+                    
+                            if ($stmt->rowCount() > 0) {
+                                $stmt = $connection->prepare("INSERT INTO order_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty, orderMaterialDateCreated) VALUES (:orderMaterialUId, :orderDeliveryUId, :materialUId, :orderMaterialQty, :orderMaterialDateCreated)");
+                    
+                                $stmt->bindParam(':orderMaterialUId', $addODLODUId);
+                                $stmt->bindParam(':orderDeliveryUId', $addODLODUId);
+                                $stmt->bindParam(':materialUId', $addODLMaterialId);
+                                $stmt->bindParam(':orderMaterialQty', $addODLMaterialQty);
+                                $stmt->bindParam(':orderMaterialDateCreated', $orderMaterialDateCreated);
+                                $stmt->execute();
+                            }
+                        }
+                    }                    
 
                     if ($stmt) {
                         return "success";

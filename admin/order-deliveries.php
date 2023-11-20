@@ -18,7 +18,173 @@
         <?php include_once('assets/components/sidebar.php'); ?>   
 
         <?php 
-            if (isset($_GET['route']) && !empty($_GET['route']) && $_GET['route'] == "order-deliveries" && isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "add-delivery") {  
+            if (isset($_GET['route']) && !empty($_GET['route']) && $_GET['route'] == "order-deliveries" && isset($_GET['order']) && !empty($_GET['order'])) {  
+        ?>
+
+            <?php
+                $orderDeliveryUId = $_GET['order'];
+                $orderDeliveryDetails = $functionClass->getOrderDeliveryByODUID($orderDeliveryUId);
+
+                if (!empty($orderDeliveryDetails)) {
+                    foreach ($orderDeliveryDetails as $orderDeliveryDetail) {
+                        $orderDeliveryId = $orderDeliveryDetail['orderDeliveryId'];
+                    }
+                }
+                
+            ?>
+
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="page-sub-header">
+                                    <h3 class="page-title"><?php echo $orderDeliveryId; ?></h3>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="students.html">Order Delivery</a></li>
+                                        <li class="breadcrumb-item">All Order Deliveries</li>
+                                        <li class="breadcrumb-item active">Add Order Delivery</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <form method="post" id="addODLForm" class="needs-validation" novalidate> -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card comman-shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="alert alert-danger mb-0" id="alertMessage"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card comman-shadow">
+                                    <div class="card-body">
+                                    
+                                    <div class="page-header">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h3 class="page-title">Order Details</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <?php
+                                            $getODODId = $functionClass->getOrderDeliveryODId();
+                                            date_default_timezone_set('Asia/Manila');
+                                            $getPurchaseOrderCurrentDate = date("Y-m-d");
+                                            if (!empty($getODODId)) {
+                                                $latestODODId = end($getODODId);
+                                                $getLatestODODId = sprintf("OD-%03d", $latestODODId + 1);
+                                            } else {
+                                                $getLatestODODId = "OD-001";
+                                            }                                                
+                                        ?>
+
+                                        <div class="row gy-4">
+
+                                            <div class="col-12 col-sm-4">
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="addODLODId" name="addODLODId" type="text" value="<?php echo $getLatestODODId ?? ""; ?>" placeholder="OD-001" readonly />
+                                                    <label class="label-blue" for="addODLODId"><i class="fa-solid fa-envelope"></i>Order ID<span class="text-danger">*</span></label>
+
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please select a valid state.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-4">
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="addODLNo" name="addODLNo" type="text" placeholder="ODN-001" required />
+                                                    <label class="label-blue" for="addODLNo"><i class="fa-solid fa-envelope"></i>Order No<span class="text-danger">*</span></label>
+
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please select a valid state.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-4">
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="addODLSupplier" name="addODLSupplier" type="text" placeholder="Base Pads" required />
+                                                    <label class="label-blue" for="addODLSupplier"><i class="fa-solid fa-envelope"></i>Supplier Name<span class="text-danger">*</span></label>
+
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Please select a valid state.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card comman-shadow">
+
+                                    <div class="card-body">
+
+                                        <div class="table-responsive">
+                                            <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="rawMaterialsOrdersTable">
+                                                <thead class="table-head">
+                                                    <tr>
+                                                        <th>Material ID</th>
+                                                        <th>Material UID</th>
+                                                        <th>Material Name</th>
+                                                        <th>Category</th>
+                                                        <th>Unit</th>
+                                                        <th>Quantity</th>
+                                                        <th>Supplier</th>
+                                                        <th>Quantity</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- </form> -->
+                </div>
+
+                <footer>
+                    <p>Copyright © 2022 J.F. Rubber</p>
+                </footer>
+            </div>
+
+            <?php include_once('assets/components/all-scripts.php'); ?> 
+
+        <?php 
+            } else if (isset($_GET['route']) && !empty($_GET['route']) && $_GET['route'] == "order-deliveries" && isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "add-delivery") {  
         ?>
             
             <div class="page-wrapper">
