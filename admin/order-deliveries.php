@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-sub-header">
-                                    <h3 class="page-title"><?php echo $orderDeliveryId; ?></h3>
+                                    <h3 class="page-title"><?php echo $orderDeliveryId ?? ""; ?></h3>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="students.html">Order Delivery</a></li>
                                         <li class="breadcrumb-item">All Order Deliveries</li>
@@ -148,7 +148,7 @@
                                     <div class="card-body">
 
                                         <div class="table-responsive">
-                                            <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="rawMaterialsOrdersTable">
+                                            <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="viewRawMaterialsOrdersTable">
                                                 <thead class="table-head">
                                                     <tr>
                                                         <th>Material ID</th>
@@ -156,13 +156,28 @@
                                                         <th>Material Name</th>
                                                         <th>Category</th>
                                                         <th>Unit</th>
-                                                        <th>Quantity</th>
                                                         <th>Supplier</th>
                                                         <th>Quantity</th>
-                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <?php
+                                                        if (!empty($orderDeliveryDetails)) {
+                                                            foreach ($orderDeliveryDetails as $orderDeliveryDetail) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><?php echo $orderDeliveryDetail['materialId'] ?? "" ?></td>
+                                                            <td><?php echo $orderDeliveryDetail['materialUId'] ?? "" ?></td>
+                                                            <td><?php echo $orderDeliveryDetail['materialName'] ?? "" ?></td>
+                                                            <td><?php echo $orderDeliveryDetail['materialCategory'] ?? "" ?></td>
+                                                            <td><?php echo $orderDeliveryDetail['materialUnit'] ?? "" ?></td>
+                                                            <td><?php echo $orderDeliveryDetail['orderDeliverySupplier'] ?? "" ?></td>
+                                                            <td><?php echo $orderDeliveryDetail['orderMaterialQty'] ?? "" ?></td>
+                                                        </tr>
+                                                    <?php
+                                                        }
+                                                            } 
+                                                    ?>
                                                     
                                                 </tbody>
                                             </table>
@@ -963,6 +978,14 @@
                 $('#deleteODODID').val(data[0]);   
                 $('#deleteODODUID').val(data[1]);
                 $('#deleteODPN').text(data[3]);
+            });
+
+
+            var viewRawMaterialsOrdersTable = $('#viewRawMaterialsOrdersTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
     </script>

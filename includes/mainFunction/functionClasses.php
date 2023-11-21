@@ -1188,7 +1188,7 @@
         // TODO: Order Deliveries All Functions 
             public function getOrderDeliveryByODUID($orderDeliveryUId) {
                 $connection = $this->connect();
-                $stmt = $connection->prepare("SELECT * FROM order_deliveries WHERE orderDeliveryUId = :orderDeliveryUId");
+                $stmt = $connection->prepare("SELECT * FROM order_materials LEFT JOIN order_deliveries ON order_materials.orderDeliveryUId = order_deliveries.orderDeliveryUId LEFT JOIN materials ON order_materials.materialUId = materials.materialUId  WHERE order_materials.orderDeliveryUId = :orderDeliveryUId");
                 $stmt->bindParam(':orderDeliveryUId', $orderDeliveryUId);
                 $stmt->execute();
 

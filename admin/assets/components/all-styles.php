@@ -8,7 +8,10 @@
 <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+<link rel="stylesheet" href="assets/plugins/datatables/css/datatables.min.css">
+<link rel="stylesheet" href="assets/plugins/datatables/css/buttons.dataTables.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/style2.css">
 <script src="assets/js/sweetalert.min.js"></script>
+
+

@@ -7,9 +7,22 @@
 <script src="assets/plugins/select2/js/select2.min.js"></script>
 <script src="assets/plugins/moment/moment.min.js"></script>
 <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-<script src="assets/plugins/datatables/datatables.min.js"></script>
+<script src="assets/plugins/datatables/js/datatables.min.js"></script>
+<script src="assets/plugins/datatables/js/dataTables.buttons.min.js"></script>
+<script src="assets/plugins/datatables/js/jszip.min.js"></script>
+<script src="assets/plugins/datatables/js/pdfmake.min.js"></script>
+<script src="assets/plugins/datatables/js/vfs_fonts.js"></script>
+<script src="assets/plugins/datatables/js/buttons.html5.min.js"></script>
+<script src="assets/plugins/datatables/js/buttons.print.min.js"></script>
 <script src="assets/js/script.js"></script>
 <script src="assets/js/script2.js"></script>
+
+
+
+
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
 
 <script>
     // TODO: Add Active Class on the Selected Route 
