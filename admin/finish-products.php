@@ -80,7 +80,7 @@
 
                                 <!-- Add Finish Product Modal -->
                                 <div class="modal fade" id="addFPModal" tabindex="-1" aria-labelledby="addFPModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header modal-primary">
                                                 <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
@@ -167,6 +167,88 @@
                                                         </div>
 
                                                     </div>
+
+                                                    
+
+                                                    <div class="row gy-4">
+                                                        <div class="col-12">
+                                                            <div class="alert alert-danger my-4" id="alertMessage">Raw Materials</div>
+                                                        </div>
+
+                                                        <div class="page-header">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-auto text-end float-end ms-auto download-grp">
+                                                                     <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchRMModal"><i class="fas fa-plus me-2"></i>Search For Existing Raw Materials</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="table-responsive">
+                                                            <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="orderDeliveriesTable">
+                                                                <thead class="table-head">
+                                                                    <tr>
+                                                                        <th>Order ID</th>
+                                                                        <th>Order UID</th>
+                                                                        <th>Order No</th>
+                                                                        <th>Supplier</th>
+                                                                        <th>Total Order</th>
+                                                                        <th>Order Date</th>
+                                                                        <th class="text-end">Actions</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Search Existing Raw Materials Modal -->
+                                                    <div class="modal fade" id="searchRMModal" tabindex="-1" aria-labelledby="searchRMModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-primary">
+                                                                    <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                                                    <i class="fas fa-plus"></i>
+                                                                    <h2 class="headline-md">Search Existing Raw Materials</h2>
+                                                                </div>
+
+                                                                <div class="modal-body">
+
+                                                                    <div class="row gy-4">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="rawMaterialsTable">
+                                                                                <thead class="table-head">
+                                                                                    <tr>
+                                                                                        <th>Material ID</th>
+                                                                                        <th>Material UID</th>
+                                                                                        <th>Material Name</th>
+                                                                                        <th>Category</th>
+                                                                                        <th>Unit</th>
+                                                                                        <th>Quantity</th>
+                                                                                        <th>Supplier</th>
+                                                                                        <th class="text-end">Actions</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                
+                                                                </div>
+
+                                                                <div class="modal-footer modal-primary">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End of Search Existing Raw Materials Modal -->
                                                    
                                                 </div>
 
