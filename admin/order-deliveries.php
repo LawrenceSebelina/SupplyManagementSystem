@@ -28,6 +28,8 @@
                 if (!empty($orderDeliveryDetails)) {
                     foreach ($orderDeliveryDetails as $orderDeliveryDetail) {
                         $orderDeliveryId = $orderDeliveryDetail['orderDeliveryId'];
+                        $orderDeliveryNo = $orderDeliveryDetail['orderDeliveryOrderNo'];
+                        $orderDeliverySupplierName = $orderDeliveryDetail['orderDeliverySupplier'];
                     }
                 }
                 
@@ -43,7 +45,7 @@
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="students.html">Order Delivery</a></li>
                                         <li class="breadcrumb-item">All Order Deliveries</li>
-                                        <li class="breadcrumb-item active">Add Order Delivery</li>
+                                        <li class="breadcrumb-item active"><?php echo $orderDeliveryNo ?? "" ?></li>
                                     </ul>
                                 </div>
                             </div>
@@ -78,24 +80,12 @@
                                         </div>
                                     </div>
 
-                                        <?php
-                                            $getODODId = $functionClass->getOrderDeliveryODId();
-                                            date_default_timezone_set('Asia/Manila');
-                                            $getPurchaseOrderCurrentDate = date("Y-m-d");
-                                            if (!empty($getODODId)) {
-                                                $latestODODId = end($getODODId);
-                                                $getLatestODODId = sprintf("OD-%03d", $latestODODId + 1);
-                                            } else {
-                                                $getLatestODODId = "OD-001";
-                                            }                                                
-                                        ?>
-
                                         <div class="row gy-4">
 
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-floating">
-                                                    <input class="form-control" id="addODLODId" name="addODLODId" type="text" value="<?php echo $getLatestODODId ?? ""; ?>" placeholder="OD-001" readonly />
-                                                    <label class="label-blue" for="addODLODId"><i class="fa-solid fa-envelope"></i>Order ID<span class="text-danger">*</span></label>
+                                                    <input class="form-control" id="viewODLODId" name="viewODLODId" type="text" value="<?php echo $orderDeliveryId ?? ""; ?>" placeholder="OD-001" readonly />
+                                                    <label class="label-blue" for="viewODLODId"><i class="fa-solid fa-envelope"></i>Order ID<span class="text-danger">*</span></label>
 
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -108,8 +98,8 @@
 
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-floating">
-                                                    <input class="form-control" id="addODLNo" name="addODLNo" type="text" placeholder="ODN-001" required />
-                                                    <label class="label-blue" for="addODLNo"><i class="fa-solid fa-envelope"></i>Order No<span class="text-danger">*</span></label>
+                                                    <input class="form-control" id="viewODLNo" name="viewODLNo" type="text" value="<?php echo $orderDeliveryNo ?? ""; ?>" placeholder="ODN-001" readonly />
+                                                    <label class="label-blue" for="viewODLNo"><i class="fa-solid fa-envelope"></i>Order No<span class="text-danger">*</span></label>
 
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -122,8 +112,8 @@
 
                                             <div class="col-12 col-sm-4">
                                                 <div class="form-floating">
-                                                    <input class="form-control" id="addODLSupplier" name="addODLSupplier" type="text" placeholder="Base Pads" required />
-                                                    <label class="label-blue" for="addODLSupplier"><i class="fa-solid fa-envelope"></i>Supplier Name<span class="text-danger">*</span></label>
+                                                    <input class="form-control" id="viewODLSupplier" name="viewODLSupplier" type="text" value="<?php echo $orderDeliverySupplierName ?? ""; ?>" placeholder="Base Pads" readonly />
+                                                    <label class="label-blue" for="viewODLSupplier"><i class="fa-solid fa-envelope"></i>Supplier Name<span class="text-danger">*</span></label>
 
                                                     <div class="valid-feedback">
                                                         Looks good!
@@ -156,7 +146,6 @@
                                                         <th>Material Name</th>
                                                         <th>Category</th>
                                                         <th>Unit</th>
-                                                        <th>Supplier</th>
                                                         <th>Quantity</th>
                                                     </tr>
                                                 </thead>
@@ -171,7 +160,6 @@
                                                             <td><?php echo $orderDeliveryDetail['materialName'] ?? "" ?></td>
                                                             <td><?php echo $orderDeliveryDetail['materialCategory'] ?? "" ?></td>
                                                             <td><?php echo $orderDeliveryDetail['materialUnit'] ?? "" ?></td>
-                                                            <td><?php echo $orderDeliveryDetail['orderDeliverySupplier'] ?? "" ?></td>
                                                             <td><?php echo $orderDeliveryDetail['orderMaterialQty'] ?? "" ?></td>
                                                         </tr>
                                                     <?php
@@ -411,7 +399,7 @@
                                                     </div>
 
                                                     <div class="modal-footer modal-primary">
-                                                        <button type="submit" class="btn btn-primary me-2" id="btnAddRMODQ" name="btnAddRMODQ">Submit <i class="fas fa-download"></i></button>
+                                                        <button type="button" class="btn btn-primary me-2" id="btnAddRMODQ" name="btnAddRMODQ">Submit <i class="fas fa-download"></i></button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
                                                     </div>
 
@@ -457,7 +445,7 @@
                                                     </div>
 
                                                     <div class="modal-footer modal-primary">
-                                                        <button type="submit" class="btn btn-primary me-2" id="btnUpdateRMOD" name="btnUpdateRMOD">Submit <i class="fas fa-download"></i></button>
+                                                        <button type="button" class="btn btn-primary me-2" id="btnUpdateRMOD" name="btnUpdateRMOD">Submit <i class="fas fa-download"></i></button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
                                                     </div>
 
@@ -487,7 +475,7 @@
                                                     </div>
 
                                                     <div class="modal-footer modal-primary">
-                                                        <button type="submit" class="btn btn-primary me-2" id="btnRemoveRMOD" name="btnRemoveRMOD">Submit <i class="fas fa-download"></i></button>
+                                                        <button type="button" class="btn btn-primary me-2" id="btnRemoveRMOD" name="btnRemoveRMOD">Submit <i class="fas fa-download"></i></button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
                                                     </div>
 

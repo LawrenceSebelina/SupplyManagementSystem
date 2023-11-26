@@ -607,6 +607,87 @@
         // TODO: End of Categories All Functions 
         
         // TODO: Finish Products All Functions 
+            public function addFinishProdQty($addFPQtyPUId, $addFPQtyPId, $addFPRQty, $addFPQty) {
+                $connection = $this->connect();
+                $stmt = $connection->prepare("UPDATE finish_products SET finishProdQuantity = :finishProdQuantity WHERE finishProdUId = :finishProdUId");
+                $stmt->bindParam(':finishProdQuantity', $addFPQty);
+                $stmt->bindParam(':finishProdUId', $addFPQtyPUId);
+                $stmt->execute();
+
+                if ($stmt) {
+                    return "success";
+                } else {
+                    return "failed";
+                }
+
+                $this->disconnect(); 
+        
+                // $connection = $this->connect();
+                // $stmt = $connection->prepare("SELECT * FROM finish_products_materials LEFT JOIN finish_products ON finish_products_materials.finishProdUId = finish_products.finishProdUId LEFT JOIN materials ON finish_products_materials.materialUId = materials.materialUId WHERE finish_products_materials.finishProdUId = :finishProdUId");
+                // $stmt->bindParam(':addFPQtyPUId', $addFPQtyPUId);
+                // $stmt->execute();
+                // $datas = $stmt->fetchAll(); 
+                // $datacount = $stmt->rowCount();
+
+                // if ($stmt) {
+                //     foreach ($datas as $data) {
+                //         $finishProdMaterialQty = $data['finishProdMaterialQty'];
+                //         $newMaterialQty = $finishProdMaterialQty * $addFPQty;
+                //         $mateialUId = $data['mateialUId'];
+                    
+                //         $connection = $this->connect();
+                    
+                //         $stmt = $connection->prepare("SELECT materialQuantity FROM materials WHERE materialUId = :materialUId");
+                //         $stmt->bindParam(':materialUId', $addODLMaterialId);
+                //         $stmt->execute();
+                        
+                //         $existingQty = $stmt->fetchColumn();
+                    
+                //         if ($existingQty !== false) {
+                //             $newQty = $existingQty + $addODLMaterialQty;
+                    
+                //             $stmt = $connection->prepare("UPDATE materials SET materialQuantity = :materialQuantity WHERE materialUId = :materialUId");
+                //             $stmt->bindParam(':materialUId', $addODLMaterialId);
+                //             $stmt->bindParam(':materialQuantity', $newQty);
+                //             $stmt->execute();
+                    
+                //             if ($stmt->rowCount() > 0) {
+                //                 $stmt = $connection->prepare("INSERT INTO order_deliveries_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty, orderMaterialDateCreated) VALUES (:orderMaterialUId, :orderDeliveryUId, :materialUId, :orderMaterialQty, :orderMaterialDateCreated)");
+                    
+                //                 $stmt->bindParam(':orderMaterialUId', $addODLODUId);
+                //                 $stmt->bindParam(':orderDeliveryUId', $addODLODUId);
+                //                 $stmt->bindParam(':materialUId', $addODLMaterialId);
+                //                 $stmt->bindParam(':orderMaterialQty', $addODLMaterialQty);
+                //                 $stmt->bindParam(':orderMaterialDateCreated', $orderMaterialDateCreated);
+                //                 $stmt->execute();
+                //             }
+                //         }
+                //     }
+    
+                // }
+
+
+            }
+
+
+            public function getFinishPRoductByFPUID($finishProductUId) {
+                $connection = $this->connect();
+                $stmt = $connection->prepare("SELECT * FROM finish_products_materials LEFT JOIN finish_products ON finish_products_materials.finishProdUId = finish_products.finishProdUId LEFT JOIN materials ON finish_products_materials.materialUId = materials.materialUId WHERE finish_products_materials.finishProdUId = :finishProdUId");
+                $stmt->bindParam(':finishProdUId', $finishProductUId);
+                $stmt->execute();
+
+                $data = $stmt->fetchAll(); 
+                $datacount = $stmt->rowCount();
+
+                if ($datacount > 0) {
+                    return $data;
+                } else {
+                    return false;
+                }
+
+                $this->disconnect(); 
+            }
+
             public function getFinishProdPId() {
                 $connection = $this->connect();
                 $stmt = $connection->prepare("SELECT id FROM finish_products ORDER BY id DESC LIMIT 1");
@@ -669,10 +750,11 @@
             public function getFinishProd() {
 
                 $connection = $this->connect();
-                $stmt = $connection->prepare("SELECT * FROM finish_products WHERE finishProdStatus = :finishProdStatus ORDER BY id DESC");
+                $stmt = $connection->prepare("SELECT * FROM finish_products ORDER BY id DESC");
+                // $stmt = $connection->prepare("SELECT * FROM finish_products WHERE finishProdStatus = :finishProdStatus ORDER BY id DESC");
 
-                $finishProdStatus = 0;
-                $stmt->bindParam(':finishProdStatus', $finishProdStatus);
+                // $finishProdStatus = 0;
+                // $stmt->bindParam(':finishProdStatus', $finishProdStatus);
                 $stmt->execute();
                 $datas = $stmt->fetchAll(); 
                 $datacount = $stmt->rowCount();
@@ -681,20 +763,21 @@
                     foreach ($datas as $data) { 
                         $actions = 
                         '<div class="actions">
-                            <a href="javascript:;" class="btn btn-sm bg-warning-light text-warning me-2 updateFP">
-                                <i class="feather-edit"></i>
+                            <a href="javascript:;" class="btn btn-sm bg-primary-light text-primary me-2 addFPQty">
+                                <i class="feather-plus"></i>
                             </a>
-                            <a href="javascript:;" class="btn btn-sm bg-danger-light text-danger deleteFP">
-                                <i class="feather-trash"></i>
+                            <a href="javascript:;" class="btn btn-sm bg-danger-light text-danger minusFPQty">
+                                <i class="feather-minus"></i>
                             </a>
                         </div>';
     
                         $arrayDatas[] = array(
-                            "finishProdId" => $data['finishProdId'],
+                            "finishProdId" => "<a href='index.php?route=finish-products&finish-product=" . $data['finishProdUId'] . "' class='btn btn-sm bg-success-light text-success me-2'>" . $data['finishProdId'] . "</a>",
                             "finishProdUId" => $data['finishProdUId'],
                             "finishProdName" => $data['finishProdName'],
-                            "finishProdTotal" => $data['finishProdTotal'],
-                            "finishProdDateFinished" =>  date('M. d, Y', strtotime($data['finishProdDateFinished'])),
+                            "finishProdTotalRawMaterials" => $data['finishProdTotalRawMaterials'],
+                            "finishProdQuantity" => $data['finishProdQuantity'],
+                            "finishProdDateCreated" =>  date('M. d, Y', strtotime($data['finishProdDateCreated'])),
                             "actions" => $actions
                         );
     
@@ -1188,7 +1271,7 @@
         // TODO: Order Deliveries All Functions 
             public function getOrderDeliveryByODUID($orderDeliveryUId) {
                 $connection = $this->connect();
-                $stmt = $connection->prepare("SELECT * FROM order_materials LEFT JOIN order_deliveries ON order_materials.orderDeliveryUId = order_deliveries.orderDeliveryUId LEFT JOIN materials ON order_materials.materialUId = materials.materialUId  WHERE order_materials.orderDeliveryUId = :orderDeliveryUId");
+                $stmt = $connection->prepare("SELECT * FROM order_deliveries_materials LEFT JOIN order_deliveries ON order_deliveries_materials.orderDeliveryUId = order_deliveries.orderDeliveryUId LEFT JOIN materials ON order_deliveries_materials.materialUId = materials.materialUId WHERE order_deliveries_materials.orderDeliveryUId = :orderDeliveryUId");
                 $stmt->bindParam(':orderDeliveryUId', $orderDeliveryUId);
                 $stmt->execute();
 
@@ -1483,7 +1566,7 @@
                             $stmt->execute();
                     
                             if ($stmt->rowCount() > 0) {
-                                $stmt = $connection->prepare("INSERT INTO order_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty, orderMaterialDateCreated) VALUES (:orderMaterialUId, :orderDeliveryUId, :materialUId, :orderMaterialQty, :orderMaterialDateCreated)");
+                                $stmt = $connection->prepare("INSERT INTO order_deliveries_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty, orderMaterialDateCreated) VALUES (:orderMaterialUId, :orderDeliveryUId, :materialUId, :orderMaterialQty, :orderMaterialDateCreated)");
                     
                                 $stmt->bindParam(':orderMaterialUId', $addODLODUId);
                                 $stmt->bindParam(':orderDeliveryUId', $addODLODUId);
@@ -1508,6 +1591,76 @@
             }
 
         // TODO: End of Add Order Deliveries with Raw Materials Lists
+
+        // TODO: Add Finish Product with Raw Materials Lists
+
+            public function addFinishProductWithRawMaterials($addFPLFPUId, $addFPPId, $addFPPN, $addFPLMaterialIds, $addFPLMaterialQtys, $finishProdMaterialsDateCreated) {
+
+                if (empty($addFPLFPUId) && empty($addFPPId) && empty($addFPPN) && empty($addFPLMaterialIds) && empty($addFPLMaterialQtys)) {
+                    return "Some of the fields are empty";
+                }
+                
+                if (empty($addFPLFPUId)) {
+                    return "Finish Product Unique Id field is empty";
+                }
+                if (empty($addFPPId)) {
+                    return "Finish Product Id field is empty";
+                }
+                if (empty($addFPPN)) {
+                    return "Finish Product Name field is empty";
+                }
+                if (empty($addFPLMaterialIds)) {
+                    return "Finish Product Raw Materials table is empty";
+                }   
+                if (empty($addFPLMaterialQtys)) {
+                    return "There is Raw Material No Quantity table is empty";
+                }   
+
+                $connection = $this->connect();
+            
+                $stmt = $connection->prepare("INSERT INTO finish_products (finishProdId, finishProdUId, finishProdName, finishProdTotalRawMaterials, finishProdDateCreated) VALUES (:finishProdId, :finishProdUId, :finishProdName, :finishProdTotalRawMaterials, :finishProdDateCreated)");
+
+                $finishProductTotalRawMaterials = count($addFPLMaterialIds);
+                $stmt->bindParam(':finishProdUId', $addFPLFPUId);
+                $stmt->bindParam(':finishProdId', $addFPPId);
+                $stmt->bindParam(':finishProdName', $addFPPN);
+                $stmt->bindParam(':finishProdTotalRawMaterials', $finishProductTotalRawMaterials);
+                $stmt->bindParam(':finishProdDateCreated', $finishProdMaterialsDateCreated);
+                $stmt->execute();
+
+                if ($stmt) {
+                    $connection = $this->connect();
+
+                    for ($i = 0; $i < count($addFPLMaterialIds); $i++) {
+                        $addFPLMaterialId = $addFPLMaterialIds[$i];
+                        $addFPLMaterialQty = $addFPLMaterialQtys[$i];
+                    
+                        $connection = $this->connect();
+
+                        $stmt = $connection->prepare("INSERT INTO finish_products_materials (finishProdMaterialUId, finishProdUId, materialUId, finishProdMaterialQty, finishProdMaterialDateCreated) VALUES (:finishProdMaterialUId, :finishProdUId, :materialUId, :finishProdQty, :finishProdDateCreated)");
+            
+                        $stmt->bindParam(':finishProdMaterialUId', $addFPLFPUId);
+                        $stmt->bindParam(':finishProdUId', $addFPLFPUId);
+                        $stmt->bindParam(':materialUId', $addFPLMaterialId);
+                        $stmt->bindParam(':finishProdQty', $addFPLMaterialQty);
+                        $stmt->bindParam(':finishProdDateCreated', $finishProdMaterialsDateCreated);
+                        $stmt->execute();
+                        
+                    }                    
+
+                    if ($stmt) {
+                        return "success";
+                    } else {
+                        return "failed";
+                    }
+
+                }
+
+                $this->disconnect(); 
+
+            }
+
+        // TODO: End of Add Finish Product with Raw Materials Lists
     }
 
     $functionClass = new functionClasses();
