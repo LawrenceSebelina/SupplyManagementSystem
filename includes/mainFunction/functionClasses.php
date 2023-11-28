@@ -609,66 +609,71 @@
         // TODO: Finish Products All Functions 
             public function addFinishProdQty($addFPQtyPUId, $addFPQtyPId, $addFPRQty, $addFPQty) {
                 $connection = $this->connect();
-                $stmt = $connection->prepare("UPDATE finish_products SET finishProdQuantity = :finishProdQuantity WHERE finishProdUId = :finishProdUId");
-                $stmt->bindParam(':finishProdQuantity', $addFPQty);
-                $stmt->bindParam(':finishProdUId', $addFPQtyPUId);
-                $stmt->execute();
+                $results = [];
 
-                if ($stmt) {
-                    return "success";
+                $updateStmt = $connection->prepare("UPDATE finish_products SET finishProdQuantity = finishProdQuantity + :addFPQty WHERE finishProdUId = :finishProdUId");
+                $updateStmt->bindParam(':addFPQty', $addFPQty);
+                $updateStmt->bindParam(':finishProdUId', $addFPQtyPUId);
+                $success = $updateStmt->execute();
+
+                if ($success) {
+                    $results[] = "Successfully updated finishProdQuantity.";
+
+                    $stmt = $connection->prepare("SELECT * FROM finish_products_materials LEFT JOIN finish_products ON finish_products_materials.finishProdUId = finish_products.finishProdUId LEFT JOIN materials ON finish_products_materials.materialUId = materials.materialUId WHERE finish_products_materials.finishProdUId = :finishProdUId");
+                    $stmt->bindParam(':finishProdUId', $addFPQtyPUId);
+                    $stmt->execute();
+                    $datas = $stmt->fetchAll();
+                    $datacount = $stmt->rowCount();
+
+                    if ($datacount > 0) {
+                        foreach ($datas as $data) {
+                            $materialQty = $data['materialQuantity'];
+                            $materialName = $data['materialName'];
+                            $finishProdMaterialQty = $data['finishProdMaterialQty'];
+                            $materialQtyNeed = $addFPQty * $finishProdMaterialQty;
+                            $newMaterialQty = $materialQty - $materialQtyNeed;
+                            $materialUId = $data['materialUId'];
+
+                            if ($newMaterialQty < 0) {
+                                $results[] = "Not enough quantity for raw material " . $materialName . ". Remaining Quantity: " . $materialQty . ". Quantity Needed: " . $materialQtyNeed;
+                            } else {
+                                $stmt = $connection->prepare("UPDATE materials SET materialQuantity = :materialQuantity WHERE materialUId = :materialUId");
+                                $stmt->bindParam(':materialUId', $materialUId);
+                                $stmt->bindParam(':materialQuantity', $newMaterialQty);
+                                $stmt->execute();
+                                $results[] = "Successfully updated material quantity for " . $materialName . ".";
+                            }
+                        }
+
+                        if ($stmt) {
+                            $stmt = $connection->prepare("SELECT finishProdQuantity FROM finish_products WHERE finishProdUId = :finishProdUId");
+                            $stmt->bindParam(':finishProdUId', $addFPQtyPUId);
+                            $stmt->execute();
+                            $remainingFinishProdQty = $stmt->fetch();
+                            $datacount = $stmt->rowCount();
+
+                            if ($datacount > 0) {
+                                $newFinishProdQty = $remainingFinishProdQty['finishProdQuantity'];
+
+                                $updateStmt = $connection->prepare("UPDATE finish_products SET finishProdQuantity = :finishProdQuantity WHERE finishProdUId = :finishProdUId");
+                                $updateStmt->bindParam(':finishProdQuantity', $newFinishProdQty);
+                                $updateStmt->bindParam(':finishProdUId', $addFPQtyPUId);
+                                $updateStmt->execute();
+                            }
+                            $this->disconnect();
+                            return $results;
+                        }
+                    } else {
+                        $results[] = "No data found for the given finishProdUId.";
+                        $this->disconnect();
+                        return $results;
+                    }
                 } else {
-                    return "failed";
+                    $results[] = "Failed to update finishProdQuantity.";
+                    $this->disconnect();
+                    return $results;
                 }
-
-                $this->disconnect(); 
-        
-                // $connection = $this->connect();
-                // $stmt = $connection->prepare("SELECT * FROM finish_products_materials LEFT JOIN finish_products ON finish_products_materials.finishProdUId = finish_products.finishProdUId LEFT JOIN materials ON finish_products_materials.materialUId = materials.materialUId WHERE finish_products_materials.finishProdUId = :finishProdUId");
-                // $stmt->bindParam(':addFPQtyPUId', $addFPQtyPUId);
-                // $stmt->execute();
-                // $datas = $stmt->fetchAll(); 
-                // $datacount = $stmt->rowCount();
-
-                // if ($stmt) {
-                //     foreach ($datas as $data) {
-                //         $finishProdMaterialQty = $data['finishProdMaterialQty'];
-                //         $newMaterialQty = $finishProdMaterialQty * $addFPQty;
-                //         $mateialUId = $data['mateialUId'];
-                    
-                //         $connection = $this->connect();
-                    
-                //         $stmt = $connection->prepare("SELECT materialQuantity FROM materials WHERE materialUId = :materialUId");
-                //         $stmt->bindParam(':materialUId', $addODLMaterialId);
-                //         $stmt->execute();
-                        
-                //         $existingQty = $stmt->fetchColumn();
-                    
-                //         if ($existingQty !== false) {
-                //             $newQty = $existingQty + $addODLMaterialQty;
-                    
-                //             $stmt = $connection->prepare("UPDATE materials SET materialQuantity = :materialQuantity WHERE materialUId = :materialUId");
-                //             $stmt->bindParam(':materialUId', $addODLMaterialId);
-                //             $stmt->bindParam(':materialQuantity', $newQty);
-                //             $stmt->execute();
-                    
-                //             if ($stmt->rowCount() > 0) {
-                //                 $stmt = $connection->prepare("INSERT INTO order_deliveries_materials (orderMaterialUId, orderDeliveryUId, materialUId, orderMaterialQty, orderMaterialDateCreated) VALUES (:orderMaterialUId, :orderDeliveryUId, :materialUId, :orderMaterialQty, :orderMaterialDateCreated)");
-                    
-                //                 $stmt->bindParam(':orderMaterialUId', $addODLODUId);
-                //                 $stmt->bindParam(':orderDeliveryUId', $addODLODUId);
-                //                 $stmt->bindParam(':materialUId', $addODLMaterialId);
-                //                 $stmt->bindParam(':orderMaterialQty', $addODLMaterialQty);
-                //                 $stmt->bindParam(':orderMaterialDateCreated', $orderMaterialDateCreated);
-                //                 $stmt->execute();
-                //             }
-                //         }
-                //     }
-    
-                // }
-
-
             }
-
 
             public function getFinishPRoductByFPUID($finishProductUId) {
                 $connection = $this->connect();
