@@ -634,7 +634,7 @@
                             $newMaterialQty = $materialQty - $materialQtyNeed;
                             $materialUId = $data['materialUId'];
 
-                            if ($newMaterialQty < 0) {
+                            if ($materialQtyNeed < $materialQty) {
                                 $results[] = "Not enough quantity for raw material " . $materialName . ". Remaining Quantity: " . $materialQty . ". Quantity Needed: " . $materialQtyNeed;
                             } else {
                                 $stmt = $connection->prepare("UPDATE materials SET materialQuantity = :materialQuantity WHERE materialUId = :materialUId");
