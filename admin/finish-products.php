@@ -638,6 +638,100 @@
                                     </div>
                                     <!-- End of Add Finish Product Quantity Modal -->
 
+                                    <!-- Deduct Finish Product Quantity Modal -->
+                                    <div class="modal fade" id="minusFPQtyModal" tabindex="-1" aria-labelledby="minusFPQtyMOdalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal-primary">
+                                                    <!-- <h1 class="modal-title fs-5" id="historyModalLabel">Modal title</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                                    <i class="feather-edit"></i>
+                                                    <h2 class="headline-md">Deduct Finish Product Quantity</h2>
+                                                </div>
+
+                                                <form method="post" id="minusFPQtyForm" class="needs-validation" novalidate>
+
+                                                    <div class="modal-body">
+
+                                                        <div class="row gy-4">
+                                                            <div class="col-12">
+                                                                <div class="alert alert-danger mb-4" id="alertMessage"></div>
+                                                            </div>
+
+                                                            <input type="text" id="minusFPQtyPUId" name="minusFPQtyPUId">
+
+                                                            <div class="col-12 col-sm-4">
+                                                                <div class="form-floating">
+                                                                    <input class="form-control" id="minusFPQtyPId" name="minusFPQtyPId" type="text" placeholder="PROD-001" readonly />
+                                                                    <label class="label-blue" for="minusFPQtyPId"><i class="fa-solid fa-envelope"></i>Product ID<span class="text-danger">*</span></label>
+
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid state.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12 col-sm-4">
+                                                                <div class="form-floating">
+                                                                    <input class="form-control" id="minusFPQtyPN" name="minusFPQtyPN" type="text" placeholder="Base Pads" readonly />
+                                                                    <label class="label-blue" for="minusFPQtyPN"><i class="fa-solid fa-envelope"></i>Product Name<span class="text-danger">*</span></label>
+
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid state.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12 col-sm-4">
+                                                                <div class="form-floating">
+                                                                    <input class="form-control" id="minusFPRQty" name="minusFPRQty" type="text" placeholder="Remaning Quantity" readonly />
+                                                                    <label class="label-blue" for="minusFPRQty"><i class="fa-solid fa-envelope"></i>Remaning Quantity<span class="text-danger">*</span></label>
+
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid state.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12 col-sm-12">
+                                                                <div class="form-floating">
+                                                                    <input class="form-control" id="minusFPQty" name="minusFPQty" type="text" placeholder="Quantity to be deducated" required />
+                                                                    <label class="label-blue" for="minusFPQty"><i class="fa-solid fa-envelope"></i>Quantity to be deducted<span class="text-danger">*</span></label>
+
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid state.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="modal-footer modal-warning">
+                                                        <button type="submit" class="btn btn-primary me-2" id="btnMinusFPQty" name="btnMinusFPQty">Update <i class="fas fa-download"></i></button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close <i class="fas fa-xmark"></i></button>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End of Deduct Finish Product Quantity Modal -->
+
                                     <div class="table-responsive">
                                         <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="finishProdTable">
                                             <thead class="table-head">
@@ -675,6 +769,8 @@
             <script src="../includes/jsFunction/finish-product-edit.js"></script>
             <!-- Add Finish Product Qty JS Function -->
             <script src="../includes/jsFunction/finish-product-qty-add.js"></script>
+            <!-- Deduct Finish Product Qty JS Function -->
+            <script src="../includes/jsFunction/finish-product-qty-minus.js"></script>
 
         <?php } ?>
     </div>
@@ -880,17 +976,18 @@
                 $('#addFPRQty').val(data[4]);   
             });
 
-            finishProdTable.on('click', '.deleteFP', function() {
-                $('#deleteFPModal').modal('show');
+            finishProdTable.on('click', '.minusFPQty', function() {
+                $('#minusFPQtyModal').modal('show');
 
                 $tr = $(this).closest('tr');
                 var data = $tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
 
-                $('#deleteFPPId').val(data[0]);   
-                $('#deleteFPPUId').val(data[1]);
-                $('#deleteFPPN').text(data[2]);
+                $('#minusFPQtyPId').val(data[0]);   
+                $('#minusFPQtyPUId').val(data[1]);   
+                $('#minusFPQtyPN').val(data[2]);   
+                $('#minusFPRQty').val(data[4]);   
             });
         });
     </script>
