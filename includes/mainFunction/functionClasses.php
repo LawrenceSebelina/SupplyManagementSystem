@@ -859,6 +859,47 @@
                 $this->disconnect(); 
             }
 
+            public function getSearchFinishProd() {
+
+                $connection = $this->connect();
+                $stmt = $connection->prepare("SELECT * FROM finish_products ORDER BY id DESC");
+                // $stmt = $connection->prepare("SELECT * FROM finish_products WHERE finishProdStatus = :finishProdStatus ORDER BY id DESC");
+
+                // $finishProdStatus = 0;
+                // $stmt->bindParam(':finishProdStatus', $finishProdStatus);
+                $stmt->execute();
+                $datas = $stmt->fetchAll(); 
+                $datacount = $stmt->rowCount();
+    
+                if($datacount > 0) {
+                    foreach ($datas as $data) { 
+                        $actions = 
+                        '<div class="actions">
+                            <a href="javascript:;" class="btn btn-sm bg-primary-light text-primary me-2 addFPPOrder">
+                                <i class="feather-plus"></i>
+                            </a>
+                        </div>';
+    
+                        $arrayDatas[] = array(
+                            "finishProdId" => $data['finishProdId'],
+                            "finishProdUId" => $data['finishProdUId'],
+                            "finishProdName" => $data['finishProdName'],
+                            "finishProdTotalRawMaterials" => $data['finishProdTotalRawMaterials'],
+                            "finishProdQuantity" => $data['finishProdQuantity'],
+                            "finishProdDateCreated" =>  date('M. d, Y', strtotime($data['finishProdDateCreated'])),
+                            "actions" => $actions
+                        );
+    
+                    }
+                    
+                }
+                
+                $jsonData['data'] = $arrayDatas ?? [];
+                return $jsonData;
+    
+                $this->disconnect(); 
+            }
+
             public function updateFinishProd($updateFPPUId, $updateFPPId, $updateFPPN, $updateFPQty, $updateFPDateFinished, $updateFPDate) {
 
                 if (empty($updateFPPUId) && empty($updateFPPId) && empty($updateFPPN) && empty($updateFPQty) && empty($updateFPDateFinished)) {
