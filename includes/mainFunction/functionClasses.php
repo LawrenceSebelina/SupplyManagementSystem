@@ -862,7 +862,7 @@
             public function getSearchFinishProd() {
 
                 $connection = $this->connect();
-                $stmt = $connection->prepare("SELECT * FROM finish_products ORDER BY id DESC");
+                $stmt = $connection->prepare("SELECT * FROM finish_products WHERE finishProdQuantity > 0 ORDER BY id DESC");
                 // $stmt = $connection->prepare("SELECT * FROM finish_products WHERE finishProdStatus = :finishProdStatus ORDER BY id DESC");
 
                 // $finishProdStatus = 0;

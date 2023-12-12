@@ -224,7 +224,7 @@
                                                                             <th>F.Prod Name</th>
                                                                             <th>F.Prod Raw Mat.</th>
                                                                             <th>F.Prod Quantity</th>
-                                                                            <th>Date</th>
+                                                                            <!-- <th>Date</th> -->
                                                                             <th class="text-end">Actions</th>
                                                                         </tr>
                                                                     </thead>
@@ -514,13 +514,11 @@
                                             <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="rawMaterialsOrdersTable">
                                                 <thead class="table-head">
                                                     <tr>
-                                                        <th>Material ID</th>
-                                                        <th>Material UID</th>
-                                                        <th>Material Name</th>
-                                                        <th>Category</th>
-                                                        <th>Unit</th>
-                                                        <th>Quantity</th>
-                                                        <th>Supplier</th>
+                                                        <th>F.Prod ID</th>
+                                                        <th>F.Prod UID</th>
+                                                        <th>F.Prod Name</th>
+                                                        <th>F.Prod Raw Mat.</th>
+                                                        <th>F.Prod Quantity</th>
                                                         <th>Quantity</th>
                                                         <th>Actions</th>
                                                     </tr>
@@ -727,7 +725,7 @@
                     {data: "finishProdName"},
                     {data: "finishProdTotalRawMaterials"},
                     {data: "finishProdQuantity"},
-                    {data: "finishProdDateCreated"},
+                    // {data: "finishProdDateCreated"},
                     {data: "actions"}
                 ],
             });
