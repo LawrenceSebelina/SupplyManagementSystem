@@ -1701,6 +1701,102 @@
 
         // TODO: End of Add Order Deliveries with Raw Materials Lists
 
+        // TODO: Add Purchase Orders with Finish Products Lists
+
+            public function addPurchaseOrderWithFinishProducts($addPOLUId, $addPOLDId, $addPOLNo, $addPOLSupplier, $addPOLFinishProdIds, $addPOLFinishProdQtys, $purchaseOrderDateCreated) {
+
+                if (empty($addPOLUId) && empty($addPOLDId) && empty($addPOLNo) && empty($addPOLSupplier) && empty($addPOLFinishProdIds)) {
+                    return "Some of the fields are empty";
+                }
+                
+                if (empty($addPOLUId)) {
+                    return "Purchase Order Unique Id field is empty";
+                }
+                if (empty($addPOLDId)) {
+                    return "Purchase Order Id field is empty";
+                }
+                if (empty($addPOLNo)) {
+                    return "Purchase Order Number field is empty";
+                }
+                if (empty($addPOLSupplier)) {
+                    return "Purchase Order Supplier field is empty";
+                }
+                if (empty($addPOLFinishProdIds)) {
+                    return "Purchase Order Finish Products table is empty";
+                }   
+                if (empty($addPOLFinishProdQtys)) {
+                    return "There is Finish Product No Quantity table is empty";
+                }   
+
+                $connection = $this->connect();
+            
+                $stmt = $connection->prepare("INSERT INTO order_deliveries (purchaseOrderId, purchaseOrderUId, purchaseOrderNo, purchaseOrderSupplier, purchaseOrderQuantity, purchaseOrderDateCreated) VALUES (:purchaseOrderId, :purchaseOrderUId, :purchaseOrderOrderNo, :purchaseOrderSupplier, :purchaseOrderTotalProd, :purchaseOrderDateCreated)");
+
+                $purchaseOrderTotalProd = count($addPOLFinishProdIds);
+                $stmt->bindParam(':purchaseOrderUId', $addPOLUId);
+                $stmt->bindParam(':purchaseOrderId', $addPOLDId);
+                $stmt->bindParam(':purchaseOrderOrderNo', $addPOLNo);
+                $stmt->bindParam(':purchaseOrderSupplier', $addPOLSupplier);
+                $stmt->bindParam(':purchaseOrderTotalProd', $purchaseOrderTotalProd);
+                $stmt->bindParam(':purchaseOrderDateCreated', $purchaseOrderDateCreated);
+                $stmt->execute();
+
+                if ($stmt) {
+                    $connection = $this->connect();
+
+                    for ($i = 0; $i < count($addPOLFinishProdIds); $i++) {
+                        $addPOLFinishProdId = $addPOLFinishProdIds[$i];
+                        $addPOLFinishProdQty = $addPOLFinishProdQtys[$i];
+                    
+                        $connection = $this->connect();
+                    
+                        $stmt = $connection->prepare("SELECT * FROM finish_products WHERE finishProdUId = :finishProdUId");
+                        $stmt->bindParam(':finishProdUId', $addPOLFinishProdId);
+                        $stmt->execute();
+                        
+                        $existingQty = $stmt->fetch();
+                    
+                        if ($existingQty['finishProdQuantity'] !== false) {
+                            if ($existingQty > $addPOLFinishProdQty) {
+                                $newQty = $existingQty - $addPOLFinishProdQty;
+                                $finishProdName = existingQty['finishProdName'];
+
+                                $stmt = $connection->prepare("UPDATE finish_products SET finishProdQuantity = :finishProdQuantity WHERE finishProdUId = :finishProdUId");
+                                $stmt->bindParam(':finishProdUId', $addPOLFinishProdId);
+                                $stmt->bindParam(':finishProdQuantity', $newQty);
+                                $stmt->execute();
+                        
+                                if ($stmt->rowCount() > 0) {
+                                    $stmt = $connection->prepare("INSERT INTO purchase_orders_products (purchaseProdUId, purchaseOrderUId, finishProdUId, purchaseProdQty, purchaseProdDateCreated) VALUES (:purchaseProdUId, :purchaseOrderUId, :finishProdUId, :purchaseProdQty, :purchaseOrderDateCreated)");
+                        
+                                    $stmt->bindParam(':purchaseProdUId', $addPOLUId);
+                                    $stmt->bindParam(':purchaseOrderUId', $addPOLUId);
+                                    $stmt->bindParam(':finishProdUId', $addPOLFinishProdId);
+                                    $stmt->bindParam(':purchaseProdQty', $addPOLFinishProdQty);
+                                    $stmt->bindParam(':purchaseProdDateCreated', $purchaseOrderDateCreated);
+                                    $stmt->execute();
+                                }
+                            } else {
+                                return "Not Enough Qty for Product " . $finishProdName;
+                            }
+
+                        }
+                    }                    
+
+                    if ($stmt) {
+                        return "success";
+                    } else {
+                        return "failed";
+                    }
+
+                }
+
+                $this->disconnect(); 
+
+            }
+
+        // TODO: End of Add Purchase Orders with Finish Products Lists
+
         // TODO: Add Finish Product with Raw Materials Lists
 
             public function addFinishProductWithRawMaterials($addFPLFPUId, $addFPPId, $addFPPN, $addFPLMaterialIds, $addFPLMaterialQtys, $finishProdMaterialsDateCreated) {

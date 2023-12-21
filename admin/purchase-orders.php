@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <form method="post" id="addODLForm" class="needs-validation" novalidate>
+                    <form method="post" id="addPOLForm" class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card comman-shadow">
@@ -541,7 +541,7 @@
                                         <div class="row gy-4">
                                             <div class="col-12">
                                                 <div class="text-end">
-                                                    <button type="submit" class="btn btn-primary me-2" id="btnaddODL" name="btnaddODL">Submit <i class="fas fa-download"></i></button>
+                                                    <button type="submit" class="btn btn-primary me-2" id="btnaddPOL" name="btnaddODL">Submit <i class="fas fa-download"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -560,7 +560,7 @@
             <?php include_once('assets/components/all-scripts.php'); ?>   
 
             <!-- Add Order Delivery JS Function -->
-            <script src="../includes/jsFunction/order-delivery-list-add.js"></script>
+            <script src="../includes/jsFunction/purchase-order-list-add.js"></script>
         <?php } else { ?>
             <div class="page-wrapper">
                 <div class="content container-fluid">
@@ -769,7 +769,7 @@
                             newRow.append(newCell);
                         });
 
-                        newRow.append('<td><input type="text" name="materialqty[]" value="' + rawMaterialQty + '"></td>');
+                        newRow.append('<td><input type="text" name="finishprodqty[]" value="' + rawMaterialQty + '"></td>');
                         newRow.append('<td><div class="actions"><a href="javascript:;" class="btn btn-sm bg-warning-light text-warning me-2 updateRMOD"><i class="feather-edit"></i></a><a href="javascript:;" class="btn btn-sm bg-danger-light text-danger deleteRMOD"><i class="feather-trash"></i></a></div></td>');
 
                         // Append the new row to the rawMaterialsOrdersTable
