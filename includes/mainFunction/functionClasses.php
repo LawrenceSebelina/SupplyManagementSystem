@@ -21,18 +21,64 @@
             $this->conn = null;
         }
 
-        public function createAccount($userUniqueId, $userFirstName, $userLastName, $userEmail, $userPassword, $userCPassword) {
-            // Check if passwords match
-            if ($userPassword !== $userCPassword) {
+        // TODO: Check User Accounts
+
+
+        // TODO: End of Check User Accounts
+
+            public function checkUserAccounts() {
+                $connection = $this->connect();
+                $stmt = $connection->prepare("SELECT * FROM users ORDER BY id DESC");
+                $stmt->execute();
+                $data = $stmt->fetch(); 
+                $datacount = $stmt->rowCount();
+
+                if ($datacount > 0) {
+                    return $data;
+                } else {
+                    return false;
+                }
+
+                $this->disconnect(); 
+            }
+        
+        // TODO: Create User Account
+
+        public function createUserAccount($addUserUId, $addUserId, $addUserFName, $addUserLName, $addUserEmail, $addUserPass, $addUserPassC, $addUserType, $addUserDate) {
+
+            if (empty($addUserUId)) {
+                return "User Unique Id field is empty";
+            }
+            if (empty($addUserId)) {
+                return "User Id field is empty";
+            }
+            if (empty($addUserFName)) {
+                return "First Name field is empty";
+            }
+            if (empty($addUserLName)) {
+                return "Last Name field is empty";
+            }
+            if (empty($addUserEmail)) {
+                return "Email field is empty";
+            }   
+            if (empty($addUserPass)) {
+                return "Password field is empty";
+            }      
+            if (empty($addUserPassC)) {
+                return "Confirm Password field is empty";
+            }     
+            if (empty($addUserType)) {
+                return "User Type field is empty";
+            }     
+            if ($addUserPass !== $addUserPassC) {
                 return "Passwords do not match";
             }
         
             $connection = $this->connect();
         
-            // Check if email is already taken
             $stmt = $connection->prepare("SELECT COUNT(*) FROM users WHERE userEmail = :email");
 
-            $stmt->bindParam(':email', $userEmail);
+            $stmt->bindParam(':email', $addUserEmail);
             $stmt->execute();
             $count = $stmt->fetchColumn();
         
@@ -40,17 +86,18 @@
                 return "Email is already taken";
             }
         
-            // Hash the password
-            $hashedPassword = password_hash($userPassword, PASSWORD_DEFAULT);
+            $hashedPassword = password_hash($addUserPass, PASSWORD_DEFAULT);
         
-            // Insert the data into the database
-            $stmt = $connection->prepare("INSERT INTO users (userId, userFirstName, userLastName, userEmail, userPassword) VALUES (:userId, :userFirstName, :userLastName, :userEmail, :userPassword)");
+            $stmt = $connection->prepare("INSERT INTO users (userId, userUId, userType, userFirstName, userLastName, userEmail, userPassword, userCPassword, userDateCreated) VALUES (:userId, :userUId, :userType, :userFirstName, :userLastName, :userEmail, :userPassword, :userPassword, :userDateCreated)");
 
-            $stmt->bindParam(':userId', $userUniqueId);
-            $stmt->bindParam(':userFirstName', $userFirstName);
-            $stmt->bindParam(':userLastName', $userLastName);
-            $stmt->bindParam(':userEmail', $userEmail);
+            $stmt->bindParam(':userId', $addUserId);
+            $stmt->bindParam(':userUId', $addUserUId);
+            $stmt->bindParam(':userType', $addUserType);
+            $stmt->bindParam(':userFirstName', $addUserFName);
+            $stmt->bindParam(':userLastName', $addUserLName);
+            $stmt->bindParam(':userEmail', $addUserEmail);
             $stmt->bindParam(':userPassword', $hashedPassword);
+            $stmt->bindParam(':userDateCreated', $addUserDate);
             $stmt->execute();
         
             if ($stmt) {
@@ -63,6 +110,8 @@
             $this->disconnect(); 
         }              
 
+        // TODO: End of Create User Account
+        
         // TODO: Login User Account
 
         public function loginAccount($userEmail, $userPassword) {
@@ -78,13 +127,14 @@
                 return "Password field is empty";
             }            
 
-            $userPassword = md5($_POST['userPassword']);
+            // $userPassword = md5($_POST['userPassword']);
 
             $connection = $this->connect();
-            $stmt = $connection->prepare("SELECT * FROM users WHERE userEmail = :email AND userPassword = :password");
+            // $stmt = $connection->prepare("SELECT * FROM users WHERE userEmail = :email AND userPassword = :password");
+            $stmt = $connection->prepare("SELECT * FROM users WHERE userEmail = :email");
 
             $stmt->bindParam(':email', $userEmail);
-            $stmt->bindParam(':password', $userPassword);
+            // $stmt->bindParam(':password', $userPassword);
             $stmt->execute();
             $data = $stmt->fetch(); 
             $datacount = $stmt->rowCount();
@@ -94,11 +144,18 @@
 
             if ($datacount > 0) {
                 // && password_verify($userPassword, $data['userPassword'])
-                $this->setUserDetails($data);
-                return "success";
+                // $this->setUserDetails($data);
+                // return "success";
+
+                if ($data && password_verify($userPassword, $data['userPassword'])) {
+                    $this->setUserDetails($data);
+                    return "success";
+                } else {
+                    return "Incorrect username or password";
+                }
             } else {
                 // return $userPassword;
-                return "Incorrect username or password";
+                return "No user found!";
             }
 
             $this->disconnect(); 
@@ -116,8 +173,10 @@
             $_SESSION['userDetails'] = array(
                 "userId" => $data['userId'], 
                 "userUId" => $data['userUId'], 
+                "userType" => $data['userType'], 
                 "userFirstName" => $data['userFirstName'], 
                 "userLastName" => $data['userLastName'], 
+                "userEmail" => $data['userEmail'], 
                 "userPassword" => $data['userPassword'], 
                 "userDateCreated" => $data['userDateCreated']
             );
@@ -143,6 +202,329 @@
         }
 
         // TODO: End of Get User Details
+
+        // TODO: Get User Accounts
+
+        public function getUserAccounts() {
+
+            $connection = $this->connect();
+            $stmt = $connection->prepare("SELECT * FROM users WHERE userStatus = :userStatus ORDER BY id DESC");
+
+            $userStatus = 0;
+            $stmt->bindParam(':userStatus', $userStatus);
+            $stmt->execute();
+            $datas = $stmt->fetchAll(); 
+            $datacount = $stmt->rowCount();
+
+            if($datacount > 0) {
+                foreach ($datas as $data) { 
+                    $actions = 
+                    '<div class="actions">
+                        <a href="javascript:;" class="btn btn-sm bg-warning-light text-warning me-2 updateUA">
+                            <i class="feather-edit"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-sm bg-success-light text-success me-2 updateUP">
+                            <i class="feather-lock"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-sm bg-danger-light text-danger deleteUA">
+                            <i class="feather-trash"></i>
+                        </a>
+                    </div>';
+
+                    $arrayDatas[] = array(
+                        "userId" => $data['userId'],
+                        "userUId" => $data['userUId'],
+                        "userType" => $data['userType'],
+                        "userFirstName" => $data['userFirstName'],
+                        "userLastName" => $data['userLastName'],
+                        "userEmail" => $data['userEmail'],
+                        "userPassword" => $data['userPassword'],
+                        "userDateCreated" => $data['userDateCreated'],
+                        "actions" => $actions
+                    );
+
+                }
+                
+            }
+            
+            $jsonData['data'] = $arrayDatas ?? [];
+            return $jsonData;
+
+            $this->disconnect(); 
+        }
+
+        // TODO: End of Get User Accounts
+
+        // TODO: Update User Accounts
+
+        public function updateUserAccount($updateUserUId, $updateUserId, $updateUserFName, $updateUserLName, $updateUserEmail, $updateUserType, $updateUserDate) {
+
+            if (empty($updateUserUId) && empty($updateUserId) && empty($updateUserFName) && empty($updateUserLName) && empty($updateUserEmail) && empty($updateUserPass) && empty($updateUserType) && empty($updateUserDate)) {
+                return "Some of the fields are empty";
+            }
+            
+            if (empty($updateUserUId)) {
+                return "User Unique Id field is empty";
+            }
+            if (empty($updateUserId)) {
+                return "User Id field is empty";
+            }
+            if (empty($updateUserFName)) {
+                return "First Name field is empty";
+            }
+            if (empty($updateUserLName)) {
+                return "Last Name field is empty";
+            }
+            if (empty($updateUserEmail)) {
+                return "Email field is empty";
+            }      
+            // if (empty($updateUserPassC)) {
+            //     return "Confirm Password field is empty";
+            // }     
+            if (empty($updateUserType)) {
+                return "User Type field is empty";
+            }     
+
+            $connection = $this->connect();
+        
+            $stmt = $connection->prepare("SELECT COUNT(*) FROM users WHERE userEmail = :email AND userId != :userId AND userUId != :userUId");
+
+            $stmt->bindParam(':email', $updateUserEmail);
+            $stmt->bindParam(':userId', $updateUserId);
+            $stmt->bindParam(':userUId', $updateUserUId);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+        
+            if ($count > 0) {
+                return "Email is already taken";
+            }
+        
+            $connection = $this->connect();
+        
+            $stmt = $connection->prepare("UPDATE users SET userType = :userType, userFirstName = :userFirstName, userLastName = :userLastName, userEmail = :userEmail, userDateCreated = :userDateCreated WHERE userId = :userId AND userUId = :userUId");
+
+            $stmt->bindParam(':userId', $updateUserId);
+            $stmt->bindParam(':userUId', $updateUserUId);
+            $stmt->bindParam(':userFirstName', $updateUserFName);
+            $stmt->bindParam(':userLastName', $updateUserLName);
+            $stmt->bindParam(':userEmail', $updateUserEmail);
+            $stmt->bindParam(':userType', $updateUserType);
+            $stmt->bindParam(':userDateCreated', $updateUserDate);
+            $stmt->execute();
+        
+            if ($stmt) {
+                return "success";
+            } else {
+                return "failed";
+            }
+
+            $this->disconnect(); 
+        }
+        
+        // TODO: End of Update User Accounts
+
+        // TODO: Update User Password
+
+        public function updatePassword($updateUserPassUId, $updateUserPassId, $currentUserPPass, $updateUserPPass, $updateUserPPassC, $updateUserPassDate) {
+
+            if (empty($updateUserPassUId) && empty($updateUserPassId) && empty($updateUserPPass) && empty($updateUserPPassC) && empty($updateUserPassDate)) {
+                return "Some of the fields are empty";
+            }
+            
+            if (empty($updateUserPassUId)) {
+                return "User Unique Id field is empty";
+            }
+            if (empty($updateUserPassId)) {
+                return "User Id field is empty";
+            }
+            if (empty($currentUserPPass)) {
+                return "Current Password field is empty";
+            }      
+            // if (empty($updateUserPassC)) {
+            //     return "Confirm Password field is empty";
+            // }  
+
+            if (!empty($updateUserPPass)) {
+                if (!empty($updateUserPPassC)) { 
+                    if ($updateUserPPass !== $updateUserPPassC) {
+                        return "New Passwords do not match";
+                    }
+                } else { 
+                    return "Confirm Password field is empty";
+                }
+            }
+
+            $hashedPassword = password_hash($updateUserPPass, PASSWORD_DEFAULT);
+        
+            $connection = $this->connect();
+        
+            $stmt = $connection->prepare("UPDATE users SET userPassword = :userPassword, userCPassword = :userCPassword, userDateCreated = :userDateCreated WHERE userId = :userId AND userUId = :userUId");
+
+            $stmt->bindParam(':userId', $updateUserPassId);
+            $stmt->bindParam(':userUId', $updateUserPassUId);
+            $stmt->bindParam(':userPassword', $hashedPassword);
+            $stmt->bindParam(':userCPassword', $hashedPassword);
+            $stmt->bindParam(':userDateCreated', $updateUserPassDate);
+            $stmt->execute();
+        
+            if ($stmt) {
+                return "success";
+            } else {
+                return "failed";
+            }
+
+            $this->disconnect(); 
+        }
+        
+        // TODO: End of Update User Password
+
+        // TODO: Update Profile
+
+        public function updateProfile() {
+
+            if (isset($_POST['btnUpdateProfile'])) {
+                
+                $updateUserUId = ucwords($_POST['updateUserUId']);
+                $updateUserId = $_POST['updateUserId'];
+                $updateUserFName = ucwords($_POST['updateUserFName']);
+                $updateUserLName = ucwords($_POST['updateUserLName']);
+                $updateUserEmail = ucwords($_POST['updateUserEmail']);
+                $currentUserPass = ucwords($_POST['currentUserPass']);
+                $updateUserPass = ucwords($_POST['updateUserPass']);
+                $updateUserPassC = ucwords($_POST['updateUserPassC']);
+                $updateUserType = ucwords($_POST['updateUserType']);
+
+                date_default_timezone_set('Asia/Manila');
+                $updateUserDate = date('Y-m-d H:i:s');
+
+                if (empty($updateUserUId) && empty($updateUserId) && empty($updateUserFName) && empty($updateUserLName) && empty($updateUserEmail) && empty($updateUserPass) && empty($updateUserType) && empty($updateUserDate)) {
+                    return "Some of the fields are empty";
+                }
+                
+                if (empty($updateUserUId)) {
+                    return "User Unique Id field is empty";
+                }
+                if (empty($updateUserId)) {
+                    return "User Id field is empty";
+                }
+                if (empty($updateUserFName)) {
+                    return "First Name field is empty";
+                }
+                if (empty($updateUserLName)) {
+                    return "Last Name field is empty";
+                }
+                if (empty($updateUserEmail)) {
+                    return "Email field is empty";
+                }   
+                if (empty($currentUserPass)) {
+                    return "Current Password field is empty";
+                }      
+                // if (empty($updateUserPassC)) {
+                //     return "Confirm Password field is empty";
+                // }     
+                if (empty($updateUserType)) {
+                    return "User Type field is empty";
+                }     
+    
+                if (!empty($updateUserPass)) {
+                    if (!empty($updateUserPassC)) { 
+                        if ($updateUserPass !== $updateUserPassC) {
+                            return "New Passwords do not match";
+                        }
+                    } else { 
+                        return "Confirm Password field is empty";
+                    }
+                } 
+    
+                $connection = $this->connect();
+            
+                $stmt = $connection->prepare("SELECT COUNT(*) FROM users WHERE userEmail = :email AND userId != :userId AND userUId != :userUId");
+    
+                $stmt->bindParam(':email', $updateUserEmail);
+                $stmt->bindParam(':userId', $updateUserId);
+                $stmt->bindParam(':userUId', $updateUserUId);
+                $stmt->execute();
+                $count = $stmt->fetchColumn();
+            
+                if ($count > 0) {
+                    return "Email is already taken";
+                }
+    
+                $hashedPassword = password_hash($updateUserPass, PASSWORD_DEFAULT);
+            
+                $connection = $this->connect();
+            
+                $stmt = $connection->prepare("UPDATE users SET userType = :userType, userFirstName = :userFirstName, userLastName = :userLastName, userEmail = :userEmail, userPassword = :userPassword, userCPassword = :userCPassword, userDateCreated = :userDateCreated WHERE userId = :userId AND userUId = :userUId");
+    
+                $stmt->bindParam(':userId', $updateUserId);
+                $stmt->bindParam(':userUId', $updateUserUId);
+                $stmt->bindParam(':userFirstName', $updateUserFName);
+                $stmt->bindParam(':userLastName', $updateUserLName);
+                $stmt->bindParam(':userEmail', $updateUserEmail);
+                $stmt->bindParam(':userPassword', $hashedPassword);
+                $stmt->bindParam(':userCPassword', $hashedPassword);
+                $stmt->bindParam(':userType', $updateUserType);
+                $stmt->bindParam(':userDateCreated', $updateUserDate);
+                $stmt->execute();
+            
+                if ($stmt) {
+                    echo "<script>
+                        swal('Archived Success!', 'Profile updated!', 'success').then(function() {
+                            window.location.href = window.location.href;
+                        });
+                    </script>";
+                } else {
+                    echo "<script>
+                        swal('Failed!', 'Update failed!', 'warning').then(function() {
+                            window.location.href = window.location.href;
+                        });
+                    </script>";
+                }
+    
+                $this->disconnect(); 
+            }
+        }
+
+        // TODO: End of Update Profile
+
+        // TODO: Archive User Account
+
+        public function deleteUserAccount() {
+
+            if (isset($_POST['btnDeleteUserAcc'])) {
+                
+                $deleteUserUId = ucwords($_POST['deleteUserUId']);
+                $deleteUserId = $_POST['deleteUserId'];   
+    
+                $connection = $this->connect();
+            
+                $stmt = $connection->prepare("UPDATE users SET userStatus = :userStatus WHERE userId = :userId AND userUId = :userUId");
+
+                $userStatus = 1;
+                $stmt->bindParam(':userId', $deleteUserId);
+                $stmt->bindParam(':userUId', $deleteUserUId);
+                $stmt->bindParam(':userStatus', $userStatus);
+                $stmt->execute();
+            
+                if ($stmt) {
+                    echo "<script>
+                        swal('Archived Success!', 'User Account archived!', 'success').then(function() {
+                            window.location.href = window.location.href;
+                        });
+                    </script>";
+                } else {
+                    echo "<script>
+                        swal('Failed!', 'Archived failed!', 'warning').then(function() {
+                            window.location.href = window.location.href;
+                        });
+                    </script>";
+                }
+
+                $this->disconnect(); 
+            }
+        }
+
+        // TODO: End of Archive User Account
 
         // TODO: Logout User Account
 
@@ -337,7 +719,7 @@
 
                 if (isset($_POST['btnDeleteRM'])) {
                     
-                    $deleteRMMUId = $_POST['deleteRMMUId'];
+                    $deleteRMMUId = ucwords($_POST['deleteRMMUId']);
                     $deleteRMMId = $_POST['deleteRMMId'];   
         
                     $connection = $this->connect();
@@ -551,7 +933,7 @@
 
                 if (isset($_POST['btnDeleteCat'])) {
                     
-                    $deleteCatCUId = $_POST['deleteCatCUId'];
+                    $deleteCatCUId = ucwords($_POST['deleteCatCUId']);
                     $deleteCatCId = $_POST['deleteCatCId'];   
         
                     $connection = $this->connect();
@@ -947,7 +1329,7 @@
 
                 if (isset($_POST['btnDeleteFP'])) {
                     
-                    $deleteFPPUId = $_POST['deleteFPPUId'];
+                    $deleteFPPUId = ucwords($_POST['deleteFPPUId']);
                     $deleteFPPId = $_POST['deleteFPPId'];   
         
                     $connection = $this->connect();
@@ -1137,7 +1519,7 @@
 
                 if (isset($_POST['btnDeleteSupply'])) {
                     
-                    $deleteSupplySUId = $_POST['deleteSupplySUId'];
+                    $deleteSupplySUId = ucwords($_POST['deleteSupplySUId']);
                     $deleteSupplySId = $_POST['deleteSupplySId'];   
         
                     $connection = $this->connect();
@@ -1345,7 +1727,7 @@
 
                 if (isset($_POST['btnDeletePO'])) {
                     
-                    $deletePOPOUId = $_POST['deletePOPOUId'];
+                    $deletePOPOUId = ucwords($_POST['deletePOPOUId']);
                     $deletePOPOID = $_POST['deletePOPOID'];   
         
                     $connection = $this->connect();
@@ -1579,7 +1961,7 @@
 
                 if (isset($_POST['btnDeletePO'])) {
                     
-                    $deleteODODUID = $_POST['deleteODODUID'];
+                    $deleteODODUID = ucwords($_POST['deleteODODUID']);
                     $deleteODODID = $_POST['deleteODODID'];   
         
                     $connection = $this->connect();
@@ -1730,7 +2112,7 @@
 
                 $connection = $this->connect();
             
-                $stmt = $connection->prepare("INSERT INTO order_deliveries (purchaseOrderId, purchaseOrderUId, purchaseOrderNo, purchaseOrderSupplier, purchaseOrderQuantity, purchaseOrderDateCreated) VALUES (:purchaseOrderId, :purchaseOrderUId, :purchaseOrderOrderNo, :purchaseOrderSupplier, :purchaseOrderTotalProd, :purchaseOrderDateCreated)");
+                $stmt = $connection->prepare("INSERT INTO purchase_orders (purchaseOrderId, purchaseOrderUId, purchaseOrderNo, purchaseOrderSupplier, purchaseOrderQuantity, purchaseOrderDateCreated) VALUES (:purchaseOrderId, :purchaseOrderUId, :purchaseOrderOrderNo, :purchaseOrderSupplier, :purchaseOrderTotalProd, :purchaseOrderDateCreated)");
 
                 $purchaseOrderTotalProd = count($addPOLFinishProdIds);
                 $stmt->bindParam(':purchaseOrderUId', $addPOLUId);
@@ -1741,8 +2123,9 @@
                 $stmt->bindParam(':purchaseOrderDateCreated', $purchaseOrderDateCreated);
                 $stmt->execute();
 
+                $results = [];
+
                 if ($stmt) {
-                    $connection = $this->connect();
 
                     for ($i = 0; $i < count($addPOLFinishProdIds); $i++) {
                         $addPOLFinishProdId = $addPOLFinishProdIds[$i];
@@ -1753,40 +2136,44 @@
                         $stmt = $connection->prepare("SELECT * FROM finish_products WHERE finishProdUId = :finishProdUId");
                         $stmt->bindParam(':finishProdUId', $addPOLFinishProdId);
                         $stmt->execute();
-                        
+                    
                         $existingQty = $stmt->fetch();
                     
-                        if ($existingQty['finishProdQuantity'] !== false) {
-                            if ($existingQty > $addPOLFinishProdQty) {
-                                $newQty = $existingQty - $addPOLFinishProdQty;
-                                $finishProdName = existingQty['finishProdName'];
-
+                        if ($existingQty !== false) {
+                            $finishProdName = $existingQty['finishProdName'];
+                    
+                            if ($existingQty['finishProdQuantity'] >= $addPOLFinishProdQty) {
+                                $newQty = $existingQty['finishProdQuantity'] - $addPOLFinishProdQty;
+                    
                                 $stmt = $connection->prepare("UPDATE finish_products SET finishProdQuantity = :finishProdQuantity WHERE finishProdUId = :finishProdUId");
                                 $stmt->bindParam(':finishProdUId', $addPOLFinishProdId);
                                 $stmt->bindParam(':finishProdQuantity', $newQty);
                                 $stmt->execute();
-                        
+                    
                                 if ($stmt->rowCount() > 0) {
-                                    $stmt = $connection->prepare("INSERT INTO purchase_orders_products (purchaseProdUId, purchaseOrderUId, finishProdUId, purchaseProdQty, purchaseProdDateCreated) VALUES (:purchaseProdUId, :purchaseOrderUId, :finishProdUId, :purchaseProdQty, :purchaseOrderDateCreated)");
-                        
+                                    $stmt = $connection->prepare("INSERT INTO purchase_orders_products (purchaseProdUId, purchaseOrderUId, finishProdUId, purchaseProdQty, purchaseProdDateCreated) VALUES (:purchaseProdUId, :purchaseOrderUId, :finishProdUId, :purchaseProdQty, :purchaseProdDateCreated)");
+                    
                                     $stmt->bindParam(':purchaseProdUId', $addPOLUId);
                                     $stmt->bindParam(':purchaseOrderUId', $addPOLUId);
                                     $stmt->bindParam(':finishProdUId', $addPOLFinishProdId);
                                     $stmt->bindParam(':purchaseProdQty', $addPOLFinishProdQty);
                                     $stmt->bindParam(':purchaseProdDateCreated', $purchaseOrderDateCreated);
                                     $stmt->execute();
+
                                 }
                             } else {
-                                return "Not Enough Qty for Product " . $finishProdName;
+                                $results[] = "Not Enough Qty for Product " . $finishProdName;
+                                return $results;
                             }
-
                         }
-                    }                    
+                    }
 
                     if ($stmt) {
-                        return "success";
+                        $results[] = "success";
+                        return $results;
                     } else {
-                        return "failed";
+                        $results[] = "failed";
+                        return $results;
                     }
 
                 }

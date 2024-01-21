@@ -4,13 +4,22 @@
     if (!empty($userDetails)) {
         $userId = $userDetails['userId'];
         $userUId = $userDetails['userUId'];
+        $userType = $userDetails['userType'];
         $userFirstName = $userDetails['userFirstName'];
         $userLastName = $userDetails['userLastName'];
+        $userEmail = $userDetails['userEmail'];
         $userPassword = $userDetails['userPassword'];
         $userDateCreated = $userDetails['userDateCreated'];
-    } else {
-        header ("location: ../login.php");
-    }
+    } 
+    
+    // else {
+    //     header ("location: ../login.php");
+            // echo "<script>
+            //     swal('Failed!', 'Update failed!', 'warning').then(function() {
+            //         window.location.href = window.location.href;
+            //     });
+            // </script>";
+    // }
 ?>
 
 <!-- Preloader -->

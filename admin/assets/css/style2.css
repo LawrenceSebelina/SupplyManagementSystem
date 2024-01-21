@@ -298,6 +298,7 @@ table.all-table {
 
 .modal-header.modal-primary,
 .modal-header.modal-warning,
+.modal-header.modal-success,
 .modal-header.modal-danger {
     gap: 10px;
     justify-content: start !important;
@@ -305,6 +306,7 @@ table.all-table {
 
 .modal-header.modal-primary i,
 .modal-header.modal-warning i,
+.modal-header.modal-success i,
 .modal-header.modal-danger i {
     font-size: 24px;
 }
@@ -317,6 +319,11 @@ table.all-table {
 .modal-header.modal-warning {
     color: var(--black);
     background-color: var(--btn-yellow);
+}
+
+.modal-header.modal-success {
+    color: var(--light-white);
+    background-color: var(--btn-green);
 }
 
 .modal-header.modal-danger {
@@ -334,4 +341,20 @@ table.all-table {
 .modal-header.modal-warning .headline-md {
     color: var(--black);
     font-size: var(--headline-sm);
+}
+
+.password-input-field .show-hide-password-icon,
+.password-c-input-field .show-hide-password-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    color: #ccc;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.password-input-field .show-hide-password-icon.active::before,
+.password-c-input-field .show-hide-password-icon.active::before {
+    color: #333;
+    content: "\f070";
 }

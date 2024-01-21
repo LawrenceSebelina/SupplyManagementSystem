@@ -1,5 +1,5 @@
 const addODLForm = document.querySelector("#addODLForm");
-const addODLSubmitBtn = document.querySelector("#addODLForm #btnaddODL");
+const addODLSubmitBtn = document.querySelector("#addODLForm #btnAddODL");
 const addODLAlertMsg = document.querySelector("#addODLForm #alertMessage");
 
 addODLForm.onsubmit = (e)=> {

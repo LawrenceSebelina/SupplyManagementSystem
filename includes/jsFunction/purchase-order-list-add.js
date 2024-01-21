@@ -1,5 +1,5 @@
 const addPOLForm = document.querySelector("#addPOLForm");
-const addPOLSubmitBtn = document.querySelector("#addPOLForm #btnaddPOL");
+const addPOLSubmitBtn = document.querySelector("#addPOLForm #btnAddPOL");
 const addPOLAlertMsg = document.querySelector("#addPOLForm #alertMessage");
 
 addPOLForm.onsubmit = (e)=> {

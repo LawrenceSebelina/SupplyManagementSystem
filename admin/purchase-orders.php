@@ -219,11 +219,11 @@
                                                                 <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="finishProdTable">
                                                                     <thead class="table-head">
                                                                         <tr>
-                                                                            <th>F.Prod ID</th>
-                                                                            <th>F.Prod UID</th>
-                                                                            <th>F.Prod Name</th>
-                                                                            <th>F.Prod Raw Mat.</th>
-                                                                            <th>F.Prod Quantity</th>
+                                                                            <th>Prod ID</th>
+                                                                            <th>Prod UID</th>
+                                                                            <th>Prod Name</th>
+                                                                            <th>Prod Raw Mat.</th>
+                                                                            <th>Prod Quantity</th>
                                                                             <!-- <th>Date</th> -->
                                                                             <th class="text-end">Actions</th>
                                                                         </tr>
@@ -514,11 +514,11 @@
                                             <table class="table border-0 all-table table-hover table-center mb-0 table-striped" id="rawMaterialsOrdersTable">
                                                 <thead class="table-head">
                                                     <tr>
-                                                        <th>F.Prod ID</th>
-                                                        <th>F.Prod UID</th>
-                                                        <th>F.Prod Name</th>
-                                                        <th>F.Prod Raw Mat.</th>
-                                                        <th>F.Prod Quantity</th>
+                                                        <th>Prod ID</th>
+                                                        <th>Prod UID</th>
+                                                        <th>Prod Name</th>
+                                                        <th>Prod Raw Mat.</th>
+                                                        <th>Prod Quantity</th>
                                                         <th>Quantity</th>
                                                         <th>Actions</th>
                                                     </tr>
@@ -541,7 +541,7 @@
                                         <div class="row gy-4">
                                             <div class="col-12">
                                                 <div class="text-end">
-                                                    <button type="submit" class="btn btn-primary me-2" id="btnaddPOL" name="btnaddODL">Submit <i class="fas fa-download"></i></button>
+                                                    <button type="submit" class="btn btn-primary me-2" id="btnAddPOL" name="btnAddPOL">Submit<i class="fas fa-download"></i></button>
                                                 </div>
                                             </div>
                                         </div>

@@ -22,7 +22,7 @@
                         <li><a href="index.php?route=raw-materials" class="nav-raw-materials">Raw Materials</a></li>
                         <li><a href="index.php?route=categories" class="nav-categories">Categories</a></li>
                         <li><a href="index.php?route=finish-products" class="nav-finish-product">Finish Product</a></li>
-                        <li><a href="index.php?route=supplies" class="nav-supplies">Supplies</a></li>
+                        <!-- <li><a href="index.php?route=supplies" class="nav-supplies">Supplies</a></li> -->
                     </ul>
                 </li>
 
@@ -36,7 +36,7 @@
                     </a>
                     <ul>
                         <li><a href="index.php?route=purchase-orders">Purchase Order</a></li>
-                        <li><a href="index.php?route=order-deliveries">Order Stock</a></li>
+                        <!-- <li><a href="index.php?route=order-deliveries">Order Stock</a></li> -->
                         <li><a href="index.php?route=order-deliveries">Order Delivery</a></li>
                     </ul>
                 </li>
@@ -58,9 +58,9 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="#">Contact Information</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Images</a></li>
+                        <li><a href="index.php?route=profile">My Profile</a></li>
+                        <li><a href="index.php?route=accounts">Accounts</a></li>
+                        <li><a href="#">Contents</a></li>
                     </ul>
                 </li>
 

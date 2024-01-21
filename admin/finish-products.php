@@ -487,7 +487,7 @@
                                         <div class="row gy-4">
                                             <div class="col-12">
                                                 <div class="text-end">
-                                                    <button type="submit" class="btn btn-primary me-2" id="btnaddFPL" name="btnaddFPL">Submit <i class="fas fa-download"></i></button>
+                                                    <button type="submit" class="btn btn-primary me-2" id="btnAddFPL" name="btnAddFPL">Submit <i class="fas fa-download"></i></button>
                                                 </div>
                                             </div>
                                         </div>

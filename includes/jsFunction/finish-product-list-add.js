@@ -1,5 +1,5 @@
 const addFPLForm = document.querySelector("#addFPLForm");
-const addFPLSubmitBtn = document.querySelector("#addFPLForm #btnaddFPL");
+const addFPLSubmitBtn = document.querySelector("#addFPLForm #btnAddFPL");
 const addFPLAlertMsg = document.querySelector("#addFPLForm #alertMessage");
 
 addFPLForm.onsubmit = (e)=> {

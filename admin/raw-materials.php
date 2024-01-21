@@ -40,8 +40,13 @@
 
                                 <div class="page-header">
                                     <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="page-title">Raw Materials</h3>
+                                        </div>
                                         <div class="col-auto text-end float-end ms-auto download-grp">
-                                            <a href="#" class="btn btn-outline-primary"><i class="fas fa-download"></i> Download</a>
+                                            <a type="button" class="btn btn-outline-primary" onclick="document.querySelector('.print-datatable').click();">
+                                                <i class="fas fa-print"></i> Print Data
+                                            </a>
                                             <!-- <a href="add-student.html" class="btn btn-primary"><i class="fas fa-plus"></i></a> -->
                                             <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRMModal"><i class="fas fa-plus"></i></a>
                                         </div>
@@ -397,6 +402,23 @@
                     {data: "materialQuantity"},
                     {data: "materialSupplier"},
                     {data: "actions"}
+                ],
+
+                dom: 'B',
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                        },
+                        className: 'btn btn-success btn-flat mb-3 print-datatable d-none',
+                        text: '<div class="d-flex align-items-center"><i class="fa-solid fa-print fs-5 me-2"></i><span class="fw-bold">Print</span></div>',
+                        messageTop: '<div class="row"><div class="col-md-4 d-flex justify-content-end align-items-center"><img class="img-fluid" width="100" height="100" src="../assets/images/logo.png" alt="" alt=""></div><div class="col-md-5 text-center mt-3 mb-2"><strong>J.F. RUBBER PHILS., INC.</strong><br><h6>Block 2, Lot 6 People`s Technology, Sez, Carmona, Cavite</h6><h6>☏ (046) 430-3485 / (6346) 443-0342</h6><h6>✉ sales@jfrubber.ph</h6></div><div class="mb-2 mt-5 col-md-12 d-flex justify-content-center align-items-center"><h3><strong>Raw Materials</strong></h3></div><div class="col-md-12 d-flex justify-content-center align-items-center"><h6>Prepared By: <?php echo $userFirstName . " " . $userLastName ?? ""; ?></h6></div><div class="col-md-12 d-flex justify-content-center align-items-center"><h6>Date & Time: <?php date_default_timezone_set('Asia/Manila'); echo date('Y-m-d | h:i a') ?? ""; ?></h6></div></div>',
+
+                        messageBottom: 'Test',
+                        
+                        title: '',
+                    },
                 ],
             });
 
